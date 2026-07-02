@@ -1,0 +1,67 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2E5C8A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E3A5F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orbitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B9DC3;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#B0BACC;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Molecular Structure -->
+  <g transform="translate(100, 100)">
+    <!-- Orbits -->
+    <ellipse cx="0" cy="0" rx="80" ry="30" fill="none" stroke="url(#orbitGradient)" stroke-width="3" opacity="0.8" transform="rotate(-20)"/>
+    <ellipse cx="0" cy="0" rx="80" ry="30" fill="none" stroke="url(#orbitGradient)" stroke-width="3" opacity="0.8" transform="rotate(20)"/>
+    <ellipse cx="0" cy="0" rx="80" ry="30" fill="none" stroke="url(#orbitGradient)" stroke-width="3" opacity="0.8" transform="rotate(60)"/>
+    
+    <!-- Connection lines -->
+    <line x1="0" y1="0" x2="0" y2="-45" stroke="#6B7A99" stroke-width="2" opacity="0.5"/>
+    <line x1="0" y1="0" x2="39" y2="22.5" stroke="#6B7A99" stroke-width="2" opacity="0.5"/>
+    <line x1="0" y1="0" x2="-39" y2="22.5" stroke="#6B7A99" stroke-width="2" opacity="0.5"/>
+    <line x1="0" y1="0" x2="39" y2="-22.5" stroke="#6B7A99" stroke-width="2" opacity="0.5"/>
+    <line x1="0" y1="0" x2="-39" y2="-22.5" stroke="#6B7A99" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Central atom -->
+    <circle cx="0" cy="0" r="28" fill="url(#blueGradient)" opacity="0.95">
+      <animate attributeName="r" values="28;30;28" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="24" fill="#2E5C8A" opacity="0.8"/>
+    
+    <!-- Outer atoms -->
+    <circle cx="0" cy="-45" r="16" fill="url(#blueGradient)" opacity="0.9"/>
+    <circle cx="0" cy="-45" r="12" fill="#4A90E2" opacity="0.7"/>
+    
+    <circle cx="39" cy="22.5" r="16" fill="url(#blueGradient)" opacity="0.9"/>
+    <circle cx="39" cy="22.5" r="12" fill="#4A90E2" opacity="0.7"/>
+    
+    <circle cx="-39" cy="22.5" r="16" fill="url(#blueGradient)" opacity="0.9"/>
+    <circle cx="-39" cy="22.5" r="12" fill="#4A90E2" opacity="0.7"/>
+    
+    <circle cx="39" cy="-22.5" r="14" fill="url(#blueGradient)" opacity="0.9"/>
+    <circle cx="39" cy="-22.5" r="10" fill="#5A9FE8" opacity="0.7"/>
+    
+    <circle cx="-39" cy="-22.5" r="14" fill="url(#blueGradient)" opacity="0.9"/>
+    <circle cx="-39" cy="-22.5" r="10" fill="#5A9FE8" opacity="0.7"/>
+    
+    <!-- Small orbital atoms -->
+    <circle cx="-70" cy="10" r="12" fill="url(#blueGradient)" opacity="0.85"/>
+    <circle cx="-70" cy="10" r="8" fill="#6AAAE8" opacity="0.6"/>
+    
+    <circle cx="70" cy="-15" r="12" fill="url(#blueGradient)" opacity="0.85"/>
+    <circle cx="70" cy="-15" r="8" fill="#6AAAE8" opacity="0.6"/>
+  </g>
+  
+  <!-- Text NRG-UA -->
+  <text x="260" y="100" font-family="Arial, sans-serif" font-size="85" font-weight="800" fill="#2C3E50" letter-spacing="-2">
+    NRG-UA
+  </text>
+  
+  <!-- Text SUPPLY PARTNER -->
+  <text x="265" y="135" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#5D6D7E" letter-spacing="8">
+    SUPPLY PARTNER
+  </text>
+</svg>

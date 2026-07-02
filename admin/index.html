@@ -1,0 +1,579 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NRG-UA | Адмін-панель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0b1220;
+            --bg-card: #111a2b;
+            --bg-soft: #162238;
+            --text: #e2e8f0;
+            --muted: #9fb0cc;
+            --line: rgba(255, 255, 255, 0.1);
+            --primary: #00d4ff;
+            --secondary: #6366f1;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius: 14px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Inter, sans-serif;
+            background: radial-gradient(ellipse at top left, rgba(0, 212, 255, 0.1), transparent 55%), var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .hidden { display: none !important; }
+
+        .login { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+        .login-card { width: min(420px, 100%); background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+        .login-card h1 { font-size: 1.4rem; margin-bottom: 4px; }
+        .login-card p { color: var(--muted); margin-bottom: 20px; }
+
+        .field { margin-bottom: 14px; }
+        .field label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 0.92rem; }
+        .field input, .field textarea, .field select {
+            width: 100%; border: 1px solid var(--line); border-radius: 10px; background: #0c1628; color: var(--text);
+            padding: 10px 12px; font: inherit;
+        }
+        .field textarea { min-height: 92px; resize: vertical; }
+
+        .btn {
+            border: 1px solid transparent; border-radius: 10px; padding: 10px 14px; font: inherit; font-weight: 600;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #05111d; }
+        .btn-soft { background: var(--bg-soft); color: var(--text); border-color: var(--line); }
+        .btn-danger { background: rgba(239, 68, 68, 0.15); color: #fecaca; border-color: rgba(239, 68, 68, 0.35); }
+
+        .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+        .sidebar {
+            border-right: 1px solid var(--line); background: rgba(12, 22, 40, 0.85); padding: 18px 14px; position: sticky; top: 0; height: 100vh;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+        .brand-badge {
+            width: 38px; height: 38px; display: inline-grid; place-items: center; border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #05111d; font-weight: 800;
+        }
+        .brand span { color: var(--muted); font-size: 0.82rem; }
+
+        .nav-btn { width: 100%; justify-content: flex-start; margin-bottom: 8px; background: transparent; color: var(--muted); border-color: transparent; }
+        .nav-btn.active, .nav-btn:hover { background: var(--bg-soft); color: var(--text); border-color: var(--line); }
+
+        .content { padding: 20px; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+        .topbar h2 { font-size: 1.45rem; }
+        .topbar p { color: var(--muted); font-size: 0.92rem; }
+
+        .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .card { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+        .stat-value { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+        .stat-label { color: var(--muted); font-size: 0.9rem; }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border-bottom: 1px solid var(--line); text-align: left; padding: 10px; vertical-align: top; }
+        th { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+        .actions { display: flex; gap: 8px; }
+        .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; background: rgba(16,185,129,0.15); color: #a7f3d0; border: 1px solid rgba(16,185,129,0.3); }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .hint { color: var(--muted); font-size: 0.86rem; }
+
+        @media (max-width: 1024px) {
+            .app { grid-template-columns: 1fr; }
+            .sidebar { height: auto; position: static; border-right: none; border-bottom: 1px solid var(--line); }
+            .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .two-col { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 620px) { .grid-4 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="login" id="loginScreen">
+        <div class="login-card">
+            <h1>Адмін-панель NRG-UA</h1>
+            <p>Тільки потрібні модулі: статистика, товари, статті, медіа, інформація сайту.</p>
+            <form id="loginForm">
+                <div class="field"><label for="loginUsername">Логін</label><input id="loginUsername" value="admin" required></div>
+                <div class="field"><label for="loginPassword">Пароль</label><input id="loginPassword" type="password" value="admin123" required></div>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-right-to-bracket"></i> Увійти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app hidden" id="app">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-badge">NRG</div>
+                <div><strong>NRG Admin</strong><br><span>Мінімальна панель</span></div>
+            </div>
+
+            <button class="btn nav-btn active" data-section="dashboard"><i class="fas fa-chart-pie"></i> Статистика</button>
+            <button class="btn nav-btn" data-section="products"><i class="fas fa-box-open"></i> Товари</button>
+            <button class="btn nav-btn" data-section="articles"><i class="fas fa-newspaper"></i> Статті</button>
+            <button class="btn nav-btn" data-section="media"><i class="fas fa-photo-film"></i> Медіа</button>
+            <button class="btn nav-btn" data-section="site-info"><i class="fas fa-pen-to-square"></i> Інформація сайту</button>
+
+            <div style="margin-top: 14px;"><button class="btn btn-soft" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Вийти</button></div>
+        </aside>
+
+        <main class="content">
+            <div class="topbar">
+                <div>
+                    <h2 id="pageTitle">Статистика</h2>
+                    <p id="pageSubtitle">Огляд контенту та наповнення сайту</p>
+                </div>
+                <div class="actions">
+                    <a href="../nrg-index.html" target="_blank" class="btn btn-soft"><i class="fas fa-up-right-from-square"></i> Відкрити сайт</a>
+                    <button class="btn btn-primary" id="saveAllBtn"><i class="fas fa-floppy-disk"></i> Зберегти все</button>
+                </div>
+            </div>
+
+            <section class="section active" id="section-dashboard">
+                <div class="grid-4">
+                    <div class="card"><div class="stat-value" id="statProducts">0</div><div class="stat-label">Товари</div></div>
+                    <div class="card"><div class="stat-value" id="statArticles">0</div><div class="stat-label">Статті</div></div>
+                    <div class="card"><div class="stat-value" id="statMedia">0</div><div class="stat-label">Медіа</div></div>
+                    <div class="card"><div class="stat-value" id="statSiteInfo">0</div><div class="stat-label">Інфо-блоки сайту</div></div>
+                </div>
+                <div class="card"><p class="hint">Тут залишені тільки потрібні вам функції без CRM, перекладів, тегів, AI-інструментів і зайвих модулів.</p></div>
+            </section>
+
+            <section class="section" id="section-products">
+                <div class="toolbar"><h3>Товари</h3><button class="btn btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Додати товар</button></div>
+                <div class="card table-wrap"><table><thead><tr><th>Назва</th><th>Ціна</th><th>Опис</th><th>Статус</th><th>Дії</th></tr></thead><tbody id="productsTbody"></tbody></table></div>
+                <div class="card">
+                    <h4 id="productFormTitle">Новий товар</h4>
+                    <div class="two-col" style="margin-top: 10px;">
+                        <div class="field"><label>Назва</label><input id="productName"></div>
+                        <div class="field"><label>Ціна (грн)</label><input id="productPrice" type="number" min="0"></div>
+                    </div>
+                    <div class="field"><label>Опис</label><textarea id="productDescription"></textarea></div>
+                    <div class="field"><label>Статус</label><select id="productStatus"><option value="active">Активний</option><option value="draft">Чернетка</option></select></div>
+                    <div class="actions"><button class="btn btn-primary" id="saveProductBtn">Зберегти товар</button><button class="btn btn-soft" id="resetProductBtn">Скинути</button></div>
+                </div>
+            </section>
+
+            <section class="section" id="section-articles">
+                <div class="toolbar"><h3>Статті</h3><button class="btn btn-primary" id="addArticleBtn"><i class="fas fa-plus"></i> Додати статтю</button></div>
+                <div class="card table-wrap"><table><thead><tr><th>Заголовок</th><th>Дата</th><th>Короткий опис</th><th>Дії</th></tr></thead><tbody id="articlesTbody"></tbody></table></div>
+                <div class="card">
+                    <h4 id="articleFormTitle">Нова стаття</h4>
+                    <div class="field"><label>Заголовок</label><input id="articleTitle"></div>
+                    <div class="field"><label>Короткий опис</label><textarea id="articleSummary"></textarea></div>
+                    <div class="field"><label>Повний текст</label><textarea id="articleBody" style="min-height: 160px;"></textarea></div>
+                    <div class="actions"><button class="btn btn-primary" id="saveArticleBtn">Зберегти статтю</button><button class="btn btn-soft" id="resetArticleBtn">Скинути</button></div>
+                </div>
+            </section>
+
+            <section class="section" id="section-media">
+                <div class="toolbar"><h3>Медіа-матеріали</h3><button class="btn btn-primary" id="addMediaBtn"><i class="fas fa-plus"></i> Додати медіа</button></div>
+                <div class="card table-wrap"><table><thead><tr><th>Назва</th><th>Тип</th><th>URL/Шлях</th><th>Опис</th><th>Дії</th></tr></thead><tbody id="mediaTbody"></tbody></table></div>
+                <div class="card">
+                    <h4 id="mediaFormTitle">Новий медіа-матеріал</h4>
+                    <div class="two-col" style="margin-top: 10px;">
+                        <div class="field"><label>Назва</label><input id="mediaTitle"></div>
+                        <div class="field"><label>Тип</label><select id="mediaType"><option value="image">Зображення</option><option value="video">Відео</option><option value="document">Документ</option></select></div>
+                    </div>
+                    <div class="field"><label>URL або шлях</label><input id="mediaUrl" placeholder="/images/example.jpg"></div>
+                    <div class="field"><label>Опис</label><textarea id="mediaDescription"></textarea></div>
+                    <div class="actions"><button class="btn btn-primary" id="saveMediaBtn">Зберегти медіа</button><button class="btn btn-soft" id="resetMediaBtn">Скинути</button></div>
+                </div>
+            </section>
+
+            <section class="section" id="section-site-info">
+                <div class="toolbar"><h3>Редактор інформації сайту</h3><button class="btn btn-primary" id="addSiteInfoBtn"><i class="fas fa-plus"></i> Додати поле</button></div>
+                <div class="card table-wrap"><table><thead><tr><th>Ключ</th><th>Значення</th><th>Дії</th></tr></thead><tbody id="siteInfoTbody"></tbody></table></div>
+                <div class="card">
+                    <h4 id="siteInfoFormTitle">Нове поле інформації</h4>
+                    <div class="field"><label>Ключ (напр. home.hero_title)</label><input id="siteInfoKey"></div>
+                    <div class="field"><label>Значення</label><textarea id="siteInfoValue"></textarea></div>
+                    <div class="actions"><button class="btn btn-primary" id="saveSiteInfoBtn">Зберегти поле</button><button class="btn btn-soft" id="resetSiteInfoBtn">Скинути</button></div>
+                    <p class="hint" style="margin-top: 8px;">Рекомендовані ключі: home.hero_title, home.hero_subtitle, contacts.phone, contacts.email, footer.text.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const AUTH_KEY = 'nrg_admin_auth';
+        const DATA_KEY = 'nrg_admin_compact_data_v1';
+        const SITE_CONTENT_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+            ? 'http://localhost:8000/api/site-content/apply'
+            : null;
+        const defaultData = {
+            products: [
+                { id: 1, name: 'Батарейка Energizer AA', price: 45, description: 'Надійне живлення для щоденних пристроїв.', status: 'active' },
+                { id: 2, name: 'LED лампа Philips 10W', price: 89, description: 'Енергоефективна лампа для дому та офісу.', status: 'active' }
+            ],
+            articles: [
+                { id: 1, title: 'Весняне оновлення каталогу', summary: 'Нові позиції у категоріях освітлення та елементів живлення.', body: 'Додано понад 150 нових SKU з оновленими умовами для партнерів.', date: '2026-07-02' }
+            ],
+            media: [
+                { id: 1, title: 'Hero банер', type: 'image', url: '/images/hero-banner.jpg', description: 'Головний банер для стартової сторінки.' }
+            ],
+            siteInfo: [
+                { id: 1, key: 'home.hero_title', value: 'Енергія поставок для' },
+                { id: 2, key: 'home.hero_highlight', value: 'українського ритейлу' },
+                { id: 3, key: 'home.hero_subtitle', value: 'NRG-UA допомагає магазинам, маркетплейсам і сервісним компаніям отримувати товари для дому, електроніку та аксесуари швидко, прогнозовано і з повним операційним супроводом. Ми поєднуємо широку матрицю брендів, регіональну логістику і сучасний B2B-процес закупівель.' },
+                { id: 4, key: 'contacts.phone', value: '+38 (044) 123-45-67' },
+                { id: 5, key: 'contacts.email', value: 'info@nrg-ua.com' },
+                { id: 6, key: 'footer.text', value: '© 2026 NRG-UA. Всі права захищено.' }
+            ]
+        };
+
+        const state = { data: null, edit: { products: null, articles: null, media: null, siteInfo: null } };
+        const clone = (obj) => JSON.parse(JSON.stringify(obj));
+        const nextId = (list) => (list.length ? Math.max(...list.map(x => x.id)) + 1 : 1);
+        const esc = (v) => String(v ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+
+        function toast(msg) {
+            const box = document.createElement('div');
+            box.textContent = msg;
+            box.style.cssText = 'position:fixed;right:14px;bottom:14px;padding:10px 12px;background:#0d2236;color:#cde9ff;border:1px solid rgba(255,255,255,0.15);border-radius:10px;z-index:9999;';
+            document.body.appendChild(box);
+            setTimeout(() => box.remove(), 1800);
+        }
+
+        function loadData() {
+            const raw = localStorage.getItem(DATA_KEY);
+            if (!raw) {
+                state.data = clone(defaultData);
+                localStorage.setItem(DATA_KEY, JSON.stringify(state.data));
+                return;
+            }
+            try { state.data = JSON.parse(raw); } catch { state.data = clone(defaultData); }
+        }
+
+        function persistData() {
+            localStorage.setItem(DATA_KEY, JSON.stringify(state.data));
+            renderAll();
+            toast('Дані збережено');
+        }
+
+        async function applySiteInfoToFiles(notifyOnOffline = true) {
+            if (!SITE_CONTENT_API) {
+                if (notifyOnOffline) {
+                    toast('GitHub Pages режим: зміни збережені локально у браузері');
+                }
+                return;
+            }
+
+            try {
+                const response = await fetch(SITE_CONTENT_API, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ items: state.data.siteInfo.map(({ key, value }) => ({ key, value })) })
+                });
+
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+
+                const result = await response.json();
+                const changed = Number(result.changed_files || 0);
+                const replacements = Number(result.total_replacements || 0);
+                toast(`Застосовано до файлів: ${changed}, замін: ${replacements}`);
+            } catch (error) {
+                if (notifyOnOffline) {
+                    toast('Backend не запущено: збережено локально, застосуйте пізніше');
+                }
+            }
+        }
+
+        function initAuth() {
+            const logged = localStorage.getItem(AUTH_KEY) === '1';
+            document.getElementById('loginScreen').classList.toggle('hidden', logged);
+            document.getElementById('app').classList.toggle('hidden', !logged);
+        }
+
+        function setupLogin() {
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const u = document.getElementById('loginUsername').value.trim();
+                const p = document.getElementById('loginPassword').value.trim();
+                if (u === 'admin' && p === 'admin123') {
+                    localStorage.setItem(AUTH_KEY, '1');
+                    initAuth();
+                    toast('Вхід виконано');
+                } else {
+                    toast('Невірний логін або пароль');
+                }
+            });
+            document.getElementById('logoutBtn').addEventListener('click', () => { localStorage.removeItem(AUTH_KEY); initAuth(); });
+        }
+
+        function setupNavigation() {
+            const titles = {
+                dashboard: ['Статистика', 'Огляд контенту та наповнення сайту'],
+                products: ['Товари', 'Додавання та редагування товарів'],
+                articles: ['Статті', 'Керування публікаціями та новинами'],
+                media: ['Медіа', 'Керування фото, відео та документами'],
+                'site-info': ['Інформація сайту', 'Редагування всіх ключових текстів сайту']
+            };
+            document.querySelectorAll('.nav-btn').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const section = btn.dataset.section;
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                    document.getElementById(`section-${section}`).classList.add('active');
+                    document.getElementById('pageTitle').textContent = titles[section][0];
+                    document.getElementById('pageSubtitle').textContent = titles[section][1];
+                });
+            });
+        }
+
+        function renderStats() {
+            document.getElementById('statProducts').textContent = state.data.products.length;
+            document.getElementById('statArticles').textContent = state.data.articles.length;
+            document.getElementById('statMedia').textContent = state.data.media.length;
+            document.getElementById('statSiteInfo').textContent = state.data.siteInfo.length;
+        }
+
+        function renderProducts() {
+            document.getElementById('productsTbody').innerHTML = state.data.products.map((p) => `
+                <tr>
+                    <td>${esc(p.name)}</td>
+                    <td>${Number(p.price || 0).toLocaleString('uk-UA')} грн</td>
+                    <td>${esc(p.description || '')}</td>
+                    <td><span class="pill">${p.status === 'active' ? 'Активний' : 'Чернетка'}</span></td>
+                    <td><div class="actions"><button class="btn btn-soft" onclick="editItem('products', ${p.id})">Редагувати</button><button class="btn btn-danger" onclick="deleteItem('products', ${p.id})">Видалити</button></div></td>
+                </tr>
+            `).join('') || '<tr><td colspan="5" class="hint">Поки немає товарів.</td></tr>';
+        }
+
+        function renderArticles() {
+            document.getElementById('articlesTbody').innerHTML = state.data.articles.map((a) => `
+                <tr>
+                    <td>${esc(a.title)}</td>
+                    <td>${esc(a.date || '')}</td>
+                    <td>${esc(a.summary || '')}</td>
+                    <td><div class="actions"><button class="btn btn-soft" onclick="editItem('articles', ${a.id})">Редагувати</button><button class="btn btn-danger" onclick="deleteItem('articles', ${a.id})">Видалити</button></div></td>
+                </tr>
+            `).join('') || '<tr><td colspan="4" class="hint">Поки немає статей.</td></tr>';
+        }
+
+        function renderMedia() {
+            document.getElementById('mediaTbody').innerHTML = state.data.media.map((m) => `
+                <tr>
+                    <td>${esc(m.title)}</td>
+                    <td>${esc(m.type)}</td>
+                    <td>${esc(m.url)}</td>
+                    <td>${esc(m.description || '')}</td>
+                    <td><div class="actions"><button class="btn btn-soft" onclick="editItem('media', ${m.id})">Редагувати</button><button class="btn btn-danger" onclick="deleteItem('media', ${m.id})">Видалити</button></div></td>
+                </tr>
+            `).join('') || '<tr><td colspan="5" class="hint">Поки немає медіа.</td></tr>';
+        }
+
+        function renderSiteInfo() {
+            document.getElementById('siteInfoTbody').innerHTML = state.data.siteInfo.map((i) => `
+                <tr>
+                    <td>${esc(i.key)}</td>
+                    <td>${esc(i.value)}</td>
+                    <td><div class="actions"><button class="btn btn-soft" onclick="editItem('siteInfo', ${i.id})">Редагувати</button><button class="btn btn-danger" onclick="deleteItem('siteInfo', ${i.id})">Видалити</button></div></td>
+                </tr>
+            `).join('') || '<tr><td colspan="3" class="hint">Поки немає полів.</td></tr>';
+        }
+
+        function resetForm(type) {
+            state.edit[type] = null;
+            if (type === 'products') {
+                document.getElementById('productFormTitle').textContent = 'Новий товар';
+                document.getElementById('productName').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productDescription').value = '';
+                document.getElementById('productStatus').value = 'active';
+            }
+            if (type === 'articles') {
+                document.getElementById('articleFormTitle').textContent = 'Нова стаття';
+                document.getElementById('articleTitle').value = '';
+                document.getElementById('articleSummary').value = '';
+                document.getElementById('articleBody').value = '';
+            }
+            if (type === 'media') {
+                document.getElementById('mediaFormTitle').textContent = 'Новий медіа-матеріал';
+                document.getElementById('mediaTitle').value = '';
+                document.getElementById('mediaType').value = 'image';
+                document.getElementById('mediaUrl').value = '';
+                document.getElementById('mediaDescription').value = '';
+            }
+            if (type === 'siteInfo') {
+                document.getElementById('siteInfoFormTitle').textContent = 'Нове поле інформації';
+                document.getElementById('siteInfoKey').value = '';
+                document.getElementById('siteInfoValue').value = '';
+            }
+        }
+
+        function editItem(type, id) {
+            const item = state.data[type].find(x => x.id === id);
+            if (!item) return;
+            state.edit[type] = id;
+            if (type === 'products') {
+                document.getElementById('productFormTitle').textContent = 'Редагування товару';
+                document.getElementById('productName').value = item.name;
+                document.getElementById('productPrice').value = item.price;
+                document.getElementById('productDescription').value = item.description;
+                document.getElementById('productStatus').value = item.status;
+            }
+            if (type === 'articles') {
+                document.getElementById('articleFormTitle').textContent = 'Редагування статті';
+                document.getElementById('articleTitle').value = item.title;
+                document.getElementById('articleSummary').value = item.summary;
+                document.getElementById('articleBody').value = item.body;
+            }
+            if (type === 'media') {
+                document.getElementById('mediaFormTitle').textContent = 'Редагування медіа';
+                document.getElementById('mediaTitle').value = item.title;
+                document.getElementById('mediaType').value = item.type;
+                document.getElementById('mediaUrl').value = item.url;
+                document.getElementById('mediaDescription').value = item.description;
+            }
+            if (type === 'siteInfo') {
+                document.getElementById('siteInfoFormTitle').textContent = 'Редагування поля';
+                document.getElementById('siteInfoKey').value = item.key;
+                document.getElementById('siteInfoValue').value = item.value;
+            }
+        }
+
+        function deleteItem(type, id) {
+            state.data[type] = state.data[type].filter(x => x.id !== id);
+            persistData();
+        }
+
+        function saveProduct() {
+            const payload = {
+                name: document.getElementById('productName').value.trim(),
+                price: Number(document.getElementById('productPrice').value || 0),
+                description: document.getElementById('productDescription').value.trim(),
+                status: document.getElementById('productStatus').value
+            };
+            if (!payload.name) return toast('Вкажіть назву товару');
+            const id = state.edit.products;
+            if (id) {
+                const idx = state.data.products.findIndex(x => x.id === id);
+                state.data.products[idx] = { ...state.data.products[idx], ...payload };
+            } else {
+                state.data.products.push({ id: nextId(state.data.products), ...payload });
+            }
+            resetForm('products');
+            persistData();
+        }
+
+        function saveArticle() {
+            const payload = {
+                title: document.getElementById('articleTitle').value.trim(),
+                summary: document.getElementById('articleSummary').value.trim(),
+                body: document.getElementById('articleBody').value.trim(),
+                date: new Date().toISOString().slice(0, 10)
+            };
+            if (!payload.title) return toast('Вкажіть заголовок статті');
+            const id = state.edit.articles;
+            if (id) {
+                const idx = state.data.articles.findIndex(x => x.id === id);
+                state.data.articles[idx] = { ...state.data.articles[idx], ...payload };
+            } else {
+                state.data.articles.push({ id: nextId(state.data.articles), ...payload });
+            }
+            resetForm('articles');
+            persistData();
+        }
+
+        function saveMedia() {
+            const payload = {
+                title: document.getElementById('mediaTitle').value.trim(),
+                type: document.getElementById('mediaType').value,
+                url: document.getElementById('mediaUrl').value.trim(),
+                description: document.getElementById('mediaDescription').value.trim()
+            };
+            if (!payload.title || !payload.url) return toast('Вкажіть назву та URL медіа');
+            const id = state.edit.media;
+            if (id) {
+                const idx = state.data.media.findIndex(x => x.id === id);
+                state.data.media[idx] = { ...state.data.media[idx], ...payload };
+            } else {
+                state.data.media.push({ id: nextId(state.data.media), ...payload });
+            }
+            resetForm('media');
+            persistData();
+        }
+
+        function saveSiteInfo() {
+            const payload = { key: document.getElementById('siteInfoKey').value.trim(), value: document.getElementById('siteInfoValue').value.trim() };
+            if (!payload.key) return toast('Вкажіть ключ поля');
+            const id = state.edit.siteInfo;
+            if (id) {
+                const idx = state.data.siteInfo.findIndex(x => x.id === id);
+                state.data.siteInfo[idx] = { ...state.data.siteInfo[idx], ...payload };
+            } else {
+                state.data.siteInfo.push({ id: nextId(state.data.siteInfo), ...payload });
+            }
+            resetForm('siteInfo');
+            persistData();
+            applySiteInfoToFiles(false);
+        }
+
+        function setupActions() {
+            if (!SITE_CONTENT_API) {
+                const saveBtn = document.getElementById('saveAllBtn');
+                saveBtn.classList.remove('btn-primary');
+                saveBtn.classList.add('btn-soft');
+                saveBtn.title = 'На GitHub Pages доступне лише локальне збереження в браузері';
+            }
+
+            document.getElementById('saveAllBtn').addEventListener('click', async () => {
+                persistData();
+                await applySiteInfoToFiles(true);
+            });
+            document.getElementById('addProductBtn').addEventListener('click', () => resetForm('products'));
+            document.getElementById('saveProductBtn').addEventListener('click', saveProduct);
+            document.getElementById('resetProductBtn').addEventListener('click', () => resetForm('products'));
+
+            document.getElementById('addArticleBtn').addEventListener('click', () => resetForm('articles'));
+            document.getElementById('saveArticleBtn').addEventListener('click', saveArticle);
+            document.getElementById('resetArticleBtn').addEventListener('click', () => resetForm('articles'));
+
+            document.getElementById('addMediaBtn').addEventListener('click', () => resetForm('media'));
+            document.getElementById('saveMediaBtn').addEventListener('click', saveMedia);
+            document.getElementById('resetMediaBtn').addEventListener('click', () => resetForm('media'));
+
+            document.getElementById('addSiteInfoBtn').addEventListener('click', () => resetForm('siteInfo'));
+            document.getElementById('saveSiteInfoBtn').addEventListener('click', saveSiteInfo);
+            document.getElementById('resetSiteInfoBtn').addEventListener('click', () => resetForm('siteInfo'));
+        }
+
+        function renderAll() {
+            renderStats();
+            renderProducts();
+            renderArticles();
+            renderMedia();
+            renderSiteInfo();
+        }
+
+        window.editItem = editItem;
+        window.deleteItem = deleteItem;
+
+        loadData();
+        initAuth();
+        setupLogin();
+        setupNavigation();
+        setupActions();
+        renderAll();
+    </script>
+</body>
+</html>
+

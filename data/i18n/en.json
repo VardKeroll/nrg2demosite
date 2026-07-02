@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "lang": "en",
+    "name": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "catalog": "Catalog",
+    "brands": "Brands",
+    "partners": "Partners",
+    "news": "News",
+    "contacts": "Contacts",
+    "login": "Login",
+    "register": "Register",
+    "b2b_portal": "B2B Portal",
+    "b2b_portal_note": "For registered clients only"
+  },
+  "hero": {
+    "badge": "FMCG products for life",
+    "title": "Reliable national operator",
+    "subtitle": "National distribution company with FMCG product portfolio, focused on customer needs for essential life products at affordable prices with high-quality service.",
+    "btn_catalog": "View Catalog",
+    "btn_partner": "Become a Partner"
+  },
+  "categories": {
+    "title": "Product Categories",
+    "subtitle": "Wide range of product groups",
+    "view_all": "View All"
+  },
+  "brands": {
+    "title": "Our Brands",
+    "subtitle": "Exclusive distributor of leading global brands",
+    "exclusive": "Exclusive",
+    "view_all": "All Brands"
+  },
+  "benefits": {
+    "title": "Why choose us?",
+    "subtitle": "Reliable FMCG distributor with strong logistics, wide range and focus on partner development",
+    "direct_contracts": {
+      "title": "Direct contracts with leading manufacturers",
+      "text": "Official cooperation with manufacturers ensures the best prices and product quality"
+    },
+    "wide_range": {
+      "title": "Wide range of FMCG products in stock",
+      "text": "Full spectrum of fast-moving goods always available at our warehouses"
+    },
+    "fast_delivery": {
+      "title": "Fast delivery and stable logistics",
+      "text": "Own logistics network ensures fast and reliable delivery to any corner of Ukraine"
+    },
+    "flexible_terms": {
+      "title": "Flexible cooperation terms and discount system",
+      "text": "Individual approach to each partner with favorable terms and bonus programs"
+    },
+    "personal_manager": {
+      "title": "Personal manager and customer support",
+      "text": "Each client has their own manager for quick resolution of any issues"
+    }
+  },
+  "partners": {
+    "title": "Our Partners",
+    "subtitle": "Over 1500 partners across Ukraine",
+    "become_partner": "Become a Partner",
+    "cities": "cities in Ukraine",
+    "active_partners": "active partners",
+    "products": "products in stock",
+    "orders_daily": "orders per day"
+  },
+  "news": {
+    "title": "News & Promotions",
+    "subtitle": "Stay updated with the latest news",
+    "read_more": "Read More",
+    "view_all": "All News"
+  },
+  "cta": {
+    "title": "Ready to Start Cooperation?",
+    "subtitle": "Join the NRG-UA network and get access to exclusive brands at the best prices",
+    "btn_register": "Register",
+    "btn_contact": "Contact Us"
+  },
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "news": "News",
+      "contacts": "Contacts"
+    },
+    "partners": {
+      "title": "For Partners",
+      "become_partner": "Become a Partner",
+      "login": "Partner Login",
+      "terms": "Partnership Terms",
+      "delivery": "Delivery & Payment"
+    },
+    "catalog": {
+      "title": "Catalog"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "address": "Kyiv, Khreshchatyk St., 1",
+      "schedule": "Mon-Fri: 9:00-18:00"
+    },
+    "copyright": "© 2024 NRG-UA. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "buttons": {
+    "learn_more": "Learn More",
+    "view_all": "View All",
+    "add_to_cart": "Add to Cart",
+    "order": "Order",
+    "send": "Send",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
+    "message": "Message",
+    "password": "Password",
+    "required": "Required field"
+  },
+  "messages": {
+    "success": "Success!",
+    "error": "Error!",
+    "loading": "Loading...",
+    "no_results": "No results found",
+    "confirm_delete": "Are you sure you want to delete?"
+  },
+  "about": {
+    "title": "About NRG-UA",
+    "subtitle": "National B2B distributor of home and business products",
+    "history_title": "Our History",
+    "history_text": "NRG-UA is a modern distribution company operating in the Ukrainian market since 2015. We are the exclusive representative of leading global brands and provide the highest quality of service to our partners.",
+    "mission_title": "Our Mission",
+    "mission_text": "To provide Ukrainian businesses with quality products at competitive prices with the best service."
+  },
+  "contacts": {
+    "title": "Contacts",
+    "subtitle": "Contact us in any convenient way",
+    "form_title": "Write to Us",
+    "form_subtitle": "Fill out the form and we will contact you shortly"
+  }
+}

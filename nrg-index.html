@@ -1,0 +1,1009 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NRG-UA - національний дистриб'ютор товарів для дому та бізнесу">
+    <title>NRG-UA | Головна</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/nrg-style.css">
+    <style>
+        :root {
+            --home-shadow-glow: 0 20px 45px rgba(0, 212, 255, 0.16);
+            --tech-intensity: 0.28;
+            --scan-intensity: 0.09;
+            --points-intensity: 0.32;
+        }
+
+        body.tech-soft {
+            --tech-intensity: 0.16;
+            --scan-intensity: 0.05;
+            --points-intensity: 0.2;
+        }
+
+        body.tech-medium {
+            --tech-intensity: 0.28;
+            --scan-intensity: 0.09;
+            --points-intensity: 0.32;
+        }
+
+        body.tech-bright {
+            --tech-intensity: 0.42;
+            --scan-intensity: 0.14;
+            --points-intensity: 0.52;
+        }
+
+        .preloader-lite {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at 50% 30%, rgba(0, 212, 255, 0.12), rgba(10, 15, 20, 0.96));
+            backdrop-filter: blur(3px);
+            transition: opacity 420ms ease, visibility 420ms ease;
+        }
+
+        .preloader-lite.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .preloader-core {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+            color: #c7f2ff;
+        }
+
+        .preloader-ring {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 212, 255, 0.24);
+            border-top-color: rgba(0, 212, 255, 0.95);
+            animation: ringSpin 0.95s linear infinite;
+            box-shadow: 0 0 22px rgba(0, 212, 255, 0.26);
+        }
+
+        .preloader-text {
+            font-size: 0.82rem;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .home-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 400;
+            background: rgba(10, 15, 20, 0.88);
+            border-bottom: 1px solid var(--color-border);
+            backdrop-filter: blur(14px);
+        }
+
+        .home-header .container {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .home-logo img {
+            height: 41px;
+        }
+
+        .home-menu {
+            display: flex;
+            gap: 0.32rem;
+            flex-wrap: wrap;
+        }
+
+        .home-menu a {
+            padding: 0.5rem 0.78rem;
+            border-radius: 999px;
+            color: var(--color-text-secondary);
+            transition: all var(--transition-base);
+            font-weight: 500;
+            font-size: 0.87rem;
+            letter-spacing: 0.01em;
+        }
+
+        .home-menu a:hover {
+            color: var(--color-text-primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .home-main {
+            padding-top: 76px;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .home-main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: var(--tech-intensity);
+            background-image:
+                radial-gradient(circle at 8% 18%, rgba(0, 212, 255, 0.22), rgba(0, 212, 255, 0) 38%),
+                radial-gradient(circle at 92% 36%, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0) 34%),
+                linear-gradient(rgba(0, 212, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.035) 1px, transparent 1px);
+            background-size: auto, auto, 80px 80px, 80px 80px;
+            animation: techFieldDrift 28s linear infinite;
+        }
+
+        .home-main::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: var(--scan-intensity);
+            background:
+                linear-gradient(180deg, rgba(0, 212, 255, 0.95) 0px, rgba(0, 212, 255, 0) 2px) 0 0 / 100% 4px repeat-y;
+            mix-blend-mode: screen;
+            animation: scanSweep 8.5s linear infinite;
+        }
+
+        .tech-points {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: var(--points-intensity);
+            background-image:
+                radial-gradient(circle at 12% 22%, rgba(0, 212, 255, 0.8) 0 1px, transparent 2px),
+                radial-gradient(circle at 27% 68%, rgba(0, 212, 255, 0.7) 0 1px, transparent 2px),
+                radial-gradient(circle at 45% 34%, rgba(99, 102, 241, 0.78) 0 1px, transparent 2px),
+                radial-gradient(circle at 62% 72%, rgba(0, 212, 255, 0.76) 0 1px, transparent 2px),
+                radial-gradient(circle at 79% 26%, rgba(0, 212, 255, 0.72) 0 1px, transparent 2px),
+                radial-gradient(circle at 89% 58%, rgba(99, 102, 241, 0.7) 0 1px, transparent 2px);
+            animation: pointsShift 18s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.35));
+        }
+
+        .hero {
+            min-height: calc(100vh - 76px);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--color-border);
+            background:
+                radial-gradient(ellipse 64% 45% at 16% 25%, rgba(0, 212, 255, 0.22) 0%, transparent 74%),
+                radial-gradient(ellipse 58% 34% at 82% 70%, rgba(99, 102, 241, 0.18) 0%, transparent 72%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, transparent 100%);
+            animation: driftGrid 22s linear infinite;
+            pointer-events: none;
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+            animation: orbFloat 10s ease-in-out infinite;
+        }
+
+        .hero-orb.o1 {
+            width: 300px;
+            height: 300px;
+            left: -110px;
+            top: 11%;
+            background: radial-gradient(circle at 35% 35%, rgba(0, 212, 255, 0.48), rgba(0, 212, 255, 0));
+        }
+
+        .hero-orb.o2 {
+            width: 220px;
+            height: 220px;
+            right: 7%;
+            top: 16%;
+            animation-delay: -3s;
+            background: radial-gradient(circle at 60% 40%, rgba(99, 102, 241, 0.42), rgba(99, 102, 241, 0));
+        }
+
+        .hero-orb.o3 {
+            width: 190px;
+            height: 190px;
+            right: 17%;
+            bottom: -45px;
+            animation-delay: -6s;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.42), rgba(0, 212, 255, 0));
+        }
+
+        .hero-wrap {
+            position: relative;
+            z-index: 2;
+            max-width: 940px;
+            padding: clamp(2rem, 4vw, 4rem) 0;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid var(--color-border-accent);
+            border-radius: 999px;
+            padding: 0.52rem 0.92rem;
+            color: var(--color-accent-light);
+            font-size: 0.84rem;
+            margin-bottom: 1.25rem;
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            line-height: 1.05;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: riseIn 650ms ease 100ms forwards;
+        }
+
+        .hero p {
+            max-width: 780px;
+            color: var(--color-text-secondary);
+            line-height: 1.75;
+            margin-bottom: 1.8rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: riseIn 700ms ease 220ms forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: riseIn 740ms ease 340ms forwards;
+        }
+
+        .hero-kpis {
+            margin-top: 1.8rem;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: riseIn 760ms ease 460ms forwards;
+        }
+
+        .hero-kpi {
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.95rem;
+        }
+
+        .hero-kpi strong {
+            display: block;
+            font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+            color: var(--color-text-primary);
+        }
+
+        .hero-kpi span {
+            color: var(--color-text-tertiary);
+            font-size: 0.82rem;
+        }
+
+        .section {
+            padding: clamp(3.8rem, 7vw, 6.6rem) 0;
+        }
+
+        .section-shell {
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.015), rgba(0, 212, 255, 0.05));
+            padding: clamp(1.1rem, 3vw, 2.2rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-shell::before {
+            content: '';
+            position: absolute;
+            inset: -40% -10% auto -10%;
+            height: 45%;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.12), rgba(0, 212, 255, 0));
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .section-head {
+            margin-bottom: 1.3rem;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.55rem, 3.8vw, 2.9rem);
+            margin-bottom: 0.55rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-head p {
+            color: var(--color-text-secondary);
+            max-width: 840px;
+            line-height: 1.72;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .catalog-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .value-card {
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.015);
+            transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-border-accent);
+            box-shadow: var(--home-shadow-glow);
+        }
+
+        .value-card i {
+            color: var(--color-accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .value-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            font-size: 0.92rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .process-step {
+            border: 1px solid var(--color-border);
+            border-radius: 15px;
+            padding: 1rem;
+            background: linear-gradient(175deg, rgba(0, 212, 255, 0.06), rgba(255, 255, 255, 0.02));
+            transition: transform var(--transition-base), border-color var(--transition-base);
+        }
+
+        .process-step:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-border-accent);
+        }
+
+        .step-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.6rem;
+            font-size: 0.84rem;
+            color: var(--color-accent-light);
+            background: rgba(0, 212, 255, 0.16);
+        }
+
+        .process-step p {
+            color: var(--color-text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+
+        .scheme-wrap {
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: 1rem;
+            background: rgba(10, 15, 20, 0.62);
+        }
+
+        .scheme-title {
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        .flow-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .flow-line {
+            stroke: rgba(0, 212, 255, 0.55);
+            stroke-width: 2.3;
+            fill: none;
+            stroke-dasharray: 9 8;
+            animation: flowDash 1.9s linear infinite;
+        }
+
+        .flow-node {
+            fill: rgba(14, 29, 39, 0.95);
+            stroke: rgba(0, 212, 255, 0.74);
+            stroke-width: 1.5;
+            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.33));
+        }
+
+        .flow-node.pulse {
+            animation: nodePulse 2.2s ease-in-out infinite;
+        }
+
+        .flow-text-main {
+            fill: #e6faff;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .flow-text-sub {
+            fill: #9fc7d8;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.1rem;
+        }
+
+        .metric-card {
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 0.95rem;
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .metric-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.6rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .metric-head span {
+            color: var(--color-text-secondary);
+            font-size: 0.86rem;
+        }
+
+        .metric-head strong {
+            color: var(--color-text-primary);
+            font-size: 0.95rem;
+        }
+
+        .metric-track {
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.95), rgba(99, 102, 241, 0.9));
+            transition: width 1.1s cubic-bezier(.25, .8, .2, 1);
+            box-shadow: 0 0 16px rgba(0, 212, 255, 0.38);
+        }
+
+        .brand-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.62rem;
+        }
+
+        .brand-pill {
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            padding: 0.52rem 0.88rem;
+            color: var(--color-text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.85rem;
+            transition: transform var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+            animation: softBob 4.5s ease-in-out infinite;
+        }
+
+        .brand-pill:nth-child(odd) {
+            animation-delay: -1.5s;
+        }
+
+        .brand-pill:nth-child(3n) {
+            animation-delay: -2.7s;
+        }
+
+        .brand-pill:hover {
+            color: var(--color-text-primary);
+            border-color: var(--color-border-accent);
+            transform: translateY(-4px);
+        }
+
+        .cta-panel {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            border: 1px solid var(--color-border-accent);
+            border-radius: 18px;
+            padding: clamp(1rem, 3vw, 1.5rem);
+            background: linear-gradient(140deg, rgba(0, 212, 255, 0.12), rgba(99, 102, 241, 0.12));
+        }
+
+        .cta-panel p {
+            color: var(--color-text-secondary);
+            max-width: 760px;
+        }
+
+        .reveal-pop {
+            opacity: 0;
+            transform: translateY(20px) scale(0.985);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(.2, .8, .2, 1);
+            transition-delay: var(--delay, 0ms);
+        }
+
+        .reveal-pop.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .home-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 2.2rem 0;
+            text-align: center;
+            color: var(--color-text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes driftGrid {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                transform: translate3d(56px, 56px, 0);
+            }
+        }
+
+        @keyframes orbFloat {
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+            50% {
+                transform: translate3d(0, -18px, 0);
+            }
+        }
+
+        @keyframes softBob {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes techFieldDrift {
+            from {
+                background-position: 0 0, 0 0, 0 0, 0 0;
+            }
+            to {
+                background-position: 0 0, 0 0, 80px 80px, 80px 80px;
+            }
+        }
+
+        @keyframes scanSweep {
+            from {
+                transform: translateY(-28px);
+            }
+            to {
+                transform: translateY(28px);
+            }
+        }
+
+        @keyframes pointsShift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            50% {
+                transform: translate3d(-6px, 4px, 0);
+            }
+            100% {
+                transform: translate3d(6px, -4px, 0);
+            }
+        }
+
+        @keyframes ringSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes flowDash {
+            to {
+                stroke-dashoffset: -34;
+            }
+        }
+
+        @keyframes nodePulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.055);
+            }
+        }
+
+        @media (max-width: 980px) {
+            .hero-kpis,
+            .value-grid,
+            .catalog-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .process-grid,
+            .cta-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .home-header .container {
+                min-height: 92px;
+                align-items: flex-start;
+                padding: 0.75rem 0;
+                flex-direction: column;
+            }
+
+            .home-main {
+                padding-top: 98px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 2rem 0;
+            }
+
+            .hero-kpis,
+            .value-grid,
+            .catalog-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-text-main {
+                font-size: 11px;
+            }
+
+            .flow-text-sub {
+                font-size: 10px;
+            }
+
+            .home-menu a {
+                font-size: 0.82rem;
+                padding: 0.46rem 0.66rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero::before,
+            .hero-orb,
+            .brand-pill,
+            .flow-line,
+            .flow-node.pulse {
+                animation: none !important;
+            }
+
+            .home-main::before,
+            .home-main::after,
+            .tech-points {
+                animation: none !important;
+                opacity: 0.12 !important;
+            }
+
+            .hero h1,
+            .hero p,
+            .hero-actions,
+            .hero-kpis,
+            .reveal-pop {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="tech-medium">
+    <div id="preloader" class="preloader-lite" aria-hidden="true">
+        <div class="preloader-core">
+            <span class="preloader-ring"></span>
+            <span class="preloader-text">NRG-UA loading</span>
+        </div>
+    </div>
+
+    <header class="home-header" id="header">
+        <div class="container">
+            <a href="nrg-index.html" class="home-logo">
+                <img src="images/nrg-logo.svg" alt="NRG-UA">
+            </a>
+            <nav class="home-menu" aria-label="Головне меню">
+                <a href="nrg-index.html">Головна</a>
+                <a href="pages/nrg-about.html">Про нас</a>
+                <a href="pages/nrg-catalog.html">Каталог</a>
+                <a href="pages/nrg-brands.html">Бренди</a>
+                <a href="pages/partners.html">Партнерам</a>
+                <a href="pages/nrg-news.html">Новини</a>
+                <a href="pages/nrg-contacts.html">Контакти</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="home-main">
+        <div class="tech-points" aria-hidden="true"></div>
+        <section class="hero" id="home">
+            <span class="hero-orb o1" aria-hidden="true"></span>
+            <span class="hero-orb o2" aria-hidden="true"></span>
+            <span class="hero-orb o3" aria-hidden="true"></span>
+            <div class="container hero-wrap">
+                <span class="hero-tag"><i class="fas fa-bolt"></i> Національний B2B-дистриб'ютор</span>
+                <h1><span data-site-key="home.hero_title">Енергія поставок для</span><br><span class="text-gradient" data-site-key="home.hero_highlight">українського ритейлу</span></h1>
+                <p data-site-key="home.hero_subtitle">NRG-UA допомагає магазинам, маркетплейсам і сервісним компаніям отримувати товари швидко, прогнозовано і з повним операційним супроводом.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="pages/partners.html"><i class="fas fa-handshake"></i> Стати партнером</a>
+                    <a class="btn btn-outline" href="pages/nrg-catalog.html"><i class="fas fa-boxes-stacked"></i> Перейти в каталог</a>
+                </div>
+
+                <div class="hero-kpis">
+                    <div class="hero-kpi"><strong>12+</strong><span>років на ринку</span></div>
+                    <div class="hero-kpi"><strong>45+</strong><span>брендів у портфелі</span></div>
+                    <div class="hero-kpi"><strong>15000+</strong><span>товарних позицій</span></div>
+                    <div class="hero-kpi"><strong>8</strong><span>філій по Україні</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="container section-shell reveal-pop" style="--delay: 0ms;">
+                <div class="section-head">
+                    <h2 data-site-key="home.about_title">Повноцінний партнер, а не просто постачальник</h2>
+                    <p data-site-key="home.about_text">Ми будуємо ланцюг поставок так, щоб ваш бізнес продавав більше: асортиментна аналітика, сезонне планування, ротація SKU та сервісна підтримка.</p>
+                </div>
+
+                <div class="value-grid">
+                    <article class="value-card reveal-pop" style="--delay: 70ms;">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Персональний менеджмент</h3>
+                        <p>Окремий менеджер для вашого бізнесу, швидке узгодження заявок і прозорі SLA.</p>
+                    </article>
+                    <article class="value-card reveal-pop" style="--delay: 130ms;">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Аналітика попиту</h3>
+                        <p>Підказуємо, які категорії ростуть, і як збільшувати середній чек без перевантаження складу.</p>
+                    </article>
+                    <article class="value-card reveal-pop" style="--delay: 190ms;">
+                        <i class="fas fa-truck-fast"></i>
+                        <h3>Швидка логістика</h3>
+                        <p>Покриття по всій Україні через регіональну мережу відвантажень та чіткий графік поставок.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="catalog">
+            <div class="container section-shell reveal-pop" style="--delay: 0ms;">
+                <div class="section-head">
+                    <h2 data-site-key="home.catalog_title">Ключові напрями асортименту</h2>
+                    <p data-site-key="home.catalog_text">Збалансована матриця для офлайну та e-commerce: від товарів щоденного попиту до технологічних новинок.</p>
+                </div>
+
+                <div class="value-grid catalog-grid">
+                    <article class="value-card reveal-pop" style="--delay: 50ms;"><i class="fas fa-battery-full"></i><h3>Елементи живлення</h3><p>Батарейки, акумулятори, зарядні рішення для побуту та професійного сегмента.</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 110ms;"><i class="fas fa-lightbulb"></i><h3>Освітлення</h3><p>LED-лампи, smart-світло, комплектуючі та енергоефективні системи.</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 170ms;"><i class="fas fa-tractor"></i><h3>Сільське господарство</h3><p>Садова техніка, полив, витратні матеріали та рішення для сезонних робіт і агро-магазинів.</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 230ms;"><i class="fas fa-house"></i><h3>Товари для дому</h3><p>Побутові категорії стабільного попиту для щоденного продажу в офлайн та e-commerce.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="process">
+            <div class="container section-shell reveal-pop" style="--delay: 0ms;">
+                <div class="section-head">
+                    <h2 data-site-key="home.process_title">Як ми запускаємо співпрацю</h2>
+                    <p data-site-key="home.process_text">Короткий шлях від першого контакту до стабільних регулярних поставок з передбачуваним сервісом.</p>
+                </div>
+
+                <div class="process-grid">
+                    <article class="process-step reveal-pop" style="--delay: 40ms;"><span class="step-num">01</span><h4>Бриф</h4><p>Фіксуємо формат бізнесу, цілі і пріоритетні категорії.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 100ms;"><span class="step-num">02</span><h4>Матриця SKU</h4><p>Формуємо стартову пропозицію за цінами і товарообігом.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 160ms;"><span class="step-num">03</span><h4>Підключення</h4><p>Узгоджуємо умови і відкриваємо доступ до B2B-кабінету.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 220ms;"><span class="step-num">04</span><h4>Масштаб</h4><p>Оптимізуємо асортимент і прискорюємо ріст продажів.</p></article>
+                </div>
+
+                <div class="scheme-wrap reveal-pop" style="--delay: 280ms;">
+                    <div class="scheme-title">Схема руху від заявки до полиці магазину</div>
+                    <svg class="flow-svg" viewBox="0 0 1000 280" role="img" aria-label="Схема процесу поставок">
+                        <path class="flow-line" d="M114 140 C 190 140, 210 70, 280 70 C 350 70, 370 140, 440 140 C 510 140, 530 210, 600 210 C 670 210, 690 140, 760 140 C 830 140, 850 140, 900 140" />
+
+                        <circle class="flow-node pulse" cx="110" cy="140" r="42" />
+                        <circle class="flow-node" cx="280" cy="70" r="42" />
+                        <circle class="flow-node pulse" cx="440" cy="140" r="42" />
+                        <circle class="flow-node" cx="600" cy="210" r="42" />
+                        <circle class="flow-node pulse" cx="760" cy="140" r="42" />
+                        <circle class="flow-node" cx="900" cy="140" r="42" />
+
+                        <text class="flow-text-main" x="110" y="136" text-anchor="middle">ЗАПИТ</text>
+                        <text class="flow-text-sub" x="110" y="154" text-anchor="middle">від партнера</text>
+
+                        <text class="flow-text-main" x="280" y="66" text-anchor="middle">SKU-ПЛАН</text>
+                        <text class="flow-text-sub" x="280" y="84" text-anchor="middle">та ціни</text>
+
+                        <text class="flow-text-main" x="440" y="136" text-anchor="middle">ЛОГІСТИКА</text>
+                        <text class="flow-text-sub" x="440" y="154" text-anchor="middle">8 філій</text>
+
+                        <text class="flow-text-main" x="600" y="206" text-anchor="middle">ПОСТАВКА</text>
+                        <text class="flow-text-sub" x="600" y="224" text-anchor="middle">та SLA</text>
+
+                        <text class="flow-text-main" x="760" y="136" text-anchor="middle">ПОЛИЦЯ</text>
+                        <text class="flow-text-sub" x="760" y="154" text-anchor="middle">продажі</text>
+
+                        <text class="flow-text-main" x="900" y="136" text-anchor="middle">АНАЛІТИКА</text>
+                        <text class="flow-text-sub" x="900" y="154" text-anchor="middle">масштаб</text>
+                    </svg>
+                </div>
+
+                <div class="metrics-grid">
+                    <article class="metric-card reveal-pop" style="--delay: 330ms;">
+                        <div class="metric-head"><span>Швидкість обробки заявки</span><strong>94%</strong></div>
+                        <div class="metric-track"><div class="metric-fill" data-width="94"></div></div>
+                    </article>
+                    <article class="metric-card reveal-pop" style="--delay: 390ms;">
+                        <div class="metric-head"><span>Наявність ключових SKU</span><strong>91%</strong></div>
+                        <div class="metric-track"><div class="metric-fill" data-width="91"></div></div>
+                    </article>
+                    <article class="metric-card reveal-pop" style="--delay: 450ms;">
+                        <div class="metric-head"><span>Відвантаження в термін</span><strong>97%</strong></div>
+                        <div class="metric-track"><div class="metric-fill" data-width="97"></div></div>
+                    </article>
+                    <article class="metric-card reveal-pop" style="--delay: 510ms;">
+                        <div class="metric-head"><span>Повторні закупівлі партнерів</span><strong>89%</strong></div>
+                        <div class="metric-track"><div class="metric-fill" data-width="89"></div></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="brands">
+            <div class="container section-shell reveal-pop" style="--delay: 0ms;">
+                <div class="section-head">
+                    <h2 data-site-key="home.brands_title">Бренди, яким довіряє ринок</h2>
+                    <p data-site-key="home.brands_text">Міжнародні і локальні виробники, стабільна наявність та сервісна підтримка на кожному етапі.</p>
+                </div>
+                <div class="brand-cloud">
+                    <span class="brand-pill">Varta</span>
+                    <span class="brand-pill">Energizer</span>
+                    <span class="brand-pill">Duracell</span>
+                    <span class="brand-pill">Panasonic</span>
+                    <span class="brand-pill">Philips</span>
+                    <span class="brand-pill">Xiaomi</span>
+                    <span class="brand-pill">TP-Link</span>
+                    <span class="brand-pill">Ajax Systems</span>
+                    <span class="brand-pill">Anker</span>
+                    <span class="brand-pill">Remax</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contacts">
+            <div class="container reveal-pop" style="--delay: 0ms;">
+                <div class="cta-panel">
+                    <div>
+                        <h2 data-site-key="home.cta_title">Готові обговорити співпрацю?</h2>
+                        <p data-site-key="home.cta_text">Напишіть нам через сторінку контактів або залиште заявку в розділі для партнерів. Відповідаємо оперативно.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="pages/nrg-contacts.html"><i class="fas fa-envelope"></i> Контакти</a>
+                        <a class="btn btn-outline" href="pages/partners.html"><i class="fas fa-handshake"></i> Партнерам</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="home-footer">
+        <div class="container" data-site-key="footer.text">© 2026 NRG-UA. Національний дистриб'ютор товарів для дому та бізнесу.</div>
+    </footer>
+
+    <script src="js/nrg-main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            const hidePreloader = () => {
+                if (!preloader) return;
+                preloader.classList.add('hidden');
+                setTimeout(() => preloader.remove(), 460);
+            };
+
+            setTimeout(hidePreloader, 280);
+            window.addEventListener('load', hidePreloader, { once: true });
+
+            const nodes = document.querySelectorAll('.reveal-pop');
+            const bars = document.querySelectorAll('.metric-fill');
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+
+                        if (entry.target.classList.contains('metric-card')) {
+                            const fill = entry.target.querySelector('.metric-fill');
+                            if (fill && !fill.dataset.animated) {
+                                fill.style.width = `${fill.dataset.width || 0}%`;
+                                fill.dataset.animated = '1';
+                            }
+                        }
+
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.18, rootMargin: '0px 0px -55px 0px' });
+
+            nodes.forEach((node) => obs.observe(node));
+            bars.forEach((bar) => {
+                bar.style.width = '0%';
+            });
+        });
+    </script>
+</body>
+</html>

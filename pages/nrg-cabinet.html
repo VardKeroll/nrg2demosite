@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NRG-UA | Кабінет партнера</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --border: #e2e8f0;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        /* Login */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem;
+        }
+        
+        .login-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: var(--shadow);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-logo .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 14px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .login-logo h1 { font-size: 1.5rem; font-weight: 700; }
+        .login-logo p { color: var(--text-muted); margin-top: 0.5rem; }
+        
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary { background: var(--primary); color: white; width: 100%; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+        .btn-success { background: var(--secondary); color: white; }
+        .btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .login-footer a { color: var(--primary); text-decoration: none; }
+        
+        /* App Layout */
+        .app-container { display: none; }
+        .app-container.active { display: flex; min-height: 100vh; }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .sidebar-logo .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.875rem;
+        }
+        
+        .sidebar-nav { flex: 1; padding: 1rem 0; overflow-y: auto; }
+        
+        .nav-section { padding: 0 0.75rem; margin-bottom: 1rem; }
+        .nav-section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--gray);
+            padding: 0.5rem 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .nav-item:hover { background: var(--bg); color: var(--text); }
+        .nav-item.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); font-weight: 500; }
+        .nav-item i { width: 18px; text-align: center; }
+        
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .company-info {
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+        
+        .company-name { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; }
+        .company-meta { font-size: 0.75rem; color: var(--text-muted); }
+        
+        /* Main */
+        .main-content { margin-left: 260px; flex: 1; }
+        
+        .header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-title h1 { font-size: 1.25rem; font-weight: 600; }
+        .header-title p { color: var(--text-muted); font-size: 0.8rem; }
+        
+        .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+        
+        .page-content { padding: 1.5rem; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; }
+        .stat-value.positive { color: var(--secondary); }
+        .stat-value.negative { color: var(--danger); }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title { font-size: 1rem; font-weight: 600; }
+        .card-body { padding: 1.25rem; }
+        
+        /* Tables */
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+        }
+        .table th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        .table tbody tr:hover { background: var(--bg); }
+        
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--secondary); }
+        .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .badge-primary { background: rgba(99, 102, 241, 0.15); color: var(--primary); }
+        .badge-gray { background: rgba(100, 116, 139, 0.15); color: var(--gray); }
+        
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.65rem 1rem 0.65rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+        .search-box input:focus { outline: none; border-color: var(--primary); }
+        .search-box i { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--gray); }
+        
+        .filter-select {
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            min-width: 140px;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+        
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .product-card:hover { box-shadow: var(--shadow); }
+        
+        .product-img {
+            width: 100%;
+            height: 140px;
+            background: var(--bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .product-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .product-sku { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .product-price { font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .product-stock { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .product-stock.low { color: var(--danger); }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .qty-input {
+            width: 60px;
+            padding: 0.4rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+        
+        /* Cart */
+        .cart-summary {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cart-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+        
+        .cart-row.total {
+            border-top: 1px solid var(--border);
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Toast */
+        .toast-container { position: fixed; top: 1rem; right: 1rem; z-index: 2000; }
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideIn 0.3s ease;
+        }
+        .toast.success { border-left: 3px solid var(--secondary); }
+        .toast.error { border-left: 3px solid var(--danger); }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Grid */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        
+        /* Actions */
+        .actions { display: flex; gap: 0.5rem; }
+        .action-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+        }
+        .action-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon">NRG</div>
+                <h1>Кабінет партнера</h1>
+                <p>Увійдіть до особистого кабінету</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="loginEmail" value="partner@test.com" placeholder="Ваш email">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" class="form-control" id="loginPassword" value="partner123" placeholder="Ваш пароль">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Увійти
+                </button>
+            </form>
+            
+            <div class="login-divider" style="display: flex; align-items: center; margin: 1.5rem 0; color: var(--text-muted);">
+                <span style="flex: 1; height: 1px; background: var(--border);"></span>
+                <span style="padding: 0 1rem; font-size: 0.85rem;">або</span>
+                <span style="flex: 1; height: 1px; background: var(--border);"></span>
+            </div>
+            
+            <button type="button" class="btn" id="telegramLoginBtn" 
+                style="width: 100%; background: #0088cc; color: white; margin-bottom: 0.75rem;">
+                <i class="fab fa-telegram-plane"></i> Увійти через Telegram
+            </button>
+            
+            <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+                Або напишіть нашому боту <a href="https://t.me/NRGCATBOT" target="_blank" style="color: #0088cc;">@NRGCATBOT</a>
+            </p>
+            
+            <div class="login-footer">
+                <p>Ще не партнер? <a href="../pages/nrg-partners.html">Стати партнером</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telegram Registration Modal -->
+    <div class="modal" id="telegramRegisterModal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header" style="padding: 1.25rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 1.1rem;"><i class="fab fa-telegram-plane" style="color: #0088cc;"></i> Реєстрація через Telegram</h3>
+                <button type="button" onclick="closeTelegramModal()" style="background: none; border: none; cursor: pointer; font-size: 1.25rem;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 1.25rem;">
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">
+                    Для завершення реєстрації заповніть дані про вашу компанію:
+                </p>
+                <form id="telegramRegisterForm">
+                    <input type="hidden" id="tgRegTelegramId">
+                    <input type="hidden" id="tgRegTelegramUsername">
+                    <input type="hidden" id="tgRegTelegramFirstName">
+                    <input type="hidden" id="tgRegTelegramLastName">
+                    
+                    <div class="form-group">
+                        <label>Назва компанії *</label>
+                        <input type="text" class="form-control" id="tgRegCompany" required placeholder="ТОВ Ваша Компанія">
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон *</label>
+                        <input type="tel" class="form-control" id="tgRegPhone" required placeholder="+380">
+                    </div>
+                    <div class="form-group">
+                        <label>Email (опційно)</label>
+                        <input type="email" class="form-control" id="tgRegEmail" placeholder="email@company.ua">
+                    </div>
+                    <div class="form-group">
+                        <label>Регіон</label>
+                        <select class="form-control" id="tgRegRegion">
+                            <option value="">Оберіть область</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Місто</label>
+                        <input type="text" class="form-control" id="tgRegCity" placeholder="Ваше місто">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-check"></i> Завершити реєстрацію
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- App -->
+    <div class="app-container" id="appContainer">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="sidebar-logo">
+                    <div class="logo-icon">NRG</div>
+                    <strong>Кабінет</strong>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <a class="nav-item active" data-page="dashboard">
+                        <i class="fas fa-home"></i> Головна
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Замовлення</div>
+                    <a class="nav-item" data-page="catalog">
+                        <i class="fas fa-boxes"></i> Каталог товарів
+                    </a>
+                    <a class="nav-item" data-page="favorites">
+                        <i class="fas fa-heart"></i> Обране
+                    </a>
+                    <a class="nav-item" data-page="cart">
+                        <i class="fas fa-shopping-cart"></i> Кошик
+                        <span class="badge badge-primary" id="cartBadge" style="margin-left: auto;">0</span>
+                    </a>
+                    <a class="nav-item" data-page="orders">
+                        <i class="fas fa-file-invoice"></i> Мої замовлення
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Фінанси</div>
+                    <a class="nav-item" data-page="documents">
+                        <i class="fas fa-file-alt"></i> Документи
+                    </a>
+                    <a class="nav-item" data-page="balance">
+                        <i class="fas fa-wallet"></i> Баланс
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Налаштування</div>
+                    <a class="nav-item" data-page="profile">
+                        <i class="fas fa-user"></i> Профіль
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="company-info">
+                    <div class="company-name" id="companyName">—</div>
+                    <div class="company-meta" id="companyMeta">Завантаження...</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" style="width: 100%;" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Вийти
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main -->
+        <main class="main-content">
+            <header class="header">
+                <div class="header-title">
+                    <h1 id="pageTitle">Головна</h1>
+                    <p id="pageSubtitle">Огляд вашого кабінету</p>
+                </div>
+                <div class="header-actions">
+                    <a href="../nrg-index.html" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-external-link-alt"></i> На сайт
+                    </a>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <!-- Dashboard -->
+                <section class="page-section active" id="page-dashboard">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Ваш баланс</div>
+                            <div class="stat-value positive" id="balanceValue">0 ₴</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Замовлень цього місяця</div>
+                            <div class="stat-value" id="ordersCount">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Ваш рівень цін</div>
+                            <div class="stat-value" id="priceLevel">—</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Персональна знижка</div>
+                            <div class="stat-value" id="discountValue">0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Останні замовлення</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr><th>№</th><th>Сума</th><th>Статус</th></tr>
+                                    </thead>
+                                    <tbody id="recentOrdersTable"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Останні документи</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr><th>Документ</th><th>Дата</th><th>Сума</th></tr>
+                                    </thead>
+                                    <tbody id="recentDocumentsTable"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Менеджер та оновлення -->
+                    <div class="grid-2" style="margin-top: 1rem;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-user-tie"></i> Ваш менеджер</h3>
+                            </div>
+                            <div class="card-body" id="managerSection">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div id="managerPhoto" style="width: 60px; height: 60px; background: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem;">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 1rem;" id="managerName">Завантаження...</div>
+                                        <div style="color: var(--text-muted); font-size: 0.85rem;" id="managerRegion"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <a id="managerPhone" href="tel:" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text); text-decoration: none;">
+                                        <i class="fas fa-phone" style="color: var(--secondary); width: 20px;"></i> <span>—</span>
+                                    </a>
+                                    <a id="managerEmail" href="mailto:" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text); text-decoration: none;">
+                                        <i class="fas fa-envelope" style="color: var(--primary); width: 20px;"></i> <span>—</span>
+                                    </a>
+                                    <a id="managerTelegram" href="#" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text); text-decoration: none;">
+                                        <i class="fab fa-telegram" style="color: #0088cc; width: 20px;"></i> <span>—</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><i class="fas fa-newspaper"></i> Новини та оновлення</h3>
+                            </div>
+                            <div class="card-body" id="updatesSection">
+                                <p style="color: var(--text-muted);">Завантаження...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Рекомендовані статті за тегами обраного -->
+                    <div class="card" style="margin-top: 1rem;" id="recommendedArticlesCard">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-lightbulb"></i> Рекомендовано для вас</h3>
+                            <small style="color: var(--text-muted);">За вашими обраними товарами</small>
+                        </div>
+                        <div class="card-body" id="recommendedArticlesSection">
+                            <p style="color: var(--text-muted);">Додайте товари до обраного, щоб отримувати персоналізовані рекомендації</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Catalog -->
+                <section class="page-section" id="page-catalog">
+                    <div class="toolbar">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Пошук товарів..." id="catalogSearch">
+                        </div>
+                        <select class="filter-select" id="catalogCategory">
+                            <option value="">Всі категорії</option>
+                        </select>
+                    </div>
+                    
+                    <div class="product-grid" id="productGrid"></div>
+                </section>
+                
+                <!-- Favorites -->
+                <section class="page-section" id="page-favorites">
+                    <div style="margin-bottom: 1rem;">
+                        <p style="color: var(--text-muted);">
+                            <i class="fas fa-info-circle"></i> 
+                            Додавайте товари до обраного, щоб отримувати корисні статті та матеріали про них
+                        </p>
+                    </div>
+                    
+                    <div class="product-grid" id="favoritesGrid">
+                        <p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 2rem;">
+                            У вас ще немає обраних товарів
+                        </p>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 1.5rem;" id="favoritesArticlesCard">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-book"></i> Матеріали по вашим обраним товарам</h3>
+                        </div>
+                        <div class="card-body" id="favoritesArticlesSection">
+                            <p style="color: var(--text-muted);">Статті з'являться тут, коли ви додасте товари до обраного</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Cart -->
+                <section class="page-section" id="page-cart">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Ваш кошик</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table" id="cartTable">
+                                <thead>
+                                    <tr><th>Товар</th><th>Ціна</th><th>К-сть</th><th>Сума</th><th></th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary" id="cartSummary" style="max-width: 400px; margin-left: auto;">
+                        <div class="cart-row">
+                            <span>Підсумок:</span>
+                            <span id="cartSubtotal">0 ₴</span>
+                        </div>
+                        <div class="cart-row">
+                            <span>Ваша знижка:</span>
+                            <span id="cartDiscount">0 ₴</span>
+                        </div>
+                        <div class="cart-row total">
+                            <span>До сплати:</span>
+                            <span id="cartTotal">0 ₴</span>
+                        </div>
+                        <button class="btn btn-success" style="width: 100%; margin-top: 1rem;" onclick="createOrder()">
+                            <i class="fas fa-check"></i> Оформити замовлення
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Orders -->
+                <section class="page-section" id="page-orders">
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr><th>№ Замовлення</th><th>Дата</th><th>Позицій</th><th>Сума</th><th>Статус</th><th></th></tr>
+                                </thead>
+                                <tbody id="ordersTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Documents -->
+                <section class="page-section" id="page-documents">
+                    <div class="toolbar">
+                        <select class="filter-select" id="docTypeFilter">
+                            <option value="">Всі типи</option>
+                            <option value="invoice">Рахунки</option>
+                            <option value="waybill">Накладні</option>
+                            <option value="act">Акти</option>
+                            <option value="contract">Договори</option>
+                        </select>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr><th>Тип</th><th>Номер</th><th>Дата</th><th>Опис</th><th>Сума</th><th></th></tr>
+                                </thead>
+                                <tbody id="documentsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Balance -->
+                <section class="page-section" id="page-balance">
+                    <div class="stats-grid" style="max-width: 600px;">
+                        <div class="stat-card">
+                            <div class="stat-label">Поточний баланс</div>
+                            <div class="stat-value positive" id="balanceTotal">0 ₴</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Кредитний ліміт</div>
+                            <div class="stat-value" id="creditLimit">0 ₴</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Історія операцій</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr><th>Дата</th><th>Операція</th><th>Сума</th><th>Опис</th></tr>
+                                </thead>
+                                <tbody id="transactionsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Profile -->
+                <section class="page-section" id="page-profile">
+                    <div class="card" style="max-width: 600px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Дані компанії</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label>Назва компанії</label>
+                                    <input type="text" class="form-control" id="profileCompany">
+                                </div>
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <label>Контактна особа</label>
+                                        <input type="text" class="form-control" id="profileContact">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Телефон</label>
+                                        <input type="text" class="form-control" id="profilePhone">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" id="profileEmail" readonly>
+                                </div>
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <label>Місто</label>
+                                        <input type="text" class="form-control" id="profileCity">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Адреса</label>
+                                        <input type="text" class="form-control" id="profileAddress">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="saveProfile()">
+                                    <i class="fas fa-save"></i> Зберегти
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="nrg-cabinet.js"></script>
+</body>
+</html>

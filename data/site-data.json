@@ -1,0 +1,453 @@
+{
+  "company": {
+    "name": "NRG-UA",
+    "fullName": "ТОВ «НРГ-Україна»",
+    "tagline": {
+      "uk": "Надійний партнер у дистрибуції національного масштабу",
+      "en": "Reliable partner in nationwide distribution"
+    },
+    "description": {
+      "uk": "NRG-UA — провідний національний B2B-дистриб'ютор широкого спектру товарів для дому та бізнесу. Ми забезпечуємо стабільні поставки по всій Україні завдяки розгалуженій мережі складів та логістичних центрів.",
+      "en": "NRG-UA is a leading national B2B distributor of a wide range of home and business products. We ensure stable deliveries throughout Ukraine thanks to our extensive network of warehouses and logistics centers."
+    },
+    "founded": 2008,
+    "contacts": {
+      "phone": "+38 (044) 123-45-67",
+      "email": "info@nrg-ua.com",
+      "salesEmail": "sales@nrg-ua.com",
+      "supportEmail": "support@nrg-ua.com"
+    },
+    "social": {
+      "facebook": "https://facebook.com/nrgua",
+      "instagram": "https://instagram.com/nrg_ua",
+      "linkedin": "https://linkedin.com/company/nrg-ua",
+      "youtube": "https://youtube.com/@nrgua",
+      "telegram": "https://t.me/nrg_ua"
+    }
+  },
+  "stats": {
+    "yearsOnMarket": 16,
+    "brandsCount": 45,
+    "partnersCount": 2500,
+    "skuCount": 15000,
+    "warehousesCount": 8,
+    "deliveryCities": 650
+  },
+  "categories": [
+    {
+      "id": 1,
+      "slug": "lighting",
+      "name": { "uk": "Світлотехніка", "en": "Lighting" },
+      "description": { "uk": "LED-освітлення, гірлянди, вуличні світильники", "en": "LED lighting, garlands, outdoor lights" },
+      "icon": "lightbulb",
+      "image": "images/categories/lighting.jpg",
+      "productsCount": 3200,
+      "featured": true
+    },
+    {
+      "id": 2,
+      "slug": "batteries",
+      "name": { "uk": "Елементи живлення", "en": "Batteries" },
+      "description": { "uk": "Батарейки, акумулятори, зарядні пристрої", "en": "Batteries, accumulators, chargers" },
+      "icon": "battery-full",
+      "image": "images/categories/batteries.jpg",
+      "productsCount": 850,
+      "featured": true
+    },
+    {
+      "id": 3,
+      "slug": "garden",
+      "name": { "uk": "Сад і город", "en": "Garden" },
+      "description": { "uk": "Інструменти, добрива, системи поливу", "en": "Tools, fertilizers, irrigation systems" },
+      "icon": "seedling",
+      "image": "images/categories/garden.jpg",
+      "productsCount": 2100,
+      "featured": true
+    },
+    {
+      "id": 4,
+      "slug": "household",
+      "name": { "uk": "Господарські товари", "en": "Household Goods" },
+      "description": { "uk": "Побутова хімія, інвентар для прибирання", "en": "Household chemicals, cleaning equipment" },
+      "icon": "spray-can-sparkles",
+      "image": "images/categories/household.jpg",
+      "productsCount": 4500,
+      "featured": true
+    },
+    {
+      "id": 5,
+      "slug": "kitchen",
+      "name": { "uk": "Товари для кухні", "en": "Kitchen Products" },
+      "description": { "uk": "Ножі, посуд, кухонне приладдя", "en": "Knives, cookware, kitchen accessories" },
+      "icon": "utensils",
+      "image": "images/categories/kitchen.jpg",
+      "productsCount": 1800,
+      "featured": true
+    },
+    {
+      "id": 6,
+      "slug": "electrical",
+      "name": { "uk": "Електротовари", "en": "Electrical Goods" },
+      "description": { "uk": "Подовжувачі, розетки, кабелі", "en": "Extension cords, sockets, cables" },
+      "icon": "plug",
+      "image": "images/categories/electrical.jpg",
+      "productsCount": 2550,
+      "featured": true
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "name": "ENERGIZER",
+      "slug": "energizer",
+      "logo": "images/brands/energizer.svg",
+      "logoWhite": "images/brands/energizer-white.svg",
+      "country": "USA",
+      "countryCode": "US",
+      "isExclusive": true,
+      "isFeatured": true,
+      "description": { "uk": "Світовий лідер у виробництві батарейок та акумуляторів", "en": "World leader in battery and accumulator production" },
+      "categories": ["batteries"]
+    },
+    {
+      "id": 2,
+      "name": "VARTA",
+      "slug": "varta",
+      "logo": "images/brands/varta.svg",
+      "logoWhite": "images/brands/varta-white.svg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "isExclusive": false,
+      "isFeatured": true,
+      "description": { "uk": "Німецька якість елементів живлення з 1887 року", "en": "German quality batteries since 1887" },
+      "categories": ["batteries"]
+    },
+    {
+      "id": 3,
+      "name": "OSRAM",
+      "slug": "osram",
+      "logo": "images/brands/osram.svg",
+      "logoWhite": "images/brands/osram-white.svg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "isExclusive": false,
+      "isFeatured": true,
+      "description": { "uk": "Інноваційні світлотехнічні рішення", "en": "Innovative lighting solutions" },
+      "categories": ["lighting"]
+    },
+    {
+      "id": 4,
+      "name": "PHILIPS",
+      "slug": "philips",
+      "logo": "images/brands/philips.svg",
+      "logoWhite": "images/brands/philips-white.svg",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "isExclusive": false,
+      "isFeatured": true,
+      "description": { "uk": "Глобальний бренд побутової техніки та освітлення", "en": "Global brand of home appliances and lighting" },
+      "categories": ["lighting", "electrical"]
+    },
+    {
+      "id": 5,
+      "name": "GARDENA",
+      "slug": "gardena",
+      "logo": "images/brands/gardena.svg",
+      "logoWhite": "images/brands/gardena-white.svg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "isExclusive": true,
+      "isFeatured": true,
+      "description": { "uk": "Європейський лідер садового інструменту", "en": "European leader in garden tools" },
+      "categories": ["garden"]
+    },
+    {
+      "id": 6,
+      "name": "TRAMONTINA",
+      "slug": "tramontina",
+      "logo": "images/brands/tramontina.svg",
+      "logoWhite": "images/brands/tramontina-white.svg",
+      "country": "Brazil",
+      "countryCode": "BR",
+      "isExclusive": true,
+      "isFeatured": true,
+      "description": { "uk": "Професійні ножі та кухонне приладдя", "en": "Professional knives and kitchen accessories" },
+      "categories": ["kitchen"]
+    },
+    {
+      "id": 7,
+      "name": "HENKEL",
+      "slug": "henkel",
+      "logo": "images/brands/henkel.svg",
+      "logoWhite": "images/brands/henkel-white.svg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "isExclusive": false,
+      "isFeatured": true,
+      "description": { "uk": "Побутова хімія та клеючі матеріали", "en": "Household chemicals and adhesives" },
+      "categories": ["household"]
+    },
+    {
+      "id": 8,
+      "name": "LEGRAND",
+      "slug": "legrand",
+      "logo": "images/brands/legrand.svg",
+      "logoWhite": "images/brands/legrand-white.svg",
+      "country": "France",
+      "countryCode": "FR",
+      "isExclusive": false,
+      "isFeatured": true,
+      "description": { "uk": "Електрофурнітура та системи автоматизації", "en": "Electrical fittings and automation systems" },
+      "categories": ["electrical"]
+    }
+  ],
+  "branches": [
+    {
+      "id": 1,
+      "type": "head_office",
+      "name": { "uk": "Головний офіс", "en": "Head Office" },
+      "city": "Київ",
+      "region": "Київська",
+      "address": "вул. Хрещатик, 1",
+      "coordinates": { "lat": 50.4501, "lng": 30.5234 },
+      "phone": "+38 (044) 123-45-67",
+      "email": "kyiv@nrg-ua.com"
+    },
+    {
+      "id": 2,
+      "type": "warehouse",
+      "name": { "uk": "Центральний склад", "en": "Central Warehouse" },
+      "city": "Бровари",
+      "region": "Київська",
+      "address": "вул. Промислова, 15",
+      "coordinates": { "lat": 50.5117, "lng": 30.7908 },
+      "phone": "+38 (044) 123-45-68",
+      "email": "warehouse@nrg-ua.com"
+    },
+    {
+      "id": 3,
+      "type": "regional_office",
+      "name": { "uk": "Західний регіон", "en": "Western Region" },
+      "city": "Львів",
+      "region": "Львівська",
+      "address": "вул. Городоцька, 50",
+      "coordinates": { "lat": 49.8397, "lng": 24.0297 },
+      "phone": "+38 (032) 123-45-67",
+      "email": "lviv@nrg-ua.com"
+    },
+    {
+      "id": 4,
+      "type": "regional_office",
+      "name": { "uk": "Південний регіон", "en": "Southern Region" },
+      "city": "Одеса",
+      "region": "Одеська",
+      "address": "вул. Дерибасівська, 10",
+      "coordinates": { "lat": 46.4825, "lng": 30.7233 },
+      "phone": "+38 (048) 123-45-67",
+      "email": "odesa@nrg-ua.com"
+    },
+    {
+      "id": 5,
+      "type": "regional_office",
+      "name": { "uk": "Східний регіон", "en": "Eastern Region" },
+      "city": "Дніпро",
+      "region": "Дніпропетровська",
+      "address": "просп. Дмитра Яворницького, 100",
+      "coordinates": { "lat": 48.4647, "lng": 35.0462 },
+      "phone": "+38 (056) 123-45-67",
+      "email": "dnipro@nrg-ua.com"
+    },
+    {
+      "id": 6,
+      "type": "warehouse",
+      "name": { "uk": "Логістичний центр", "en": "Logistics Center" },
+      "city": "Харків",
+      "region": "Харківська",
+      "address": "вул. Полтавський Шлях, 150",
+      "coordinates": { "lat": 49.9935, "lng": 36.2304 },
+      "phone": "+38 (057) 123-45-67",
+      "email": "kharkiv@nrg-ua.com"
+    },
+    {
+      "id": 7,
+      "type": "regional_office",
+      "name": { "uk": "Центральний регіон", "en": "Central Region" },
+      "city": "Вінниця",
+      "region": "Вінницька",
+      "address": "вул. Соборна, 25",
+      "coordinates": { "lat": 49.2331, "lng": 28.4682 },
+      "phone": "+38 (043) 123-45-67",
+      "email": "vinnytsia@nrg-ua.com"
+    },
+    {
+      "id": 8,
+      "type": "warehouse",
+      "name": { "uk": "Склад Південь", "en": "South Warehouse" },
+      "city": "Запоріжжя",
+      "region": "Запорізька",
+      "address": "просп. Соборний, 200",
+      "coordinates": { "lat": 47.8388, "lng": 35.1396 },
+      "phone": "+38 (061) 123-45-67",
+      "email": "zaporizhzhia@nrg-ua.com"
+    }
+  ],
+  "partnerBenefits": [
+    {
+      "icon": "truck-fast",
+      "title": { "uk": "Швидка логістика", "en": "Fast Logistics" },
+      "description": { "uk": "Доставка по всій Україні за 1-3 дні завдяки власній мережі складів", "en": "Delivery throughout Ukraine in 1-3 days thanks to our own warehouse network" }
+    },
+    {
+      "icon": "tags",
+      "title": { "uk": "Конкурентні ціни", "en": "Competitive Prices" },
+      "description": { "uk": "Пряма дистрибуція від виробників забезпечує найкращі ціни на ринку", "en": "Direct distribution from manufacturers ensures the best prices on the market" }
+    },
+    {
+      "icon": "headset",
+      "title": { "uk": "Персональний менеджер", "en": "Personal Manager" },
+      "description": { "uk": "Індивідуальний підхід та підтримка на всіх етапах співпраці", "en": "Individual approach and support at all stages of cooperation" }
+    },
+    {
+      "icon": "chart-line",
+      "title": { "uk": "Маркетингова підтримка", "en": "Marketing Support" },
+      "description": { "uk": "POS-матеріали, рекламні акції та спільні промо-кампанії", "en": "POS materials, promotions and joint promo campaigns" }
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "slug": "new-energizer-lineup-2026",
+      "title": { "uk": "Нова лінійка Energizer 2026", "en": "New Energizer Lineup 2026" },
+      "excerpt": { "uk": "Представляємо оновлену серію батарейок з підвищеною ємністю та екологічним пакуванням.", "en": "Introducing an updated battery series with increased capacity and eco-friendly packaging." },
+      "image": "images/news/energizer-2026.jpg",
+      "date": "2026-04-10",
+      "type": "product_review"
+    },
+    {
+      "id": 2,
+      "slug": "spring-promo-campaign",
+      "title": { "uk": "Весняна акція для партнерів", "en": "Spring Promo for Partners" },
+      "excerpt": { "uk": "Спеціальні умови на садовий інструмент GARDENA до кінця квітня.", "en": "Special conditions on GARDENA garden tools until the end of April." },
+      "image": "images/news/spring-promo.jpg",
+      "date": "2026-04-05",
+      "type": "promotion"
+    },
+    {
+      "id": 3,
+      "slug": "nrg-ua-exhibition-2026",
+      "title": { "uk": "NRG-UA на виставці InterBuild 2026", "en": "NRG-UA at InterBuild 2026 Exhibition" },
+      "excerpt": { "uk": "Запрошуємо відвідати наш стенд на найбільшій будівельній виставці України.", "en": "We invite you to visit our booth at Ukraine's largest construction exhibition." },
+      "image": "images/news/exhibition.jpg",
+      "date": "2026-03-28",
+      "type": "corporate"
+    }
+  ],
+  "translations": {
+    "uk": {
+      "nav": {
+        "home": "Головна",
+        "about": "Про компанію",
+        "catalog": "Каталог",
+        "brands": "Бренди",
+        "partners": "Партнерам",
+        "news": "Новини",
+        "contacts": "Контакти",
+        "login": "Увійти",
+        "becomePartner": "Стати партнером"
+      },
+      "hero": {
+        "title": "Ваш надійний партнер у дистрибуції",
+        "subtitle": "національного масштабу",
+        "description": "Ексклюзивна дистрибуція світових брендів. 15000+ SKU на складі. Доставка по всій Україні.",
+        "cta": "Стати партнером",
+        "catalog": "Переглянути каталог"
+      },
+      "stats": {
+        "years": "років на ринку",
+        "brands": "брендів у портфелі",
+        "partners": "активних партнерів",
+        "cities": "міст доставки"
+      },
+      "sections": {
+        "coverage": "Покриття по Україні",
+        "coverageSubtitle": "Розгалужена мережа складів та логістичних центрів для швидкої доставки",
+        "categories": "Товарні напрямки",
+        "categoriesSubtitle": "Широкий асортимент для різних сегментів ритейлу",
+        "brands": "Наші бренди",
+        "brandsSubtitle": "Ексклюзивні та провідні світові виробники",
+        "whyUs": "Чому обирають NRG-UA",
+        "whyUsSubtitle": "Переваги співпраці з національним дистриб'ютором",
+        "news": "Новини та огляди",
+        "newsSubtitle": "Актуальна інформація про продукцію та акції"
+      },
+      "cta": {
+        "learnMore": "Дізнатися більше",
+        "viewAll": "Дивитись всі",
+        "requestPrice": "Запитати ціну",
+        "download": "Завантажити",
+        "submit": "Надіслати"
+      },
+      "footer": {
+        "description": "Національний B2B-дистриб'ютор товарів для дому та бізнесу",
+        "quickLinks": "Швидкі посилання",
+        "forPartners": "Партнерам",
+        "contacts": "Контакти",
+        "workingHours": "Пн-Пт: 9:00-18:00",
+        "copyright": "© 2026 NRG-UA. Всі права захищені."
+      }
+    },
+    "en": {
+      "nav": {
+        "home": "Home",
+        "about": "About",
+        "catalog": "Catalog",
+        "brands": "Brands",
+        "partners": "Partners",
+        "news": "News",
+        "contacts": "Contacts",
+        "login": "Login",
+        "becomePartner": "Become a Partner"
+      },
+      "hero": {
+        "title": "Your Reliable Partner in Distribution",
+        "subtitle": "at a National Scale",
+        "description": "Exclusive distribution of world brands. 15000+ SKUs in stock. Delivery across Ukraine.",
+        "cta": "Become a Partner",
+        "catalog": "View Catalog"
+      },
+      "stats": {
+        "years": "years on the market",
+        "brands": "brands in portfolio",
+        "partners": "active partners",
+        "cities": "delivery cities"
+      },
+      "sections": {
+        "coverage": "Coverage Across Ukraine",
+        "coverageSubtitle": "Extensive network of warehouses and logistics centers for fast delivery",
+        "categories": "Product Categories",
+        "categoriesSubtitle": "Wide range for different retail segments",
+        "brands": "Our Brands",
+        "brandsSubtitle": "Exclusive and leading global manufacturers",
+        "whyUs": "Why Choose NRG-UA",
+        "whyUsSubtitle": "Benefits of cooperation with a national distributor",
+        "news": "News & Reviews",
+        "newsSubtitle": "Latest information about products and promotions"
+      },
+      "cta": {
+        "learnMore": "Learn More",
+        "viewAll": "View All",
+        "requestPrice": "Request Price",
+        "download": "Download",
+        "submit": "Submit"
+      },
+      "footer": {
+        "description": "National B2B distributor of home and business products",
+        "quickLinks": "Quick Links",
+        "forPartners": "For Partners",
+        "contacts": "Contacts",
+        "workingHours": "Mon-Fri: 9:00-18:00",
+        "copyright": "© 2026 NRG-UA. All rights reserved."
+      }
+    }
+  }
+}

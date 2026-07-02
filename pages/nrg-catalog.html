@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог товарів NRG-UA — понад 15 000 позицій від 45 брендів. Світлотехніка, батарейки, товари для дому.">
+    
+    <title>Каталог | NRG-UA — Всі товари</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/nrg-style.css">
+    <link rel="stylesheet" href="../css/nrg-pages.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../nrg-index.html" class="logo">
+                    <img src="../images/nrg-logo.svg" alt="NRG-UA Supply Partner" class="logo-image" height="50">
+                </a>
+
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="../nrg-index.html" class="nav-link">Головна</a></li>
+                        <li><a href="nrg-about.html" class="nav-link">Про нас</a></li>
+                        <li><a href="nrg-catalog.html" class="nav-link active">Каталог</a></li>
+                        <li><a href="nrg-brands.html" class="nav-link">Бренди</a></li>
+                        <li><a href="partners.html" class="nav-link">Партнерам</a></li>
+                        <li><a href="nrg-news.html" class="nav-link">Новини</a></li>
+                        <li><a href="nrg-contacts.html" class="nav-link">Контакти</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="lang-switcher">
+                        <button class="lang-btn active" data-lang="uk">UA</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                    <a href="nrg-cabinet.html" class="btn btn-outline btn-sm" id="loginBtn">
+                        <i class="fas fa-user"></i>
+                        <span>Увійти</span>
+                    </a>
+                    <a href="https://nrgportal.com.ua" class="btn btn-primary btn-sm" id="b2bPortalBtn" style="display: none;" target="_blank" title="Тільки для зареєстрованих клієнтів">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span data-i18n="nav.b2b_portal">B2B Portal</span>
+                    </a>
+                    <button class="mobile-toggle" id="mobileToggle" aria-label="Меню">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero page-hero-compact">
+        <div class="page-hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="container">
+            <div class="page-hero-content" data-animate="fade-up">
+                <nav class="breadcrumb">
+                    <a href="../nrg-index.html">Головна</a>
+                    <span>/</span>
+                    <span>Каталог</span>
+                </nav>
+                <h1 class="page-title">Каталог товарів</h1>
+                <p class="page-description">
+                    Понад 15 000 найменувань від провідних світових брендів
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog-section">
+        <div class="container">
+            <div class="catalog-layout">
+                <!-- Sidebar Filters -->
+                <aside class="catalog-sidebar" data-animate="fade-up">
+                    <!-- Categories -->
+                    <div class="filter-group open">
+                        <div class="filter-title">
+                            Категорії
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="lighting">
+                                Світлотехніка
+                                <span class="count">(3240)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="batteries">
+                                Елементи живлення
+                                <span class="count">(2850)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="garden">
+                                Сад і город
+                                <span class="count">(1920)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="household">
+                                Господарські товари
+                                <span class="count">(3150)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="kitchen">
+                                Товари для кухні
+                                <span class="count">(2340)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="electrical">
+                                Електротовари
+                                <span class="count">(1500)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Brands -->
+                    <div class="filter-group open">
+                        <div class="filter-title">
+                            Бренди
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="varta">
+                                Varta
+                                <span class="count">(1250)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="energizer">
+                                Energizer
+                                <span class="count">(980)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="osram">
+                                Osram
+                                <span class="count">(1540)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="gardena">
+                                Gardena
+                                <span class="count">(720)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="leifheit">
+                                Leifheit
+                                <span class="count">(890)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="tefal">
+                                Tefal
+                                <span class="count">(1120)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="filter-group open">
+                        <div class="filter-title">
+                            Наявність
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="stock" value="in-stock">
+                                В наявності
+                                <span class="count">(12450)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="stock" value="low-stock">
+                                Закінчується
+                                <span class="count">(1820)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="stock" value="preorder">
+                                Під замовлення
+                                <span class="count">(730)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Special -->
+                    <div class="filter-group open">
+                        <div class="filter-title">
+                            Додатково
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="special" value="new">
+                                Новинки
+                                <span class="count">(340)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="special" value="hit">
+                                Хіти продажів
+                                <span class="count">(520)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="special" value="exclusive">
+                                Ексклюзив
+                                <span class="count">(180)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline btn-full" id="resetFilters">
+                        <i class="fas fa-times"></i>
+                        Скинути фільтри
+                    </button>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="catalog-content" data-animate="fade-up" data-delay="100">
+                    <!-- Toolbar -->
+                    <div class="catalog-toolbar">
+                        <div class="results-count">
+                            Знайдено: <strong>15 000</strong> товарів
+                        </div>
+                        <div class="toolbar-actions">
+                            <select class="sort-select" id="sortSelect">
+                                <option value="popular">За популярністю</option>
+                                <option value="new">Спочатку нові</option>
+                                <option value="name-asc">Назва: А-Я</option>
+                                <option value="name-desc">Назва: Я-А</option>
+                            </select>
+                            <div class="view-toggles">
+                                <button class="view-btn active" data-view="grid" title="Сітка">
+                                    <i class="fas fa-grid-2"></i>
+                                </button>
+                                <button class="view-btn" data-view="list" title="Список">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="product-badges">
+                                    <span class="badge badge-new">Новинка</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Osram</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">LED лампа Osram Value A60 10W E27 3000K</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: OSR-A60-10W</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                                <div class="product-badges">
+                                    <span class="badge badge-hit">Хіт</span>
+                                    <span class="badge badge-exclusive">Ексклюзив</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Varta</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Батарейки Varta Longlife Power AA BLI 8</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: VARTA-LP-AA8</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-battery-three-quarters"></i>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Energizer</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Акумулятори Energizer Recharge Universal AAA 500mAh</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: ENR-RU-AAA4</span>
+                                    <span class="product-stock low-stock">
+                                        <i class="fas fa-exclamation-circle"></i> Закінчується
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="product-badges">
+                                    <span class="badge badge-new">Новинка</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Gardena</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Секатор Gardena Classic B/S-M 8857-20</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: GAR-8857-20</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 5 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-broom"></i>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Leifheit</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Швабра Leifheit Clean Twist M з відром</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: LEI-52014</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="product-badges">
+                                    <span class="badge badge-hit">Хіт</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Tefal</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Сковорода Tefal Unlimited 26 см</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: TEF-G2550502</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 7 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Osram</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">LED стрічка Osram Ledvance 5м 14.4W/m 3000K</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: OSR-LS-5M</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 8 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-plug"></i>
+                                </div>
+                                <div class="product-badges">
+                                    <span class="badge badge-exclusive">Ексклюзив</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Legrand</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Розетка Legrand Valena Life з/з біла</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: LEG-753016</span>
+                                    <span class="product-stock in-stock">
+                                        <i class="fas fa-check-circle"></i> В наявності
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product 9 -->
+                        <div class="product-card">
+                            <div class="product-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-spray-can"></i>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="action-btn" title="Додати в обране">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="action-btn" title="Порівняти">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand">Gardena</div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Пульверизатор Gardena Comfort 1.25л</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <span class="product-sku">Арт: GAR-11120-20</span>
+                                    <span class="product-stock out-stock">
+                                        <i class="fas fa-times-circle"></i> Під замовлення
+                                    </span>
+                                </div>
+                                <div class="product-price-row">
+                                    <div class="price-login">
+                                        <a href="nrg-cabinet.html">Увійдіть</a> для перегляду ціни
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <span class="pagination-dots">...</span>
+                        <button class="pagination-btn">167</button>
+                        <button class="pagination-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="catalog-cta">
+        <div class="container">
+            <div class="cta-banner" data-animate="fade-up">
+                <div class="cta-content">
+                    <h3>Хочете бачити ціни?</h3>
+                    <p>Зареєструйтесь як партнер та отримайте доступ до B2B-кабінету з актуальними цінами та залишками</p>
+                </div>
+                <div class="cta-actions">
+                    <a href="partners.html" class="btn btn-primary btn-lg">
+                        <span>Стати партнером</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col footer-about">
+                        <a href="nrg-catalog.html" class="footer-logo">
+                            <span class="logo-icon">
+                                <svg width="40" height="40" viewBox="0 0 40 40">
+                                    <rect x="2" y="2" width="36" height="36" rx="8" fill="currentColor"/>
+                                    <text x="50%" y="58%" text-anchor="middle" fill="#0A0F14" font-size="14" font-weight="800">NRG</text>
+                                </svg>
+                            </span>
+                            <span class="logo-text">NRG-UA</span>
+                        </a>
+                        <p class="footer-description">
+                            Національний B2B-дистриб'ютор товарів для дому та бізнесу.
+                        </p>
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-title">Компанія</h4>
+                        <ul class="footer-links">
+                            <li><a href="nrg-about.html">Про нас</a></li>
+                            <li><a href="nrg-news.html">Новини</a></li>
+                            <li><a href="nrg-contacts.html">Контакти</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4 class="footer-title">Каталог</h4>
+                        <ul class="footer-links">
+                            <li><a href="nrg-catalog.html">Всі товари</a></li>
+                            <li><a href="nrg-brands.html">Бренди</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col footer-contacts">
+                        <h4 class="footer-title">Контакти</h4>
+                        <ul class="contact-list">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+380441234567">+38 (044) 123-45-67</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@nrg-ua.com">info@nrg-ua.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="copyright">© 2026 NRG-UA. Всі права захищені.</p>
+                    <div class="footer-bottom-links">
+                        <a href="privacy.html">Політика конфіденційності</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="../js/nrg-main.js"></script>
+    <script>
+        // Filter toggles
+        document.querySelectorAll('.filter-title').forEach(title => {
+            title.addEventListener('click', () => {
+                title.parentElement.classList.toggle('open');
+            });
+        });
+
+        // View toggles
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const view = btn.dataset.view;
+                const grid = document.getElementById('productsGrid');
+                
+                if (view === 'list') {
+                    grid.classList.add('list-view');
+                } else {
+                    grid.classList.remove('list-view');
+                }
+            });
+        });
+
+        // Reset filters
+        document.getElementById('resetFilters').addEventListener('click', () => {
+            document.querySelectorAll('.filter-option input').forEach(input => {
+                input.checked = false;
+            });
+        });
+    </script>
+
+    <style>
+        /* Compact Hero */
+        .page-hero-compact {
+            min-height: 300px;
+            padding: 140px 0 60px;
+        }
+
+        .page-hero-compact .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        /* Catalog CTA */
+        .catalog-cta {
+            padding: 0 0 var(--section-spacing);
+        }
+
+        .cta-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--accent-primary);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 3rem;
+        }
+
+        .cta-banner h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-banner p {
+            color: var(--gray-300);
+        }
+
+        @media (max-width: 768px) {
+            .cta-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+        }
+
+        /* Image placeholder in product cards */
+        .product-card .image-placeholder {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+        }
+
+        .product-card .image-placeholder i {
+            font-size: 3rem;
+            color: var(--gray-600);
+        }
+
+        /* Pagination dots */
+        .pagination-dots {
+            color: var(--gray-500);
+            padding: 0 0.5rem;
+        }
+    </style>
+</body>
+</html>
+
+
