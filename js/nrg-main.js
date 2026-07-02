@@ -46,6 +46,7 @@ const utils = {
     animateCounter(element, target, duration = 2000) {
         const start = 0;
         const startTime = performance.now();
+        const suffix = element.dataset.suffix || '';
         
         const updateCounter = (currentTime) => {
             const elapsed = currentTime - startTime;
@@ -55,7 +56,7 @@ const utils = {
             const easeOut = 1 - Math.pow(1 - progress, 3);
             const current = Math.floor(start + (target - start) * easeOut);
             
-            element.textContent = current.toLocaleString('uk-UA');
+            element.textContent = `${current.toLocaleString('uk-UA')}${suffix}`;
             
             if (progress < 1) {
                 requestAnimationFrame(updateCounter);
@@ -234,8 +235,9 @@ class StatsCounter {
     fillStatic() {
         this.counters.forEach((counter) => {
             const target = parseInt(counter.dataset.count, 10);
+            const suffix = counter.dataset.suffix || '';
             if (!Number.isNaN(target)) {
-                counter.textContent = target;
+                counter.textContent = `${target.toLocaleString('uk-UA')}${suffix}`;
             }
         });
     }
