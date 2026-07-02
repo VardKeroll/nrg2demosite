@@ -231,6 +231,15 @@ class StatsCounter {
         this.init();
     }
 
+    fillStatic() {
+        this.counters.forEach((counter) => {
+            const target = parseInt(counter.dataset.count, 10);
+            if (!Number.isNaN(target)) {
+                counter.textContent = target;
+            }
+        });
+    }
+
     init() {
         if (this.counters.length === 0) return;
 
@@ -243,10 +252,20 @@ class StatsCounter {
             });
         }, { threshold: 0.5 });
 
-        const statsSection = document.querySelector('.hero-stats');
+        const statsSection = document.querySelector('.hero-stats, .about-stats');
         if (statsSection) {
             observer.observe(statsSection);
+        } else {
+            this.fillStatic();
+            return;
         }
+
+        // Safety fallback: if observer did not fire, keep real values instead of zeros.
+        setTimeout(() => {
+            if (!this.animated) {
+                this.fillStatic();
+            }
+        }, 2500);
     }
 
     animateCounters() {
