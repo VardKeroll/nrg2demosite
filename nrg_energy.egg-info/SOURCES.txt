@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+backend/config.py
+backend/main.py
+backend/nrg_api.py
+backend/telegram_bot.py
+nrg_energy.egg-info/PKG-INFO
+nrg_energy.egg-info/SOURCES.txt
+nrg_energy.egg-info/dependency_links.txt
+nrg_energy.egg-info/requires.txt
+nrg_energy.egg-info/top_level.txt

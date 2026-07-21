@@ -3,57 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NRG-UA — національний дистриб'ютор товарів для дому. 16 років на ринку, 45 брендів у портфелі, 2500+ партнерів.">
+    <meta name="description" content="NRG-UA — національний дистриб'ютор товарів для дому. 28 років на ринку, 23 бренди у портфелі, 8000+ партнерів та доставка 24/48 год по Україні.">
     
     <title>Про компанію | NRG-UA — Національний дистриб'ютор</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/nrg-style.css">
-    <link rel="stylesheet" href="../css/nrg-pages.css">
+    <link rel="stylesheet" href="../css/nrg-style.css?v=premium-refresh-20260721">
+    <link rel="stylesheet" href="../css/nrg-pages.css?v=premium-refresh-20260721">
 </head>
 <body>
     <!-- Header -->
-    <header class="header" id="header">
+    <header class="home-header header" id="header">
         <div class="container">
-            <div class="header-inner">
-                <a href="../nrg-index.html" class="logo">
-                    <img src="../images/nrg-logo.svg" alt="NRG-UA Supply Partner" class="logo-image" height="50">
-                </a>
-
-                <nav class="main-nav" id="mainNav">
-                    <ul class="nav-list">
-                        <li><a href="../nrg-index.html" class="nav-link">Головна</a></li>
-                        <li><a href="nrg-about.html" class="nav-link active">Про нас</a></li>
-                        <li><a href="nrg-catalog.html" class="nav-link">Каталог</a></li>
-                        <li><a href="nrg-brands.html" class="nav-link">Бренди</a></li>
-                        <li><a href="partners.html" class="nav-link">Партнерам</a></li>
-                        <li><a href="nrg-news.html" class="nav-link">Новини</a></li>
-                        <li><a href="nrg-contacts.html" class="nav-link">Контакти</a></li>
-                    </ul>
-                </nav>
-
-                <div class="header-actions">
-                    <div class="lang-switcher">
-                        <button class="lang-btn active" data-lang="uk">UA</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
-                    </div>
-                    <a href="nrg-cabinet.html" class="btn btn-outline btn-sm" id="loginBtn">
-                        <i class="fas fa-user"></i>
-                        <span>Увійти</span>
-                    </a>
-                    <a href="https://nrgportal.com.ua" class="btn btn-primary btn-sm" id="b2bPortalBtn" style="display: none;" target="_blank" title="Тільки для зареєстрованих клієнтів">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span data-i18n="nav.b2b_portal">B2B Portal</span>
-                    </a>
-                    <button class="mobile-toggle" id="mobileToggle" aria-label="Меню">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+            <a href="../nrg-index.html" class="home-logo">
+                <img src="../images/nrg-logo.svg" alt="NRG-UA">
+            </a>
+            <nav class="home-menu" aria-label="Головне меню">
+                <a href="../nrg-index.html">Головна</a>
+                <a href="nrg-about.html">Про нас</a>
+                <a href="nrg-catalog.html">Каталог</a>
+                <a href="nrg-brands.html">Бренди</a>
+                <a href="partners.html">Партнерам</a>
+                <a href="nrg-news.html">Новини</a>
+                <a href="nrg-contacts.html">Контакти</a>
+            </nav>
+            <div class="home-controls">
+                <div class="lang-switcher" aria-label="Вибір мови">
+                    <button class="lang-btn active" data-lang="uk" type="button">UA</button>
+                    <button class="lang-btn" data-lang="en" type="button">EN</button>
                 </div>
+                <a href="https://nrgportal.com.ua/uk/login" class="btn btn-primary btn-sm" id="b2bPortalBtn" target="_blank" rel="noopener noreferrer" title="Тільки для зареєстрованих клієнтів">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span data-i18n="nav.b2b_portal">B2B Portal</span>
+                </a>
+                <button class="theme-toggle compact" id="themeToggle" type="button" aria-label="Перемкнути тему">
+                    <i class="fas fa-circle-half-stroke"></i>
+                    <span data-theme-toggle-label>Темна тема</span>
+                </button>
             </div>
         </div>
     </header>
@@ -74,7 +64,7 @@
                 <h1 class="page-title">Енергія для вашого<br><span class="text-gradient">бізнесу</span></h1>
                 <p class="page-description">
                     NRG-UA — національний B2B-дистриб'ютор товарів для дому. 
-                    Понад 16 років ми забезпечуємо український ринок якісною продукцією 
+                    Понад 28 років ми забезпечуємо український ринок якісною продукцією 
                     від світових виробників.
                 </p>
             </div>
@@ -95,8 +85,8 @@
                     <p class="story-text">
                         Починаючи з невеликого офісу в Києві та асортименту з кількох десятків позицій, 
                         ми поступово розширювали географію присутності та портфель брендів. Сьогодні 
-                        NRG-UA — це 8 складів та логістичних центрів по всій Україні, покриття 
-                        650 міст доставки, понад 15 000 найменувань товарів та 2 500+ активних партнерів.
+                        NRG-UA — це 6 складів та логістичних центрів по всій Україні, покриття 
+                        650+ міст доставки, понад 3 000 SKU та 8 000+ активних партнерів.
                     </p>
                     <p class="story-text">
                         Наш успіх базується на простих принципах: чесність у відносинах з партнерами, 
@@ -119,20 +109,20 @@
         <div class="container">
             <div class="stats-wrapper" data-animate="fade-up">
                 <div class="stat-card">
-                    <div class="stat-number" data-count="16">16</div>
+                    <div class="stat-number" data-count="28">28</div>
                     <div class="stat-label">років на ринку</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-count="45">45</div>
+                    <div class="stat-number" data-count="23">23</div>
                     <div class="stat-label">брендів у портфелі</div>
-                    <div class="stat-note">Ключові бренди: Tramontina, Osram, Henkel</div>
+                    <div class="stat-note">Ключові бренди: Duracell, Varta, Henkel</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-count="2500" data-suffix="+">2 500+</div>
+                    <div class="stat-number" data-count="8000" data-suffix="+">8 000+</div>
                     <div class="stat-label">активних партнерів</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-count="650">650</div>
+                    <div class="stat-number" data-count="650" data-suffix="+">650+</div>
                     <div class="stat-label">міст доставки</div>
                 </div>
             </div>
@@ -146,7 +136,7 @@
                 <h2 class="section-title">Покриття по Україні</h2>
                 <p class="section-subtitle">
                     Розгалужена мережа складів та логістичних центрів забезпечує доставку товарів 
-                    протягом 1-3 днів у будь-яку точку країни.
+                    по Україні у вікно 24/48 годин.
                 </p>
             </div>
 
@@ -154,17 +144,22 @@
                 <div class="advantage-card" data-animate="fade-up" data-delay="0">
                     <div class="advantage-icon"><i class="fas fa-warehouse"></i></div>
                     <h4>Склади та логістичні центри</h4>
-                    <p><strong>8</strong> хабів для швидкого покриття всіх регіонів.</p>
+                    <p><strong>6</strong> хабів для швидкого покриття всіх регіонів.</p>
                 </div>
                 <div class="advantage-card" data-animate="fade-up" data-delay="70">
                     <div class="advantage-icon"><i class="fas fa-truck-fast"></i></div>
                     <h4>Дні доставки по Україні</h4>
-                    <p><strong>1-3</strong> дні від замовлення до відвантаження.</p>
+                    <p><strong>24/48</strong> годин від замовлення до відвантаження.</p>
                 </div>
                 <div class="advantage-card" data-animate="fade-up" data-delay="140">
                     <div class="advantage-icon"><i class="fas fa-ruler-combined"></i></div>
                     <h4>Складські площі</h4>
-                    <p><strong>50K+</strong> м2 для стабільної наявності товару.</p>
+                    <p><strong>3 500</strong> м2 для стабільної наявності товару.</p>
+                </div>
+                <div class="advantage-card" data-animate="fade-up" data-delay="210">
+                    <div class="advantage-icon"><i class="fas fa-truck"></i></div>
+                    <h4>Автомобілі доставки</h4>
+                    <p><strong>22</strong> автомобілі у власному парку доставки.</p>
                 </div>
             </div>
         </div>
@@ -263,7 +258,7 @@
                     <div class="timeline-year">2024</div>
                     <div class="timeline-content">
                         <h4>Новий етап зростання</h4>
-                        <p>8 логістичних центрів, 45 брендів, 15 000 SKU, покриття 650 міст доставки.</p>
+                        <p>6 логістичних центрів, 23 бренди, 3 000+ SKU, покриття 650+ міст доставки.</p>
                     </div>
                 </div>
             </div>
@@ -292,7 +287,7 @@
                         <i class="fas fa-warehouse"></i>
                     </div>
                     <h4>Власна логістика</h4>
-                    <p>8 регіональних складів забезпечують доставку за 1-3 дні в будь-яку точку України.</p>
+                    <p>6 регіональних складів забезпечують доставку за 24/48 год по Україні.</p>
                 </div>
 
                 <div class="advantage-card" data-animate="fade-up" data-delay="100">
@@ -330,73 +325,7 @@
         </div>
     </section>
 
-    <!-- Team -->
-    <section class="about-team">
-        <div class="container">
-            <div class="section-header" data-animate="fade-up">
-                <span class="section-badge">Команда</span>
-                <h2 class="section-title">Люди, які створюють NRG-UA</h2>
-                <p class="section-subtitle">
-                    За кожним успіхом компанії стоїть команда професіоналів, 
-                    відданих своїй справі
-                </p>
-            </div>
-
-            <div class="team-grid">
-                <div class="team-card" data-animate="fade-up" data-delay="0">
-                    <div class="team-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="team-info">
-                        <h4>Олександр Петренко</h4>
-                        <span class="team-role">CEO & Засновник</span>
-                        <p>15+ років досвіду в дистрибуції FMCG</p>
-                    </div>
-                </div>
-
-                <div class="team-card" data-animate="fade-up" data-delay="50">
-                    <div class="team-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="team-info">
-                        <h4>Марія Коваленко</h4>
-                        <span class="team-role">Комерційний директор</span>
-                        <p>Відповідає за розвиток партнерської мережі</p>
-                    </div>
-                </div>
-
-                <div class="team-card" data-animate="fade-up" data-delay="100">
-                    <div class="team-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="team-info">
-                        <h4>Андрій Шевченко</h4>
-                        <span class="team-role">Директор з логістики</span>
-                        <p>Забезпечує безперебійну роботу 8 філій</p>
-                    </div>
-                </div>
-
-                <div class="team-card" data-animate="fade-up" data-delay="150">
-                    <div class="team-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="team-info">
-                        <h4>Ірина Бондаренко</h4>
-                        <span class="team-role">HR директор</span>
-                        <p>Розвиток команди та корпоративна культура</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Team section intentionally hidden by design update -->
 
     <!-- CTA -->
     <section class="about-cta">
@@ -404,7 +333,7 @@
             <div class="cta-card" data-animate="fade-up">
                 <div class="cta-content">
                     <h2>Готові до співпраці?</h2>
-                    <p>Приєднуйтесь до понад 2500 успішних партнерів NRG-UA</p>
+                    <p>Приєднуйтесь до понад 8 000 успішних партнерів NRG-UA</p>
                 </div>
                 <div class="cta-actions">
                     <a href="partners.html" class="btn btn-primary btn-lg">
@@ -426,13 +355,7 @@
                 <div class="footer-grid">
                     <div class="footer-col footer-about">
                         <a href="nrg-catalog.html" class="footer-logo">
-                            <span class="logo-icon">
-                                <svg width="40" height="40" viewBox="0 0 40 40">
-                                    <rect x="2" y="2" width="36" height="36" rx="8" fill="currentColor"/>
-                                    <text x="50%" y="58%" text-anchor="middle" fill="#0A0F14" font-size="14" font-weight="800">NRG</text>
-                                </svg>
-                            </span>
-                            <span class="logo-text">NRG-UA</span>
+                            <img src="../images/nrg-logo.svg" alt="NRG-UA Supply Partner" class="logo-image" height="38">
                         </a>
                         <p class="footer-description">
                             Національний B2B-дистриб'ютор товарів для дому та бізнесу.
@@ -493,7 +416,7 @@
 
     <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="../js/nrg-main.js?v=about-stats-fix"></script>
+    <script src="../js/nrg-main.js?v=menu-active-fix-20260721"></script>
 </body>
 </html>
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NRG-UA | Адмін-панель</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -74,7 +75,7 @@
         .topbar h2 { font-size: 1.45rem; }
         .topbar p { color: var(--muted); font-size: 0.92rem; }
 
-        .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
         .card { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
         .stat-value { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
         .stat-label { color: var(--muted); font-size: 0.9rem; }
@@ -126,6 +127,8 @@
             <button class="btn nav-btn" data-section="products"><i class="fas fa-box-open"></i> Товари</button>
             <button class="btn nav-btn" data-section="articles"><i class="fas fa-newspaper"></i> Статті</button>
             <button class="btn nav-btn" data-section="media"><i class="fas fa-photo-film"></i> Медіа</button>
+            <button class="btn nav-btn" data-section="blocks"><i class="fas fa-cubes"></i> Блоки сторінок</button>
+            <button class="btn nav-btn" data-section="branding"><i class="fas fa-palette"></i> Брендинг</button>
             <button class="btn nav-btn" data-section="site-info"><i class="fas fa-pen-to-square"></i> Інформація сайту</button>
 
             <div style="margin-top: 14px;"><button class="btn btn-soft" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Вийти</button></div>
@@ -148,6 +151,7 @@
                     <div class="card"><div class="stat-value" id="statProducts">0</div><div class="stat-label">Товари</div></div>
                     <div class="card"><div class="stat-value" id="statArticles">0</div><div class="stat-label">Статті</div></div>
                     <div class="card"><div class="stat-value" id="statMedia">0</div><div class="stat-label">Медіа</div></div>
+                    <div class="card"><div class="stat-value" id="statBlocks">0</div><div class="stat-label">Блоки сторінок</div></div>
                     <div class="card"><div class="stat-value" id="statSiteInfo">0</div><div class="stat-label">Інфо-блоки сайту</div></div>
                 </div>
                 <div class="card"><p class="hint">Тут залишені тільки потрібні вам функції без CRM, перекладів, тегів, AI-інструментів і зайвих модулів.</p></div>
@@ -170,12 +174,29 @@
 
             <section class="section" id="section-articles">
                 <div class="toolbar"><h3>Статті</h3><button class="btn btn-primary" id="addArticleBtn"><i class="fas fa-plus"></i> Додати статтю</button></div>
-                <div class="card table-wrap"><table><thead><tr><th>Заголовок</th><th>Дата</th><th>Короткий опис</th><th>Дії</th></tr></thead><tbody id="articlesTbody"></tbody></table></div>
+                <div class="card table-wrap"><table><thead><tr><th>Заголовок (UK)</th><th>Категорія</th><th>Дата</th><th>Медіа</th><th>Дії</th></tr></thead><tbody id="articlesTbody"></tbody></table></div>
                 <div class="card">
                     <h4 id="articleFormTitle">Нова стаття</h4>
-                    <div class="field"><label>Заголовок</label><input id="articleTitle"></div>
-                    <div class="field"><label>Короткий опис</label><textarea id="articleSummary"></textarea></div>
-                    <div class="field"><label>Повний текст</label><textarea id="articleBody" style="min-height: 160px;"></textarea></div>
+                    <div class="two-col" style="margin-top: 10px;">
+                        <div class="field"><label>Заголовок (українською)</label><input id="articleTitleUk"></div>
+                        <div class="field"><label>Заголовок (англійською)</label><input id="articleTitleEn"></div>
+                    </div>
+                    <div class="two-col">
+                        <div class="field"><label>Короткий опис (українською)</label><textarea id="articleSummaryUk"></textarea></div>
+                        <div class="field"><label>Короткий опис (англійською)</label><textarea id="articleSummaryEn"></textarea></div>
+                    </div>
+                    <div class="two-col">
+                        <div class="field"><label>Текст статті (українською)</label><textarea id="articleBodyUk" style="min-height: 160px;"></textarea></div>
+                        <div class="field"><label>Текст статті (англійською)</label><textarea id="articleBodyEn" style="min-height: 160px;"></textarea></div>
+                    </div>
+                    <div class="two-col">
+                        <div class="field"><label>Категорія в Новинах</label><select id="articleCategory"><option value="company">Компанія</option><option value="products">Продукція</option><option value="partners">Партнерам</option><option value="events">Події</option></select></div>
+                        <div class="field"><label>URL картинки (опц.)</label><input id="articleImageUrl" placeholder="images/news/news-1.jpg"></div>
+                    </div>
+                    <div class="two-col">
+                        <div class="field"><label>Завантажити картинку</label><input id="articleImageFile" type="file" accept="image/*"></div>
+                        <div class="field"><label>Або вибрати з Медіа</label><select id="articleMediaId"><option value="">Не вибрано</option></select></div>
+                    </div>
                     <div class="actions"><button class="btn btn-primary" id="saveArticleBtn">Зберегти статтю</button><button class="btn btn-soft" id="resetArticleBtn">Скинути</button></div>
                 </div>
             </section>
@@ -190,8 +211,43 @@
                         <div class="field"><label>Тип</label><select id="mediaType"><option value="image">Зображення</option><option value="video">Відео</option><option value="document">Документ</option></select></div>
                     </div>
                     <div class="field"><label>URL або шлях</label><input id="mediaUrl" placeholder="/images/example.jpg"></div>
+                    <div class="field"><label>Або завантажити файл</label><input id="mediaFile" type="file" accept="image/*,video/*,.pdf,.doc,.docx"></div>
                     <div class="field"><label>Опис</label><textarea id="mediaDescription"></textarea></div>
                     <div class="actions"><button class="btn btn-primary" id="saveMediaBtn">Зберегти медіа</button><button class="btn btn-soft" id="resetMediaBtn">Скинути</button></div>
+                </div>
+            </section>
+
+            <section class="section" id="section-blocks">
+                <div class="toolbar"><h3>Блоки сторінок</h3><button class="btn btn-primary" id="addBlockBtn"><i class="fas fa-plus"></i> Додати блок</button></div>
+                <div class="card table-wrap"><table><thead><tr><th>Сторінка</th><th>Заголовок</th><th>Текст</th><th>Картинка</th><th>Статус</th><th>Дії</th></tr></thead><tbody id="blocksTbody"></tbody></table></div>
+                <div class="card">
+                    <h4 id="blockFormTitle">Новий блок</h4>
+                    <div class="two-col" style="margin-top: 10px;">
+                        <div class="field"><label>Сторінка</label><select id="blockPage"><option value="all">Всі сторінки</option><option value="home">Головна</option><option value="about">Про нас</option><option value="catalog">Каталог</option><option value="brands">Бренди</option><option value="news">Новини</option><option value="contacts">Контакти</option><option value="partners">Партнерам</option></select></div>
+                        <div class="field"><label>Заголовок</label><input id="blockTitle"></div>
+                    </div>
+                    <div class="field"><label>Текст</label><textarea id="blockText"></textarea></div>
+                    <div class="two-col">
+                        <div class="field"><label>URL картинки</label><input id="blockImageUrl" placeholder="images/example.jpg"></div>
+                        <div class="field"><label>URL кнопки</label><input id="blockCtaUrl" placeholder="pages/partners.html"></div>
+                    </div>
+                    <div class="two-col">
+                        <div class="field"><label>Текст кнопки</label><input id="blockCtaText" placeholder="Детальніше"></div>
+                        <div class="field"><label>Статус</label><select id="blockEnabled"><option value="1">Увімкнено</option><option value="0">Вимкнено</option></select></div>
+                    </div>
+                    <div class="actions"><button class="btn btn-primary" id="saveBlockBtn">Зберегти блок</button><button class="btn btn-soft" id="resetBlockBtn">Скинути</button></div>
+                </div>
+            </section>
+
+            <section class="section" id="section-branding">
+                <div class="toolbar"><h3>Брендинг</h3></div>
+                <div class="card">
+                    <div class="field"><label>Логотип (URL/шлях)</label><input id="brandingLogoUrl" placeholder="images/nrg-logo.svg"></div>
+                    <div class="field"><label>Favicon (URL/шлях)</label><input id="brandingFaviconUrl" placeholder="images/favicon.svg"></div>
+                    <div class="field"><label>Назва компанії</label><input id="brandingCompanyName" placeholder="NRG-UA"></div>
+                    <div class="field"><label>Слоган</label><input id="brandingTagline" placeholder="SUPPLY PARTNER"></div>
+                    <div class="actions"><button class="btn btn-primary" id="saveBrandingBtn">Зберегти брендинг</button><button class="btn btn-soft" id="resetBrandingBtn">Скинути</button></div>
+                    <p class="hint" style="margin-top: 8px;">Логотип автоматично застосовується до шапки, футера і hero-брендмарки на сторінках сайту.</p>
                 </div>
             </section>
 
@@ -221,11 +277,28 @@
                 { id: 2, name: 'LED лампа Philips 10W', price: 89, description: 'Енергоефективна лампа для дому та офісу.', status: 'active' }
             ],
             articles: [
-                { id: 1, title: 'Весняне оновлення каталогу', summary: 'Нові позиції у категоріях освітлення та елементів живлення.', body: 'Додано понад 150 нових SKU з оновленими умовами для партнерів.', date: '2026-07-02' }
+                {
+                    id: 1,
+                    title: { uk: 'Весняне оновлення каталогу', en: 'Spring catalog update' },
+                    summary: { uk: 'Нові позиції у категоріях освітлення та елементів живлення.', en: 'New items in lighting and battery categories.' },
+                    body: { uk: 'Додано понад 150 нових SKU з оновленими умовами для партнерів.', en: 'Over 150 new SKUs have been added with updated partner terms.' },
+                    category: 'company',
+                    imageUrl: 'images/nrg-logo.svg',
+                    date: '2026-07-02'
+                }
             ],
             media: [
                 { id: 1, title: 'Hero банер', type: 'image', url: '/images/hero-banner.jpg', description: 'Головний банер для стартової сторінки.' }
             ],
+            blocks: [
+                { id: 1, page: 'home', title: 'Надійні поставки по Україні', text: 'Додавайте нові промо-блоки вручну прямо з адмінки без редагування HTML.', imageUrl: 'images/nrg-logo.svg', ctaText: 'Стати партнером', ctaUrl: 'pages/partners.html', enabled: true }
+            ],
+            branding: {
+                logoUrl: 'images/nrg-logo.svg',
+                faviconUrl: 'images/favicon.svg',
+                companyName: 'NRG-UA',
+                tagline: 'SUPPLY PARTNER'
+            },
             siteInfo: [
                 { id: 1, key: 'home.hero_title', value: 'Енергія поставок для' },
                 { id: 2, key: 'home.hero_highlight', value: 'українського ритейлу' },
@@ -236,10 +309,29 @@
             ]
         };
 
-        const state = { data: null, edit: { products: null, articles: null, media: null, siteInfo: null } };
+        const state = { data: null, edit: { products: null, articles: null, media: null, blocks: null, siteInfo: null } };
         const clone = (obj) => JSON.parse(JSON.stringify(obj));
         const nextId = (list) => (list.length ? Math.max(...list.map(x => x.id)) + 1 : 1);
         const esc = (v) => String(v ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+        const toObjLang = (value) => {
+            if (value && typeof value === 'object') {
+                return {
+                    uk: String(value.uk || ''),
+                    en: String(value.en || '')
+                };
+            }
+            return { uk: String(value || ''), en: '' };
+        };
+        const categoryLabel = (value) => ({ company: 'Компанія', products: 'Продукція', partners: 'Партнерам', events: 'Події' }[value] || value || '-');
+
+        function fileToDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(String(reader.result || ''));
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
 
         function toast(msg) {
             const box = document.createElement('div');
@@ -257,6 +349,18 @@
                 return;
             }
             try { state.data = JSON.parse(raw); } catch { state.data = clone(defaultData); }
+
+            if (!Array.isArray(state.data.blocks)) state.data.blocks = clone(defaultData.blocks);
+            if (!state.data.branding || typeof state.data.branding !== 'object') state.data.branding = clone(defaultData.branding);
+
+            state.data.articles = (state.data.articles || []).map((article) => ({
+                ...article,
+                title: toObjLang(article.title),
+                summary: toObjLang(article.summary),
+                body: toObjLang(article.body),
+                category: article.category || 'company',
+                imageUrl: article.imageUrl || ''
+            }));
         }
 
         function persistData() {
@@ -323,6 +427,8 @@
                 products: ['Товари', 'Додавання та редагування товарів'],
                 articles: ['Статті', 'Керування публікаціями та новинами'],
                 media: ['Медіа', 'Керування фото, відео та документами'],
+                blocks: ['Блоки сторінок', 'Додавайте, вимикайте та видаляйте блоки вручну'],
+                branding: ['Брендинг', 'Логотип, favicon та фірмові дані сайту'],
                 'site-info': ['Інформація сайту', 'Редагування всіх ключових текстів сайту']
             };
             document.querySelectorAll('.nav-btn').forEach((btn) => {
@@ -342,6 +448,7 @@
             document.getElementById('statProducts').textContent = state.data.products.length;
             document.getElementById('statArticles').textContent = state.data.articles.length;
             document.getElementById('statMedia').textContent = state.data.media.length;
+            document.getElementById('statBlocks').textContent = state.data.blocks.length;
             document.getElementById('statSiteInfo').textContent = state.data.siteInfo.length;
         }
 
@@ -360,12 +467,23 @@
         function renderArticles() {
             document.getElementById('articlesTbody').innerHTML = state.data.articles.map((a) => `
                 <tr>
-                    <td>${esc(a.title)}</td>
+                    <td>${esc(toObjLang(a.title).uk)}</td>
+                    <td>${esc(categoryLabel(a.category))}</td>
                     <td>${esc(a.date || '')}</td>
-                    <td>${esc(a.summary || '')}</td>
+                    <td>${a.imageUrl ? '<span class="pill">Є</span>' : '<span class="hint">Немає</span>'}</td>
                     <td><div class="actions"><button class="btn btn-soft" onclick="editItem('articles', ${a.id})">Редагувати</button><button class="btn btn-danger" onclick="deleteItem('articles', ${a.id})">Видалити</button></div></td>
                 </tr>
             `).join('') || '<tr><td colspan="4" class="hint">Поки немає статей.</td></tr>';
+        }
+
+        function renderArticleMediaOptions() {
+            const select = document.getElementById('articleMediaId');
+            const images = (state.data.media || []).filter((m) => m.type === 'image');
+            const options = ['<option value="">Не вибрано</option>'];
+            images.forEach((m) => {
+                options.push(`<option value="${m.id}">${esc(m.title)} (${esc(m.url)})</option>`);
+            });
+            select.innerHTML = options.join('');
         }
 
         function renderMedia() {
@@ -390,6 +508,40 @@
             `).join('') || '<tr><td colspan="3" class="hint">Поки немає полів.</td></tr>';
         }
 
+        function pageLabel(page) {
+            const labels = {
+                all: 'Всі сторінки',
+                home: 'Головна',
+                about: 'Про нас',
+                catalog: 'Каталог',
+                brands: 'Бренди',
+                news: 'Новини',
+                contacts: 'Контакти',
+                partners: 'Партнерам'
+            };
+            return labels[page] || page;
+        }
+
+        function renderBlocks() {
+            document.getElementById('blocksTbody').innerHTML = state.data.blocks.map((b) => `
+                <tr>
+                    <td>${esc(pageLabel(b.page))}</td>
+                    <td>${esc(b.title || '')}</td>
+                    <td>${esc(b.text || '')}</td>
+                    <td>${esc(b.imageUrl || '')}</td>
+                    <td><span class="pill">${b.enabled ? 'Увімкнено' : 'Вимкнено'}</span></td>
+                    <td><div class="actions"><button class="btn btn-soft" onclick="editItem('blocks', ${b.id})">Редагувати</button><button class="btn btn-danger" onclick="deleteItem('blocks', ${b.id})">Видалити</button></div></td>
+                </tr>
+            `).join('') || '<tr><td colspan="6" class="hint">Поки немає блоків.</td></tr>';
+        }
+
+        function renderBranding() {
+            document.getElementById('brandingLogoUrl').value = state.data.branding.logoUrl || '';
+            document.getElementById('brandingFaviconUrl').value = state.data.branding.faviconUrl || '';
+            document.getElementById('brandingCompanyName').value = state.data.branding.companyName || '';
+            document.getElementById('brandingTagline').value = state.data.branding.tagline || '';
+        }
+
         function resetForm(type) {
             state.edit[type] = null;
             if (type === 'products') {
@@ -401,21 +553,39 @@
             }
             if (type === 'articles') {
                 document.getElementById('articleFormTitle').textContent = 'Нова стаття';
-                document.getElementById('articleTitle').value = '';
-                document.getElementById('articleSummary').value = '';
-                document.getElementById('articleBody').value = '';
+                document.getElementById('articleTitleUk').value = '';
+                document.getElementById('articleTitleEn').value = '';
+                document.getElementById('articleSummaryUk').value = '';
+                document.getElementById('articleSummaryEn').value = '';
+                document.getElementById('articleBodyUk').value = '';
+                document.getElementById('articleBodyEn').value = '';
+                document.getElementById('articleCategory').value = 'company';
+                document.getElementById('articleImageUrl').value = '';
+                document.getElementById('articleImageFile').value = '';
+                document.getElementById('articleMediaId').value = '';
             }
             if (type === 'media') {
                 document.getElementById('mediaFormTitle').textContent = 'Новий медіа-матеріал';
                 document.getElementById('mediaTitle').value = '';
                 document.getElementById('mediaType').value = 'image';
                 document.getElementById('mediaUrl').value = '';
+                document.getElementById('mediaFile').value = '';
                 document.getElementById('mediaDescription').value = '';
             }
             if (type === 'siteInfo') {
                 document.getElementById('siteInfoFormTitle').textContent = 'Нове поле інформації';
                 document.getElementById('siteInfoKey').value = '';
                 document.getElementById('siteInfoValue').value = '';
+            }
+            if (type === 'blocks') {
+                document.getElementById('blockFormTitle').textContent = 'Новий блок';
+                document.getElementById('blockPage').value = 'home';
+                document.getElementById('blockTitle').value = '';
+                document.getElementById('blockText').value = '';
+                document.getElementById('blockImageUrl').value = '';
+                document.getElementById('blockCtaText').value = '';
+                document.getElementById('blockCtaUrl').value = '';
+                document.getElementById('blockEnabled').value = '1';
             }
         }
 
@@ -432,9 +602,19 @@
             }
             if (type === 'articles') {
                 document.getElementById('articleFormTitle').textContent = 'Редагування статті';
-                document.getElementById('articleTitle').value = item.title;
-                document.getElementById('articleSummary').value = item.summary;
-                document.getElementById('articleBody').value = item.body;
+                const title = toObjLang(item.title);
+                const summary = toObjLang(item.summary);
+                const body = toObjLang(item.body);
+                document.getElementById('articleTitleUk').value = title.uk || '';
+                document.getElementById('articleTitleEn').value = title.en || '';
+                document.getElementById('articleSummaryUk').value = summary.uk || '';
+                document.getElementById('articleSummaryEn').value = summary.en || '';
+                document.getElementById('articleBodyUk').value = body.uk || '';
+                document.getElementById('articleBodyEn').value = body.en || '';
+                document.getElementById('articleCategory').value = item.category || 'company';
+                document.getElementById('articleImageUrl').value = item.imageUrl || '';
+                document.getElementById('articleImageFile').value = '';
+                document.getElementById('articleMediaId').value = '';
             }
             if (type === 'media') {
                 document.getElementById('mediaFormTitle').textContent = 'Редагування медіа';
@@ -447,6 +627,16 @@
                 document.getElementById('siteInfoFormTitle').textContent = 'Редагування поля';
                 document.getElementById('siteInfoKey').value = item.key;
                 document.getElementById('siteInfoValue').value = item.value;
+            }
+            if (type === 'blocks') {
+                document.getElementById('blockFormTitle').textContent = 'Редагування блока';
+                document.getElementById('blockPage').value = item.page || 'home';
+                document.getElementById('blockTitle').value = item.title || '';
+                document.getElementById('blockText').value = item.text || '';
+                document.getElementById('blockImageUrl').value = item.imageUrl || '';
+                document.getElementById('blockCtaText').value = item.ctaText || '';
+                document.getElementById('blockCtaUrl').value = item.ctaUrl || '';
+                document.getElementById('blockEnabled').value = item.enabled ? '1' : '0';
             }
         }
 
@@ -474,18 +664,50 @@
             persistData();
         }
 
-        function saveArticle() {
+        async function saveArticle() {
+            const titleUk = document.getElementById('articleTitleUk').value.trim();
+            const titleEn = document.getElementById('articleTitleEn').value.trim();
+            const summaryUk = document.getElementById('articleSummaryUk').value.trim();
+            const summaryEn = document.getElementById('articleSummaryEn').value.trim();
+            const bodyUk = document.getElementById('articleBodyUk').value.trim();
+            const bodyEn = document.getElementById('articleBodyEn').value.trim();
+            const category = document.getElementById('articleCategory').value;
+            const imageUrlInput = document.getElementById('articleImageUrl').value.trim();
+            const mediaId = Number(document.getElementById('articleMediaId').value || 0);
+            const imageFile = document.getElementById('articleImageFile').files[0] || null;
+
+            if (!titleUk) return toast('Вкажіть заголовок статті українською');
+
+            let imageUrl = imageUrlInput;
+            if (mediaId) {
+                const mediaItem = state.data.media.find((m) => m.id === mediaId);
+                if (mediaItem) imageUrl = mediaItem.url;
+            }
+            if (imageFile) {
+                imageUrl = await fileToDataUrl(imageFile);
+                const mediaTitle = `${titleUk} (обкладинка)`;
+                state.data.media.push({
+                    id: nextId(state.data.media),
+                    title: mediaTitle,
+                    type: 'image',
+                    url: imageUrl,
+                    description: 'Завантажено разом зі статтею'
+                });
+            }
+
             const payload = {
-                title: document.getElementById('articleTitle').value.trim(),
-                summary: document.getElementById('articleSummary').value.trim(),
-                body: document.getElementById('articleBody').value.trim(),
+                title: { uk: titleUk, en: titleEn },
+                summary: { uk: summaryUk, en: summaryEn },
+                body: { uk: bodyUk, en: bodyEn },
+                category,
+                imageUrl,
                 date: new Date().toISOString().slice(0, 10)
             };
-            if (!payload.title) return toast('Вкажіть заголовок статті');
+
             const id = state.edit.articles;
             if (id) {
                 const idx = state.data.articles.findIndex(x => x.id === id);
-                state.data.articles[idx] = { ...state.data.articles[idx], ...payload };
+                state.data.articles[idx] = { ...state.data.articles[idx], ...payload, date: state.data.articles[idx].date || payload.date };
             } else {
                 state.data.articles.push({ id: nextId(state.data.articles), ...payload });
             }
@@ -493,14 +715,20 @@
             persistData();
         }
 
-        function saveMedia() {
+        async function saveMedia() {
             const payload = {
                 title: document.getElementById('mediaTitle').value.trim(),
                 type: document.getElementById('mediaType').value,
                 url: document.getElementById('mediaUrl').value.trim(),
                 description: document.getElementById('mediaDescription').value.trim()
             };
-            if (!payload.title || !payload.url) return toast('Вкажіть назву та URL медіа');
+
+            const file = document.getElementById('mediaFile').files[0] || null;
+            if (file) {
+                payload.url = await fileToDataUrl(file);
+            }
+
+            if (!payload.title || !payload.url) return toast('Вкажіть назву та URL або завантажте файл');
             const id = state.edit.media;
             if (id) {
                 const idx = state.data.media.findIndex(x => x.id === id);
@@ -527,6 +755,40 @@
             applySiteInfoToFiles(false);
         }
 
+        function saveBlock() {
+            const payload = {
+                page: document.getElementById('blockPage').value,
+                title: document.getElementById('blockTitle').value.trim(),
+                text: document.getElementById('blockText').value.trim(),
+                imageUrl: document.getElementById('blockImageUrl').value.trim(),
+                ctaText: document.getElementById('blockCtaText').value.trim(),
+                ctaUrl: document.getElementById('blockCtaUrl').value.trim(),
+                enabled: document.getElementById('blockEnabled').value === '1'
+            };
+            if (!payload.title) return toast('Вкажіть заголовок блоку');
+
+            const id = state.edit.blocks;
+            if (id) {
+                const idx = state.data.blocks.findIndex(x => x.id === id);
+                state.data.blocks[idx] = { ...state.data.blocks[idx], ...payload };
+            } else {
+                state.data.blocks.push({ id: nextId(state.data.blocks), ...payload });
+            }
+
+            resetForm('blocks');
+            persistData();
+        }
+
+        function saveBranding() {
+            state.data.branding = {
+                logoUrl: document.getElementById('brandingLogoUrl').value.trim() || 'images/nrg-logo.svg',
+                faviconUrl: document.getElementById('brandingFaviconUrl').value.trim() || 'images/favicon.svg',
+                companyName: document.getElementById('brandingCompanyName').value.trim() || 'NRG-UA',
+                tagline: document.getElementById('brandingTagline').value.trim() || 'SUPPLY PARTNER'
+            };
+            persistData();
+        }
+
         function setupActions() {
             if (!SITE_CONTENT_API) {
                 const saveBtn = document.getElementById('saveAllBtn');
@@ -551,6 +813,13 @@
             document.getElementById('saveMediaBtn').addEventListener('click', saveMedia);
             document.getElementById('resetMediaBtn').addEventListener('click', () => resetForm('media'));
 
+            document.getElementById('addBlockBtn').addEventListener('click', () => resetForm('blocks'));
+            document.getElementById('saveBlockBtn').addEventListener('click', saveBlock);
+            document.getElementById('resetBlockBtn').addEventListener('click', () => resetForm('blocks'));
+
+            document.getElementById('saveBrandingBtn').addEventListener('click', saveBranding);
+            document.getElementById('resetBrandingBtn').addEventListener('click', renderBranding);
+
             document.getElementById('addSiteInfoBtn').addEventListener('click', () => resetForm('siteInfo'));
             document.getElementById('saveSiteInfoBtn').addEventListener('click', saveSiteInfo);
             document.getElementById('resetSiteInfoBtn').addEventListener('click', () => resetForm('siteInfo'));
@@ -561,7 +830,10 @@
             renderProducts();
             renderArticles();
             renderMedia();
+            renderBlocks();
+            renderBranding();
             renderSiteInfo();
+            renderArticleMediaOptions();
         }
 
         window.editItem = editItem;

@@ -5,35 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="NRG-UA - національний дистриб'ютор товарів для дому та бізнесу">
     <title>NRG-UA | Головна</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/nrg-style.css">
+    <link rel="stylesheet" href="css/nrg-style.css?v=premium-refresh-20260721">
     <style>
         :root {
             --home-shadow-glow: 0 20px 45px rgba(0, 212, 255, 0.16);
-            --tech-intensity: 0.28;
-            --scan-intensity: 0.09;
-            --points-intensity: 0.32;
+            --tech-intensity: 0;
+            --scan-intensity: 0;
+            --points-intensity: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 14% 10%, rgba(0, 212, 255, 0.09), transparent 40%),
+                radial-gradient(circle at 88% 22%, rgba(46, 92, 138, 0.1), transparent 43%),
+                linear-gradient(180deg, #0a0f14 0%, #0f1419 42%, #131b24 100%);
+            min-width: 320px;
+        }
+
+        body.theme-light {
+            background:
+                radial-gradient(circle at 14% 10%, rgba(74, 144, 226, 0.14), transparent 42%),
+                radial-gradient(circle at 88% 22%, rgba(46, 92, 138, 0.12), transparent 44%),
+                linear-gradient(180deg, #f8fbff 0%, #eff4fa 40%, #e9f0f7 100%);
+        }
+
+        .home-header .container,
+        .home-main .container,
+        .home-footer .container {
+            width: min(1720px, 100%);
+            max-width: none;
+            padding-left: clamp(1rem, 2.8vw, 3.2rem);
+            padding-right: clamp(1rem, 2.8vw, 3.2rem);
         }
 
         body.tech-soft {
-            --tech-intensity: 0.16;
-            --scan-intensity: 0.05;
-            --points-intensity: 0.2;
+            --tech-intensity: 0;
+            --scan-intensity: 0;
+            --points-intensity: 0;
         }
 
         body.tech-medium {
-            --tech-intensity: 0.28;
-            --scan-intensity: 0.09;
-            --points-intensity: 0.32;
+            --tech-intensity: 0;
+            --scan-intensity: 0;
+            --points-intensity: 0;
         }
 
         body.tech-bright {
-            --tech-intensity: 0.42;
-            --scan-intensity: 0.14;
-            --points-intensity: 0.52;
+            --tech-intensity: 0;
+            --scan-intensity: 0;
+            --points-intensity: 0;
         }
 
         .preloader-lite {
@@ -84,9 +109,13 @@
             left: 0;
             right: 0;
             z-index: 400;
-            background: rgba(10, 15, 20, 0.88);
-            border-bottom: 1px solid var(--color-border);
-            backdrop-filter: blur(14px);
+            background: #000000;
+        }
+
+        body.theme-light .home-header {
+            background: rgba(251, 253, 255, 0.9);
+            border-bottom-color: rgba(30, 58, 95, 0.14);
+            box-shadow: 0 10px 26px rgba(21, 42, 68, 0.1);
         }
 
         .home-header .container {
@@ -98,7 +127,87 @@
         }
 
         .home-logo img {
-            height: 41px;
+            height: 47px;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
+            transition: filter 240ms ease, transform 240ms ease;
+        }
+
+        .home-logo:hover img {
+            filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.45));
+            transform: scale(1.03);
+        }
+
+        .home-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .home-controls .lang-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.22rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-border);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .home-controls .lang-btn {
+            min-width: 36px;
+            text-align: center;
+            font-size: 0.74rem;
+        }
+
+        .home-controls #b2bPortalBtn {
+            padding: 0.5rem 0.78rem;
+            font-size: 0.82rem;
+            gap: 0.42rem;
+            border-radius: 999px;
+        }
+
+        .theme-toggle.compact {
+            padding: 0.5rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            background: rgba(255, 255, 255, 0.06);
+            display: inline-flex;
+            gap: 0.45rem;
+            align-items: center;
+            font-size: 0.84rem;
+            transition: all var(--transition-base);
+        }
+
+        body.theme-light .home-controls .lang-switcher,
+        body.theme-light .theme-toggle.compact {
+            background: rgba(255, 255, 255, 0.76);
+            border-color: rgba(30, 58, 95, 0.16);
+        }
+
+        body.theme-light .hero,
+        body.theme-light .section-shell,
+        body.theme-light .value-card,
+        body.theme-light .metric-card,
+        body.theme-light .scheme-wrap,
+        body.theme-light .insight-card,
+        body.theme-light .cta-panel {
+            box-shadow: 0 14px 30px rgba(21, 42, 68, 0.08);
+        }
+
+        body.theme-light .hero {
+            background:
+                radial-gradient(ellipse 64% 45% at 16% 25%, rgba(74, 144, 226, 0.14) 0%, transparent 74%),
+                radial-gradient(ellipse 58% 34% at 82% 70%, rgba(46, 92, 138, 0.1) 0%, transparent 72%),
+                #f8fbff;
+        }
+
+        .theme-toggle.compact:hover {
+            color: var(--color-text-primary);
+            border-color: var(--color-border-accent);
+            transform: translateY(-2px);
         }
 
         .home-menu {
@@ -136,8 +245,8 @@
             pointer-events: none;
             opacity: var(--tech-intensity);
             background-image:
-                radial-gradient(circle at 8% 18%, rgba(0, 212, 255, 0.22), rgba(0, 212, 255, 0) 38%),
-                radial-gradient(circle at 92% 36%, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0) 34%),
+                radial-gradient(circle at 8% 18%, rgba(0, 212, 255, 0.18), rgba(0, 212, 255, 0) 38%),
+                radial-gradient(circle at 92% 36%, rgba(46, 92, 138, 0.18), rgba(46, 92, 138, 0) 34%),
                 linear-gradient(rgba(0, 212, 255, 0.035) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 212, 255, 0.035) 1px, transparent 1px);
             background-size: auto, auto, 80px 80px, 80px 80px;
@@ -164,12 +273,12 @@
             pointer-events: none;
             opacity: var(--points-intensity);
             background-image:
-                radial-gradient(circle at 12% 22%, rgba(0, 212, 255, 0.8) 0 1px, transparent 2px),
-                radial-gradient(circle at 27% 68%, rgba(0, 212, 255, 0.7) 0 1px, transparent 2px),
-                radial-gradient(circle at 45% 34%, rgba(99, 102, 241, 0.78) 0 1px, transparent 2px),
-                radial-gradient(circle at 62% 72%, rgba(0, 212, 255, 0.76) 0 1px, transparent 2px),
-                radial-gradient(circle at 79% 26%, rgba(0, 212, 255, 0.72) 0 1px, transparent 2px),
-                radial-gradient(circle at 89% 58%, rgba(99, 102, 241, 0.7) 0 1px, transparent 2px);
+                radial-gradient(circle at 12% 22%, rgba(0, 212, 255, 0.62) 0 1px, transparent 2px),
+                radial-gradient(circle at 27% 68%, rgba(0, 212, 255, 0.56) 0 1px, transparent 2px),
+                radial-gradient(circle at 45% 34%, rgba(46, 92, 138, 0.62) 0 1px, transparent 2px),
+                radial-gradient(circle at 62% 72%, rgba(0, 212, 255, 0.58) 0 1px, transparent 2px),
+                radial-gradient(circle at 79% 26%, rgba(0, 212, 255, 0.54) 0 1px, transparent 2px),
+                radial-gradient(circle at 89% 58%, rgba(46, 92, 138, 0.58) 0 1px, transparent 2px);
             animation: pointsShift 18s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.35));
         }
@@ -180,10 +289,14 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid var(--color-border);
             background:
-                radial-gradient(ellipse 64% 45% at 16% 25%, rgba(0, 212, 255, 0.22) 0%, transparent 74%),
-                radial-gradient(ellipse 58% 34% at 82% 70%, rgba(99, 102, 241, 0.18) 0%, transparent 72%);
+                radial-gradient(ellipse 64% 45% at 16% 25%, rgba(0, 212, 255, 0.18) 0%, transparent 74%),
+                radial-gradient(ellipse 58% 34% at 82% 70%, rgba(46, 92, 138, 0.14) 0%, transparent 72%),
+                #000000;
+        }
+
+        .hero::after {
+            display: none;
         }
 
         .hero::before {
@@ -221,7 +334,7 @@
             right: 7%;
             top: 16%;
             animation-delay: -3s;
-            background: radial-gradient(circle at 60% 40%, rgba(99, 102, 241, 0.42), rgba(99, 102, 241, 0));
+            background: radial-gradient(circle at 60% 40%, rgba(46, 92, 138, 0.34), rgba(46, 92, 138, 0));
         }
 
         .hero-orb.o3 {
@@ -295,7 +408,7 @@
         .hero-kpi {
             border: 1px solid var(--color-border);
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--color-bg-secondary);
             padding: 0.95rem;
         }
 
@@ -314,23 +427,20 @@
             padding: clamp(3.8rem, 7vw, 6.6rem) 0;
         }
 
-        .section-shell {
-            border: 1px solid var(--color-border);
-            border-radius: 24px;
-            background: linear-gradient(155deg, rgba(255, 255, 255, 0.015), rgba(0, 212, 255, 0.05));
-            padding: clamp(1.1rem, 3vw, 2.2rem);
-            position: relative;
-            overflow: hidden;
+        .section:nth-of-type(even) {
+            background: var(--color-bg-secondary);
         }
 
-        .section-shell::before {
-            content: '';
-            position: absolute;
-            inset: -40% -10% auto -10%;
-            height: 45%;
-            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.12), rgba(0, 212, 255, 0));
-            pointer-events: none;
-            opacity: 0.6;
+        #about .value-card,
+        #process .process-step,
+        #process .metric-card,
+        #brands .brand-pill {
+            background: var(--color-bg-primary);
+        }
+
+        .section-shell {
+            padding: clamp(1.1rem, 3vw, 2.2rem) 0;
+            position: relative;
         }
 
         .section-head {
@@ -363,7 +473,7 @@
             border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.015);
+            background: var(--color-bg-secondary);
             transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
         }
 
@@ -395,13 +505,114 @@
             border: 1px solid var(--color-border);
             border-radius: 15px;
             padding: 1rem;
-            background: linear-gradient(175deg, rgba(0, 212, 255, 0.06), rgba(255, 255, 255, 0.02));
-            transition: transform var(--transition-base), border-color var(--transition-base);
+            background: var(--color-bg-secondary);
+            transition: transform var(--transition-base), border-color var(--transition-base), opacity var(--transition-base), box-shadow var(--transition-base);
+            opacity: 0.28;
+            transform: translateY(8px);
         }
 
         .process-step:hover {
             transform: translateY(-4px);
             border-color: var(--color-border-accent);
+        }
+
+        .process-step.is-active {
+            opacity: 1;
+            transform: translateY(0);
+            box-shadow: 0 12px 32px rgba(0, 114, 206, 0.2);
+        }
+
+        .application-effect {
+            margin: 1.1rem 0 1.3rem;
+            border: 1px dashed var(--color-border-accent);
+            border-radius: 14px;
+            padding: 0.82rem 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 114, 206, 0.07);
+        }
+
+        .application-line {
+            position: relative;
+            height: 2px;
+            background: rgba(0, 114, 206, 0.28);
+            overflow: visible;
+        }
+
+        .application-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            position: absolute;
+            top: -7px;
+            left: 0;
+            background: var(--color-accent);
+            box-shadow: 0 0 0 6px rgba(0, 114, 206, 0.16);
+            opacity: 0;
+        }
+
+        .application-effect.run .application-dot {
+            opacity: 1;
+            animation: sendApplication 1.9s ease-out forwards;
+        }
+
+        .application-label {
+            font-size: 0.84rem;
+            color: var(--color-text-secondary);
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .insight-card {
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1rem;
+            background: var(--color-bg-secondary);
+        }
+
+        .insight-card h3 {
+            margin-bottom: 0.45rem;
+            font-size: 1.15rem;
+        }
+
+        .insight-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.66;
+        }
+
+        .insight-card .metric-track {
+            margin-top: 0.6rem;
+        }
+
+        .key-catalog {
+            margin-top: 1rem;
+            border: 1px solid var(--color-border-accent);
+            border-radius: 16px;
+            padding: 1rem 1.1rem;
+            background: linear-gradient(115deg, rgba(0, 114, 206, 0.16), rgba(0, 182, 122, 0.14)), var(--color-bg-secondary);
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .key-catalog p {
+            color: var(--color-text-secondary);
+        }
+
+        body.theme-light .value-card,
+        body.theme-light .metric-card,
+        body.theme-light .process-step,
+        body.theme-light .scheme-wrap {
+            background: rgba(255, 255, 255, 0.56);
+        }
+
+        body.theme-light .home-main::after {
+            mix-blend-mode: multiply;
         }
 
         .step-num {
@@ -425,13 +636,15 @@
 
         .scheme-wrap {
             border: 1px solid var(--color-border);
-            border-radius: 18px;
+            border-radius: 20px;
             padding: 1rem;
-            background: rgba(10, 15, 20, 0.62);
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.96), rgba(13, 20, 29, 0.88));
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.26);
+            overflow-x: auto;
         }
 
         .scheme-title {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.9rem;
             font-size: 0.95rem;
             color: var(--color-text-secondary);
             letter-spacing: 0.02em;
@@ -439,40 +652,153 @@
 
         .flow-svg {
             width: 100%;
+            min-width: 980px;
             height: auto;
             display: block;
         }
 
-        .flow-line {
-            stroke: rgba(0, 212, 255, 0.55);
-            stroke-width: 2.3;
+        .flow-curve-base {
             fill: none;
-            stroke-dasharray: 9 8;
-            animation: flowDash 1.9s linear infinite;
+            stroke: rgba(148, 163, 184, 0.16);
+            stroke-width: 5;
+            stroke-linecap: round;
         }
 
-        .flow-node {
-            fill: rgba(14, 29, 39, 0.95);
-            stroke: rgba(0, 212, 255, 0.74);
-            stroke-width: 1.5;
-            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.33));
+        .flow-curve-active {
+            fill: none;
+            stroke: url(#flowCurveGradient);
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 1100;
+            stroke-dashoffset: 1100;
+            transition: stroke-dashoffset 1.9s cubic-bezier(.22, .61, .36, 1);
+            filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.18));
         }
 
-        .flow-node.pulse {
-            animation: nodePulse 2.2s ease-in-out infinite;
+        .flow-svg.is-drawn .flow-curve-active {
+            stroke-dashoffset: 0;
         }
 
-        .flow-text-main {
-            fill: #e6faff;
-            font-size: 13px;
-            font-weight: 700;
+        .flow-pulse-dot {
+            fill: #eafcff;
+            opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.95)) drop-shadow(0 0 18px rgba(0, 212, 255, 0.55));
+            transition: opacity 500ms ease 1.6s;
+        }
+
+        .flow-svg.is-drawn .flow-pulse-dot {
+            opacity: 1;
+        }
+
+        @keyframes stageIgnite {
+            0% {
+                filter: drop-shadow(0 0 0 rgba(0, 212, 255, 0));
+            }
+
+            35% {
+                filter: drop-shadow(0 0 16px rgba(0, 212, 255, 0.95));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.24));
+            }
+        }
+
+        @keyframes stageIgniteGreen {
+            0% {
+                filter: drop-shadow(0 0 0 rgba(16, 185, 129, 0));
+            }
+
+            35% {
+                filter: drop-shadow(0 0 16px rgba(16, 185, 129, 0.95));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.22));
+            }
+        }
+
+        .flow-stage {
+            opacity: 0;
+            transform: translateY(12px);
+            transform-origin: center;
+            transition: opacity 420ms ease, transform 420ms ease;
+        }
+
+        .flow-stage.is-on {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .flow-stage-circle {
+            fill: rgba(11, 18, 27, 0.92);
+            stroke: rgba(0, 212, 255, 0.5);
+            stroke-width: 2.5;
+            transition: stroke 300ms ease, fill 300ms ease;
+        }
+
+        .flow-stage.is-on .flow-stage-circle {
+            stroke: rgba(0, 212, 255, 0.95);
+            animation: stageIgnite 700ms ease-out;
+            filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.55));
+        }
+
+        .flow-stage-final .flow-stage-circle {
+            stroke: rgba(16, 185, 129, 0.5);
+        }
+
+        .flow-stage-final.is-on .flow-stage-circle {
+            stroke: rgba(16, 185, 129, 0.95);
+            fill: rgba(9, 28, 22, 0.92);
+            animation: stageIgniteGreen 700ms ease-out;
+            filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.5));
+        }
+
+        .flow-stage-title {
+            fill: #e6f1fb;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+
+        .flow-stage-copy {
+            fill: #8fa5ba;
+            font-size: 11.5px;
+            font-weight: 500;
             letter-spacing: 0.01em;
         }
 
-        .flow-text-sub {
-            fill: #9fc7d8;
-            font-size: 11px;
-            font-weight: 500;
+        body.theme-light .scheme-wrap {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 249, 255, 0.9));
+            box-shadow: 0 16px 30px rgba(21, 42, 68, 0.1);
+        }
+
+        body.theme-light .flow-curve-base {
+            stroke: rgba(102, 125, 148, 0.18);
+        }
+
+        body.theme-light .flow-stage-circle {
+            fill: rgba(255, 255, 255, 0.98);
+            stroke: rgba(46, 92, 138, 0.3);
+        }
+
+        body.theme-light .flow-stage-title {
+            fill: #183550;
+        }
+
+        body.theme-light .flow-stage-copy {
+            fill: #59728d;
+        }
+
+        @keyframes flowStageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .metrics-grid {
@@ -486,7 +812,7 @@
             border: 1px solid var(--color-border);
             border-radius: 14px;
             padding: 0.95rem;
-            background: rgba(255, 255, 255, 0.015);
+            background: var(--color-bg-secondary);
         }
 
         .metric-head {
@@ -534,7 +860,7 @@
             border-radius: 999px;
             padding: 0.52rem 0.88rem;
             color: var(--color-text-secondary);
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--color-bg-secondary);
             font-size: 0.85rem;
             transition: transform var(--transition-base), border-color var(--transition-base), color var(--transition-base);
             animation: softBob 4.5s ease-in-out infinite;
@@ -562,7 +888,7 @@
             border: 1px solid var(--color-border-accent);
             border-radius: 18px;
             padding: clamp(1rem, 3vw, 1.5rem);
-            background: linear-gradient(140deg, rgba(0, 212, 255, 0.12), rgba(99, 102, 241, 0.12));
+            background: linear-gradient(140deg, rgba(0, 212, 255, 0.16), rgba(99, 102, 241, 0.16)), var(--color-bg-secondary);
         }
 
         .cta-panel p {
@@ -666,19 +992,17 @@
             }
         }
 
-        @keyframes flowDash {
-            to {
-                stroke-dashoffset: -34;
+        @keyframes sendApplication {
+            0% {
+                left: 0;
+                transform: scale(0.92);
             }
-        }
-
-        @keyframes nodePulse {
-            0%,
+            70% {
+                transform: scale(1.08);
+            }
             100% {
+                left: calc(100% - 16px);
                 transform: scale(1);
-            }
-            50% {
-                transform: scale(1.055);
             }
         }
 
@@ -695,6 +1019,10 @@
             }
 
             .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -716,6 +1044,12 @@
                 padding: 2rem 0;
             }
 
+            .hero::after {
+                width: min(72vw, 320px);
+                top: 48%;
+                opacity: 0.05;
+            }
+
             .hero-kpis,
             .value-grid,
             .catalog-grid,
@@ -723,11 +1057,11 @@
                 grid-template-columns: 1fr;
             }
 
-            .flow-text-main {
+            .flow-stage-title {
                 font-size: 11px;
             }
 
-            .flow-text-sub {
+            .flow-stage-copy {
                 font-size: 10px;
             }
 
@@ -735,15 +1069,30 @@
                 font-size: 0.82rem;
                 padding: 0.46rem 0.66rem;
             }
+
+            .theme-toggle.compact span {
+                display: none;
+            }
+
+            .home-controls {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
             .hero::before,
             .hero-orb,
             .brand-pill,
-            .flow-line,
-            .flow-node.pulse {
+            .flow-curve-active,
+            .flow-stage {
                 animation: none !important;
+            }
+
+            .flow-curve-active {
+                transition: none !important;
+                stroke-dashoffset: 0 !important;
             }
 
             .home-main::before,
@@ -788,6 +1137,20 @@
                 <a href="pages/nrg-news.html">Новини</a>
                 <a href="pages/nrg-contacts.html">Контакти</a>
             </nav>
+            <div class="home-controls">
+                <div class="lang-switcher" aria-label="Вибір мови">
+                    <button class="lang-btn active" data-lang="uk" type="button">UA</button>
+                    <button class="lang-btn" data-lang="en" type="button">EN</button>
+                </div>
+                <a href="https://nrgportal.com.ua/uk/login" class="btn btn-primary btn-sm" id="b2bPortalBtn" target="_blank" rel="noopener noreferrer" title="Тільки для зареєстрованих клієнтів">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span data-i18n="nav.b2b_portal">B2B Portal</span>
+                </a>
+                <button class="theme-toggle compact" id="themeToggle" type="button" aria-label="Перемкнути тему">
+                    <i class="fas fa-circle-half-stroke"></i>
+                    <span data-theme-toggle-label>Темна тема</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -807,10 +1170,10 @@
                 </div>
 
                 <div class="hero-kpis">
-                    <div class="hero-kpi"><strong>16</strong><span>років на ринку</span></div>
-                    <div class="hero-kpi"><strong>45</strong><span>брендів у портфелі</span></div>
-                    <div class="hero-kpi"><strong>2500+</strong><span>активних партнерів</span></div>
-                    <div class="hero-kpi"><strong>650</strong><span>міст доставки</span></div>
+                    <div class="hero-kpi"><strong data-count="28">0</strong><span>років на ринку</span></div>
+                    <div class="hero-kpi"><strong data-count="8000" data-suffix="+">0</strong><span>партнерів</span></div>
+                    <div class="hero-kpi"><strong data-count="1000" data-suffix="+">0</strong><span>замовлень на день</span></div>
+                    <div class="hero-kpi"><strong data-count="3000" data-suffix="+">0</strong><span>SKU в асортименті</span></div>
                 </div>
             </div>
         </section>
@@ -846,21 +1209,26 @@
                 </div>
 
                 <div class="value-grid">
-                    <article class="value-card reveal-pop" style="--delay: 30ms;"><i class="fas fa-calendar-check"></i><h3>16</h3><p>років на ринку</p></article>
-                    <article class="value-card reveal-pop" style="--delay: 90ms;"><i class="fas fa-award"></i><h3>45</h3><p>брендів у портфелі<br><strong>Tramontina, Osram, Henkel</strong></p></article>
-                    <article class="value-card reveal-pop" style="--delay: 150ms;"><i class="fas fa-handshake"></i><h3>2 500+</h3><p>активних партнерів</p></article>
-                    <article class="value-card reveal-pop" style="--delay: 210ms;"><i class="fas fa-location-dot"></i><h3>650</h3><p>міст доставки</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 30ms;"><i class="fas fa-calendar-check"></i><h3 data-count="28">0</h3><p>років на ринку</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 90ms;"><i class="fas fa-handshake"></i><h3 data-count="8000" data-suffix="+">0</h3><p>активних партнерів</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 150ms;"><i class="fas fa-boxes-stacked"></i><h3 data-count="3000" data-suffix="+">0</h3><p>SKU в асортименті</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 210ms;"><i class="fas fa-receipt"></i><h3 data-count="1000" data-suffix="+">0</h3><p>замовлень на день</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 270ms;"><i class="fas fa-location-dot"></i><h3 data-count="650" data-suffix="+">0</h3><p>міст доставки по всій Україні</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 330ms;"><i class="fas fa-award"></i><h3 data-count="23">0</h3><p>бренди у портфелі</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 390ms;"><i class="fas fa-user-group"></i><h3>36 + 5</h3><p>польових менеджерів і KAM-команда</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 450ms;"><i class="fas fa-chart-pie"></i><h3>АКБ / КБ</h3><p>активна база відстежується щомісяця + окремий облік системних клієнтів</p></article>
                 </div>
 
                 <div class="section-head" style="margin-top: 2.2rem;">
                     <h2>Покриття по Україні</h2>
-                    <p>Розгалужена мережа складів та логістичних центрів забезпечує доставку товарів протягом 1-3 днів у будь-яку точку країни.</p>
+                    <p>Розгалужена мережа складів та логістичних центрів забезпечує доставку по Україні у вікно 24/48 годин.</p>
                 </div>
 
                 <div class="value-grid">
-                    <article class="value-card reveal-pop" style="--delay: 40ms;"><i class="fas fa-warehouse"></i><h3>8</h3><p>Складів та логістичних центрів</p></article>
-                    <article class="value-card reveal-pop" style="--delay: 100ms;"><i class="fas fa-truck-fast"></i><h3>1-3</h3><p>Дні доставки по Україні</p></article>
-                    <article class="value-card reveal-pop" style="--delay: 160ms;"><i class="fas fa-ruler-combined"></i><h3>50K+</h3><p>м2 складських площ</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 40ms;"><i class="fas fa-warehouse"></i><h3 data-count="6">0</h3><p>складів та логістичних центрів</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 100ms;"><i class="fas fa-ruler-combined"></i><h3 data-count="3500" data-suffix=" м2">0</h3><p>складських площ</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 160ms;"><i class="fas fa-clock"></i><h3>24/48</h3><p>годин доставка по Україні</p></article>
+                    <article class="value-card reveal-pop" style="--delay: 220ms;"><i class="fas fa-truck"></i><h3 data-count="22">0</h3><p>автомобілі доставки</p></article>
                 </div>
             </div>
         </section>
@@ -873,78 +1241,145 @@
                 </div>
 
                 <div class="value-grid catalog-grid">
-                    <article class="value-card reveal-pop" style="--delay: 30ms;"><i class="fas fa-pump-soap"></i><h3>Господарські товари</h3><p>Побутова хімія, інвентар для прибирання<br><strong>4 500+ товарів</strong></p></article>
-                    <article class="value-card reveal-pop" style="--delay: 80ms;"><i class="fas fa-utensils"></i><h3>Товари для кухні</h3><p>Ножі, посуд, кухонне приладдя<br><strong>1 800+ товарів</strong></p></article>
-                    <article class="value-card reveal-pop" style="--delay: 130ms;"><i class="fas fa-plug"></i><h3>Електротовари</h3><p>Подовжувачі, розетки, кабелі<br><strong>2 550+ товарів</strong></p></article>
-                    <article class="value-card reveal-pop" style="--delay: 180ms;"><i class="fas fa-lightbulb"></i><h3>Світлотехніка</h3><p>LED-освітлення, гірлянди, вуличні світильники<br><strong>3 200+ товарів</strong></p></article>
-                    <article class="value-card reveal-pop" style="--delay: 230ms;"><i class="fas fa-battery-full"></i><h3>Елементи живлення</h3><p>Батарейки, акумулятори, зарядні пристрої<br><strong>850+ товарів</strong></p></article>
-                    <article class="value-card reveal-pop" style="--delay: 280ms;"><i class="fas fa-seedling"></i><h3>Сад і город</h3><p>Інструменти, добрива, системи поливу<br><strong>2 100+ товарів</strong></p></article>
+                    <article class="value-card reveal-pop" style="--delay: 30ms;"><i class="fas fa-hand"></i><h3>Рукавички</h3><p>Нітрилові, латексні та господарські моделі<br><strong data-count="620" data-suffix="+ товарів">0</strong></p></article>
+                    <article class="value-card reveal-pop" style="--delay: 80ms;"><i class="fas fa-droplet"></i><h3>Клей</h3><p>Побутові та професійні клейові рішення<br><strong data-count="280" data-suffix="+ товарів">0</strong></p></article>
+                    <article class="value-card reveal-pop" style="--delay: 130ms;"><i class="fas fa-plug"></i><h3>Електротовари</h3><p>Подовжувачі, розетки, кабелі<br><strong data-count="2550" data-suffix="+ товарів">0</strong></p></article>
+                    <article class="value-card reveal-pop" style="--delay: 180ms;"><i class="fas fa-lightbulb"></i><h3>Світлотехніка</h3><p>LED-освітлення, гірлянди, вуличні світильники<br><strong data-count="3200" data-suffix="+ товарів">0</strong></p></article>
+                    <article class="value-card reveal-pop" style="--delay: 230ms;"><i class="fas fa-battery-full"></i><h3>Елементи живлення</h3><p>Батарейки, акумулятори, зарядні пристрої<br><strong data-count="850" data-suffix="+ товарів">0</strong></p></article>
+                    <article class="value-card reveal-pop" style="--delay: 280ms;"><i class="fas fa-seedling"></i><h3>Сад і город</h3><p>Інструменти, добрива, системи поливу<br><strong data-count="2100" data-suffix="+ товарів">0</strong></p></article>
                 </div>
+
+                <article class="key-catalog reveal-pop" style="--delay: 340ms;">
+                    <h3>Каталог ключових товарів</h3>
+                    <p>Окремий фокус на SKU з найвищою оборотністю, стабільною маржинальністю та швидким поповненням залишків.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="pages/nrg-catalog.html"><i class="fas fa-book-open"></i> Відкрити ключовий каталог</a>
+                    </div>
+                </article>
             </div>
         </section>
 
         <section class="section" id="process">
             <div class="container section-shell reveal-pop" style="--delay: 0ms;">
                 <div class="section-head">
-                    <h2 data-site-key="home.process_title">Як ми запускаємо співпрацю</h2>
+                    <h2 data-site-key="home.process_title">Як стартує партнерство з NRG-UA</h2>
                     <p data-site-key="home.process_text">Короткий шлях від першого контакту до стабільних регулярних поставок з передбачуваним сервісом.</p>
                 </div>
 
                 <div class="process-grid">
-                    <article class="process-step reveal-pop" style="--delay: 40ms;"><span class="step-num">01</span><h4>Бриф</h4><p>Фіксуємо формат бізнесу, цілі і пріоритетні категорії.</p></article>
-                    <article class="process-step reveal-pop" style="--delay: 100ms;"><span class="step-num">02</span><h4>Матриця SKU</h4><p>Формуємо стартову пропозицію за цінами і товарообігом.</p></article>
-                    <article class="process-step reveal-pop" style="--delay: 160ms;"><span class="step-num">03</span><h4>Підключення</h4><p>Узгоджуємо умови і відкриваємо доступ до B2B-кабінету.</p></article>
-                    <article class="process-step reveal-pop" style="--delay: 220ms;"><span class="step-num">04</span><h4>Масштаб</h4><p>Оптимізуємо асортимент і прискорюємо ріст продажів.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 40ms;"><span class="step-num">01</span><h4>Заявка</h4><p>Фіксуємо формат бізнесу, потенціал каналів і пріоритетні категорії.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 100ms;"><span class="step-num">02</span><h4>Матриця SKU</h4><p>Формуємо стартову пропозицію за цінами, сезонністю та товарообігом.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 160ms;"><span class="step-num">03</span><h4>Підключення</h4><p>Узгоджуємо умови, логістику та відкриваємо доступ до B2B-кабінету.</p></article>
+                    <article class="process-step reveal-pop" style="--delay: 220ms;"><span class="step-num">04</span><h4>Масштабування</h4><p>Включаємо SFAR-аналітику і прискорюємо повторні закупівлі.</p></article>
+                </div>
+
+                <div class="application-effect" id="applicationEffect" aria-live="polite">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    <div class="application-line"><span class="application-dot" aria-hidden="true"></span></div>
+                    <span class="application-label">Ефект заявки: запит потрапив у CRM та переданий менеджеру</span>
                 </div>
 
                 <div class="scheme-wrap reveal-pop" style="--delay: 280ms;">
                     <div class="scheme-title">Схема руху від заявки до полиці магазину</div>
-                    <svg class="flow-svg" viewBox="0 0 1000 280" role="img" aria-label="Схема процесу поставок">
-                        <path class="flow-line" d="M114 140 C 190 140, 210 70, 280 70 C 350 70, 370 140, 440 140 C 510 140, 530 210, 600 210 C 670 210, 690 140, 760 140 C 830 140, 850 140, 900 140" />
+                    <svg class="flow-svg" viewBox="0 0 1200 260" role="img" aria-label="Схема процесу поставок">
+                        <defs>
+                            <linearGradient id="flowCurveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#2e5c8a" />
+                                <stop offset="48%" stop-color="#00d4ff" />
+                                <stop offset="100%" stop-color="#10b981" />
+                            </linearGradient>
+                        </defs>
 
-                        <circle class="flow-node pulse" cx="110" cy="140" r="42" />
-                        <circle class="flow-node" cx="280" cy="70" r="42" />
-                        <circle class="flow-node pulse" cx="440" cy="140" r="42" />
-                        <circle class="flow-node" cx="600" cy="210" r="42" />
-                        <circle class="flow-node pulse" cx="760" cy="140" r="42" />
-                        <circle class="flow-node" cx="900" cy="140" r="42" />
+                        <path class="flow-curve-base" d="M 70 150 L 1130 150" />
+                        <path id="flowMainPath" class="flow-curve-active" d="M 70 150 L 1130 150" />
 
-                        <text class="flow-text-main" x="110" y="136" text-anchor="middle">ЗАПИТ</text>
-                        <text class="flow-text-sub" x="110" y="154" text-anchor="middle">від партнера</text>
+                        <circle class="flow-pulse-dot" r="6">
+                            <animateMotion dur="3.4s" repeatCount="indefinite" rotate="auto">
+                                <mpath href="#flowMainPath"></mpath>
+                            </animateMotion>
+                        </circle>
 
-                        <text class="flow-text-main" x="280" y="66" text-anchor="middle">SKU-ПЛАН</text>
-                        <text class="flow-text-sub" x="280" y="84" text-anchor="middle">та ціни</text>
+                        <g class="flow-stage">
+                            <text class="flow-stage-title" x="70" y="90" text-anchor="middle">ЗАПИТ</text>
+                            <text class="flow-stage-copy" x="70" y="108" text-anchor="middle">від партнера</text>
+                            <circle class="flow-stage-circle" cx="70" cy="150" r="38" />
+                        </g>
 
-                        <text class="flow-text-main" x="440" y="136" text-anchor="middle">ЛОГІСТИКА</text>
-                        <text class="flow-text-sub" x="440" y="154" text-anchor="middle">8 центрів</text>
+                        <g class="flow-stage">
+                            <text class="flow-stage-title" x="247" y="90" text-anchor="middle">SKU-ПЛАН</text>
+                            <text class="flow-stage-copy" x="247" y="108" text-anchor="middle">та ціни</text>
+                            <circle class="flow-stage-circle" cx="247" cy="150" r="38" />
+                        </g>
 
-                        <text class="flow-text-main" x="600" y="206" text-anchor="middle">ПОСТАВКА</text>
-                        <text class="flow-text-sub" x="600" y="224" text-anchor="middle">та SLA</text>
+                        <g class="flow-stage">
+                            <text class="flow-stage-title" x="423" y="90" text-anchor="middle">ЛОГІСТИКА</text>
+                            <text class="flow-stage-copy" x="423" y="108" text-anchor="middle">6 центрів</text>
+                            <circle class="flow-stage-circle" cx="423" cy="150" r="38" />
+                        </g>
 
-                        <text class="flow-text-main" x="760" y="136" text-anchor="middle">ПОЛИЦЯ</text>
-                        <text class="flow-text-sub" x="760" y="154" text-anchor="middle">продажі</text>
+                        <g class="flow-stage">
+                            <text class="flow-stage-title" x="600" y="90" text-anchor="middle">ПОСТАВКА</text>
+                            <text class="flow-stage-copy" x="600" y="108" text-anchor="middle">та SLA</text>
+                            <circle class="flow-stage-circle" cx="600" cy="150" r="38" />
+                        </g>
 
-                        <text class="flow-text-main" x="900" y="136" text-anchor="middle">АНАЛІТИКА</text>
-                        <text class="flow-text-sub" x="900" y="154" text-anchor="middle">масштаб</text>
+                        <g class="flow-stage">
+                            <text class="flow-stage-title" x="777" y="90" text-anchor="middle">ПОЛИЦЯ</text>
+                            <text class="flow-stage-copy" x="777" y="108" text-anchor="middle">продажі</text>
+                            <circle class="flow-stage-circle" cx="777" cy="150" r="38" />
+                        </g>
+
+                        <g class="flow-stage">
+                            <text class="flow-stage-title" x="953" y="90" text-anchor="middle">АНАЛІТИКА</text>
+                            <text class="flow-stage-copy" x="953" y="108" text-anchor="middle">масштаб</text>
+                            <circle class="flow-stage-circle" cx="953" cy="150" r="38" />
+                        </g>
+
+                        <g class="flow-stage flow-stage-final">
+                            <text class="flow-stage-title" x="1130" y="90" text-anchor="middle">ПРИБУТОК</text>
+                            <text class="flow-stage-copy" x="1130" y="108" text-anchor="middle">з маржею</text>
+                            <circle class="flow-stage-circle" cx="1130" cy="150" r="38" />
+                        </g>
                     </svg>
                 </div>
 
                 <div class="metrics-grid">
                     <article class="metric-card reveal-pop" style="--delay: 330ms;">
-                        <div class="metric-head"><span>Швидкість обробки заявки</span><strong>94%</strong></div>
+                        <div class="metric-head"><span>Швидкість обробки заявки</span><strong data-count="94" data-suffix="%">0%</strong></div>
                         <div class="metric-track"><div class="metric-fill" data-width="94"></div></div>
                     </article>
                     <article class="metric-card reveal-pop" style="--delay: 390ms;">
-                        <div class="metric-head"><span>Наявність ключових SKU</span><strong>91%</strong></div>
+                        <div class="metric-head"><span>Наявність ключових SKU</span><strong data-count="91" data-suffix="%">0%</strong></div>
                         <div class="metric-track"><div class="metric-fill" data-width="91"></div></div>
                     </article>
                     <article class="metric-card reveal-pop" style="--delay: 450ms;">
-                        <div class="metric-head"><span>Відвантаження в термін</span><strong>97%</strong></div>
+                        <div class="metric-head"><span>Відвантаження в термін</span><strong data-count="97" data-suffix="%">0%</strong></div>
                         <div class="metric-track"><div class="metric-fill" data-width="97"></div></div>
                     </article>
                     <article class="metric-card reveal-pop" style="--delay: 510ms;">
-                        <div class="metric-head"><span>Повторні закупівлі партнерів</span><strong>89%</strong></div>
+                        <div class="metric-head"><span>Повторні закупівлі партнерів</span><strong data-count="89" data-suffix="%">0%</strong></div>
                         <div class="metric-track"><div class="metric-fill" data-width="89"></div></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="sfar">
+            <div class="container section-shell reveal-pop" style="--delay: 0ms;">
+                <div class="section-head">
+                    <h2>SFAR та клієнтська аналітика</h2>
+                    <p>Пояснюємо для партнерів, як система SFAR допомагає керувати продажами, маршрутами менеджерів і повторними замовленнями.</p>
+                </div>
+
+                <div class="insight-grid">
+                    <article class="insight-card reveal-pop" style="--delay: 60ms;">
+                        <h3>Що таке SFAR</h3>
+                        <p>SFAR (Sales Force Automation & Reporting) - це CRM-система польової команди. Вона фіксує візити, замовлення, наявність SKU та завдання по кожній торговій точці в єдиному контурі.</p>
+                    </article>
+                    <article class="insight-card reveal-pop" style="--delay: 120ms;">
+                        <h3>АКБ до КБ і системні клієнти</h3>
+                        <p><strong>АКБ/КБ: 72%</strong> за останній звітний період. Системні клієнти: <strong>2 180</strong> компаній з регулярними закупівлями та погодженим календарем поставок.</p>
+                        <div class="metric-track"><div class="metric-fill" data-width="72"></div></div>
                     </article>
                 </div>
             </div>
@@ -957,16 +1392,29 @@
                     <p data-site-key="home.brands_text">Міжнародні і локальні виробники, стабільна наявність та сервісна підтримка на кожному етапі.</p>
                 </div>
                 <div class="brand-cloud">
-                    <span class="brand-pill">Varta</span>
-                    <span class="brand-pill">Energizer</span>
+                    <span class="brand-pill">GP</span>
+                    <span class="brand-pill">Uniross</span>
                     <span class="brand-pill">Duracell</span>
-                    <span class="brand-pill">Panasonic</span>
-                    <span class="brand-pill">Philips</span>
-                    <span class="brand-pill">Xiaomi</span>
-                    <span class="brand-pill">TP-Link</span>
-                    <span class="brand-pill">Ajax Systems</span>
-                    <span class="brand-pill">Anker</span>
-                    <span class="brand-pill">Remax</span>
+                    <span class="brand-pill">Esperanza</span>
+                    <span class="brand-pill">Kodak</span>
+                    <span class="brand-pill">Toshiba</span>
+                    <span class="brand-pill">Renata</span>
+                    <span class="brand-pill">Varta</span>
+                    <span class="brand-pill">Gembird</span>
+                    <span class="brand-pill">Maxxter</span>
+                    <span class="brand-pill">Enerlight</span>
+                    <span class="brand-pill">Garden line</span>
+                    <span class="brand-pill">Mercator</span>
+                    <span class="brand-pill">MTEX</span>
+                    <span class="brand-pill">JuteRD</span>
+                    <span class="brand-pill">Дилонг</span>
+                    <span class="brand-pill">Химик+</span>
+                    <span class="brand-pill">Рідка латка</span>
+                    <span class="brand-pill">Enifix</span>
+                    <span class="brand-pill">Polax</span>
+                    <span class="brand-pill">Tramontina</span>
+                    <span class="brand-pill">Osram</span>
+                    <span class="brand-pill">Henkel</span>
                 </div>
             </div>
         </section>
@@ -991,7 +1439,7 @@
         <div class="container" data-site-key="footer.text">© 2026 NRG-UA. Національний дистриб'ютор товарів для дому та бізнесу.</div>
     </footer>
 
-    <script src="js/nrg-main.js"></script>
+    <script src="js/nrg-main.js?v=menu-active-fix-20260721"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
@@ -1006,10 +1454,50 @@
 
             const nodes = document.querySelectorAll('.reveal-pop');
             const bars = document.querySelectorAll('.metric-fill');
+            const processSection = document.getElementById('process');
+            const processSteps = processSection ? processSection.querySelectorAll('.process-step') : [];
+            const applicationEffect = document.getElementById('applicationEffect');
+            const flowStages = processSection ? processSection.querySelectorAll('.flow-stage') : [];
+            const flowSvg = processSection ? processSection.querySelector('.flow-svg') : null;
+
+            const animateCount = (el) => {
+                if (el.dataset.counted) return;
+                el.dataset.counted = '1';
+
+                const target = parseFloat(el.dataset.count);
+                if (Number.isNaN(target)) return;
+                const suffix = el.dataset.suffix || '';
+                const duration = 1500;
+                const startTime = performance.now();
+
+                const tick = (now) => {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const value = Math.round(target * eased);
+                    el.textContent = `${value.toLocaleString('uk-UA')}${suffix}`;
+                    if (progress < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        el.textContent = `${target.toLocaleString('uk-UA')}${suffix}`;
+                    }
+                };
+
+                requestAnimationFrame(tick);
+            };
+
+            const heroCounters = document.querySelectorAll('.hero-kpi [data-count]');
+            heroCounters.forEach((el, index) => {
+                setTimeout(() => animateCount(el), 500 + index * 150);
+            });
+
             const obs = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('show');
+
+                        entry.target.querySelectorAll('[data-count]').forEach((el, index) => {
+                            setTimeout(() => animateCount(el), index * 120);
+                        });
 
                         if (entry.target.classList.contains('metric-card')) {
                             const fill = entry.target.querySelector('.metric-fill');
@@ -1028,6 +1516,36 @@
             bars.forEach((bar) => {
                 bar.style.width = '0%';
             });
+
+            if (processSection && processSteps.length) {
+                const schemeWrap = processSection.querySelector('.scheme-wrap');
+                const sequenceTarget = schemeWrap || processSection;
+
+                const processObs = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting || processSection.dataset.sequenceDone) return;
+
+                        processSection.dataset.sequenceDone = '1';
+                        processSteps.forEach((step, index) => {
+                            setTimeout(() => step.classList.add('is-active'), index * 360);
+                        });
+
+                        if (applicationEffect) {
+                            setTimeout(() => applicationEffect.classList.add('run'), 380);
+                        }
+
+                        if (flowSvg) {
+                            setTimeout(() => flowSvg.classList.add('is-drawn'), 220);
+                        }
+
+                        flowStages.forEach((stage, index) => {
+                            setTimeout(() => stage.classList.add('is-on'), 420 + index * 180);
+                        });
+                    });
+                }, { threshold: 0.15 });
+
+                processObs.observe(sequenceTarget);
+            }
         });
     </script>
 </body>

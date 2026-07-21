@@ -22,6 +22,174 @@
     z-index: -1;
 }
 
+/* ========================================
+   Premium Minimal Refresh (Internal Pages)
+   ======================================== */
+.page-hero {
+    min-height: 340px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-hero-bg .hero-gradient {
+    background:
+        radial-gradient(ellipse 72% 44% at 14% 28%, rgba(0, 212, 255, 0.17) 0%, transparent 64%),
+        radial-gradient(ellipse 58% 40% at 84% 66%, rgba(99, 102, 241, 0.12) 0%, transparent 58%);
+}
+
+.page-title {
+    letter-spacing: -0.025em;
+}
+
+.page-description {
+    max-width: 680px;
+    font-size: 1.04rem;
+}
+
+.catalog-toolbar,
+.filter-group,
+.product-card,
+.brand-card,
+.news-card,
+.contact-block,
+.contact-form-wrapper,
+.mission-card,
+.advantage-card,
+.stat-card,
+.timeline-content,
+.distributor-card,
+.about-cta .cta-card,
+.cta-banner {
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 18px 34px rgba(3, 9, 18, 0.28);
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease, background-color 260ms ease;
+}
+
+.product-card:hover,
+.brand-card:hover,
+.news-card:hover,
+.mission-card:hover,
+.advantage-card:hover,
+.stat-card:hover,
+.timeline-content:hover,
+.benefit-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.14);
+}
+
+.catalog-toolbar,
+.filter-group,
+.contact-form-wrapper,
+.contact-block {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(6px);
+}
+
+.filter-title,
+.product-title,
+.brand-name,
+.news-title,
+.footer-title {
+    letter-spacing: -0.01em;
+}
+
+.filter-btn,
+.view-btn,
+.pagination-btn {
+    border-radius: 999px;
+}
+
+.filter-btn.active,
+.view-btn.active,
+.pagination-btn.active {
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+}
+
+.products-grid {
+    gap: 1.25rem;
+}
+
+.product-info {
+    padding: 1.1rem;
+}
+
+.product-image {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(0, 212, 255, 0.06));
+}
+
+.brands-grid {
+    gap: 1.4rem;
+}
+
+.brand-card {
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-card::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0), rgba(0, 212, 255, 0.85), rgba(99, 102, 241, 0));
+    opacity: 0.7;
+}
+
+.brand-logo,
+.news-image,
+.product-image {
+    border-radius: 14px;
+}
+
+.footer {
+    border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.footer-top {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.005) 100%);
+}
+
+body.theme-light .page-hero-bg .hero-gradient {
+    background:
+        radial-gradient(ellipse 78% 46% at 14% 28%, rgba(74, 144, 226, 0.18) 0%, transparent 66%),
+        radial-gradient(ellipse 62% 42% at 86% 66%, rgba(46, 92, 138, 0.12) 0%, transparent 60%);
+}
+
+body.theme-light .catalog-toolbar,
+body.theme-light .filter-group,
+body.theme-light .product-card,
+body.theme-light .brand-card,
+body.theme-light .news-card,
+body.theme-light .contact-block,
+body.theme-light .contact-form-wrapper,
+body.theme-light .mission-card,
+body.theme-light .advantage-card,
+body.theme-light .stat-card,
+body.theme-light .timeline-content,
+body.theme-light .distributor-card,
+body.theme-light .about-cta .cta-card,
+body.theme-light .cta-banner {
+    border-color: rgba(30, 58, 95, 0.14);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(246, 250, 255, 0.82));
+    box-shadow: 0 16px 30px rgba(21, 42, 68, 0.09);
+}
+
+body.theme-light .product-card:hover,
+body.theme-light .brand-card:hover,
+body.theme-light .news-card:hover,
+body.theme-light .mission-card:hover,
+body.theme-light .advantage-card:hover,
+body.theme-light .stat-card:hover,
+body.theme-light .timeline-content:hover {
+    box-shadow: 0 18px 36px rgba(21, 42, 68, 0.14);
+}
+
+body.theme-light .footer-top {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(237, 244, 252, 0.92));
+}
+
 .page-hero-bg .hero-gradient {
     position: absolute;
     inset: 0;
@@ -37,6 +205,40 @@
         linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
+    mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, transparent 100%);
+    animation: gridDrift 22s linear infinite;
+}
+
+.page-hero-bg::before,
+.page-hero-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+    animation: orbFloat 10s ease-in-out infinite;
+}
+
+.page-hero-bg::before {
+    width: 240px;
+    height: 240px;
+    left: -90px;
+    top: 8%;
+    background: radial-gradient(circle at 35% 35%, rgba(0, 212, 255, 0.4), rgba(0, 212, 255, 0));
+}
+
+.page-hero-bg::after {
+    width: 180px;
+    height: 180px;
+    right: 6%;
+    bottom: -30px;
+    animation-delay: -4s;
+    background: radial-gradient(circle at 60% 40%, rgba(46, 92, 138, 0.32), rgba(46, 92, 138, 0));
+}
+
+body.theme-light .page-hero-bg::before,
+body.theme-light .page-hero-bg::after {
+    opacity: 0.6;
 }
 
 .page-hero-content {
@@ -1109,6 +1311,7 @@
 }
 
 .map-placeholder {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -1116,13 +1319,18 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    color: var(--gray-500);
+    color: var(--gray-300);
+    text-align: center;
+    background-image:
+        linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(0, 212, 255, 0.12), transparent 70%);
+    background-size: 42px 42px, 42px 42px, 100% 100%;
 }
 
 .map-placeholder i {
-    font-size: 3rem;
+    font-size: 2.6rem;
     color: var(--accent-primary);
-    opacity: 0.5;
 }
 
 /* ========================================
@@ -1231,6 +1439,58 @@
 .brand-products {
     font-size: 0.85rem;
     color: var(--accent-primary);
+}
+
+/* ========================================
+   Light Theme - Premium Minimal
+   ======================================== */
+body.theme-light .page-hero-bg .hero-gradient {
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(74, 144, 226, 0.16) 0%, transparent 62%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(46, 92, 138, 0.1) 0%, transparent 54%);
+}
+
+body.theme-light .page-hero-bg .hero-pattern {
+    background-image:
+        linear-gradient(rgba(46, 92, 138, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46, 92, 138, 0.055) 1px, transparent 1px);
+}
+
+body.theme-light .about-stats,
+body.theme-light .about-timeline,
+body.theme-light .how-it-works,
+body.theme-light .application-section,
+body.theme-light .branches-section,
+body.theme-light .newsletter-section,
+body.theme-light .distributor-cta {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(236, 243, 251, 0.62) 100%);
+}
+
+body.theme-light .mission-icon,
+body.theme-light .advantage-icon,
+body.theme-light .benefit-icon,
+body.theme-light .branch-icon,
+body.theme-light .contact-item-detailed i {
+    background: linear-gradient(145deg, rgba(74, 144, 226, 0.2) 0%, rgba(46, 92, 138, 0.08) 100%);
+}
+
+body.theme-light .brand-card.exclusive,
+body.theme-light .brand-badge,
+body.theme-light .badge-exclusive {
+    border-color: rgba(46, 92, 138, 0.35);
+    background: linear-gradient(135deg, #1e3a5f 0%, #4a90e2 100%);
+}
+
+body.theme-light .brand-card.exclusive::before {
+    background: linear-gradient(135deg, #1e3a5f 0%, #4a90e2 100%);
+}
+
+body.theme-light .featured-news,
+body.theme-light .featured-image .image-placeholder,
+body.theme-light .newsletter-card,
+body.theme-light .distributor-card,
+body.theme-light .about-cta .cta-card {
+    box-shadow: 0 14px 30px rgba(21, 42, 68, 0.1);
 }
 
 /* ========================================
@@ -1379,4 +1639,19 @@
     .about-cta .cta-card {
         padding: 2rem;
     }
+}
+
+/* Final visual overrides to keep premium minimal layer deterministic */
+.products-grid .product-card,
+.brands-grid .brand-card,
+.news-grid .news-card,
+.catalog-sidebar .filter-group,
+.catalog-toolbar,
+.contact-block,
+.contact-form-wrapper {
+    border-radius: 20px;
+}
+
+.brands-grid .brand-card {
+    text-align: left;
 }

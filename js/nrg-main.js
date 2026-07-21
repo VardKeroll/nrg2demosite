@@ -3,6 +3,17 @@
  * Handles animations, interactions, and dynamic features
  */
 
+// Apply persisted theme as early as possible to avoid wrong-theme flashes.
+(() => {
+    const key = 'nrg_theme_mode';
+    const saved = localStorage.getItem(key) || 'dark';
+    const isLight = saved !== 'dark';
+    if (document.body) {
+        document.body.classList.toggle('theme-light', isLight);
+    }
+    document.documentElement.style.colorScheme = isLight ? 'light' : 'dark';
+})();
+
 // ============================================
 // Utility Functions
 // ============================================
@@ -116,6 +127,8 @@ class Header {
     init() {
         if (!this.header) return;
 
+        this.setActiveMenuLink();
+
         // Scroll handling
         window.addEventListener('scroll', () => {
             if (!this.ticking) {
@@ -145,6 +158,34 @@ class Header {
         document.addEventListener('click', (e) => {
             if (!this.header.contains(e.target) && this.mainNav?.classList.contains('active')) {
                 this.closeMobileMenu();
+            }
+        });
+    }
+
+    setActiveMenuLink() {
+        const links = this.header.querySelectorAll('.home-menu a, .main-nav a');
+        if (!links.length) return;
+
+        const normalizePath = (inputPath) => {
+            const raw = String(inputPath || '').split('?')[0].split('#')[0];
+            let path = raw || '/';
+            if (!path.startsWith('/')) path = `/${path}`;
+            if (path === '/index.html') return '/nrg-index.html';
+            return path;
+        };
+
+        const currentPath = normalizePath(window.location.pathname);
+
+        links.forEach((link) => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            const targetUrl = new URL(href, window.location.href);
+            const targetPath = normalizePath(targetUrl.pathname);
+
+            if (targetPath === currentPath) {
+                link.classList.add('active');
             }
         });
     }
@@ -459,7 +500,9 @@ class BrandsMarquee {
 class LanguageSwitcher {
     constructor() {
         this.buttons = document.querySelectorAll('.lang-btn');
-        this.currentLang = localStorage.getItem('nrg-lang') || 'uk';
+        this.supportedLangs = ['uk', 'en'];
+        const savedLang = (localStorage.getItem('nrg-lang') || 'uk').toLowerCase();
+        this.currentLang = this.supportedLangs.includes(savedLang) ? savedLang : 'uk';
         this.init();
     }
 
@@ -476,6 +519,22 @@ class LanguageSwitcher {
                 this.switchLang(lang);
             });
         });
+
+        window.addEventListener('storage', (event) => {
+            if (event.key !== 'nrg-lang' || !event.newValue || event.newValue === this.currentLang) return;
+
+            const nextLang = String(event.newValue).toLowerCase();
+            if (!this.supportedLangs.includes(nextLang)) return;
+
+            this.currentLang = nextLang;
+            this.setActiveLang(this.currentLang);
+
+            if (window.i18n && typeof window.i18n.setLanguage === 'function') {
+                window.i18n.setLanguage(this.currentLang);
+            }
+
+            document.dispatchEvent(new CustomEvent('langChange', { detail: { lang: this.currentLang } }));
+        });
     }
 
     setActiveLang(lang) {
@@ -486,11 +545,16 @@ class LanguageSwitcher {
     }
 
     switchLang(lang) {
+        if (!this.supportedLangs.includes(lang)) return;
         if (lang === this.currentLang) return;
 
         this.currentLang = lang;
         localStorage.setItem('nrg-lang', lang);
         this.setActiveLang(lang);
+
+        if (window.i18n && typeof window.i18n.setLanguage === 'function') {
+            window.i18n.setLanguage(lang);
+        }
 
         // Trigger language change event
         document.dispatchEvent(new CustomEvent('langChange', { detail: { lang } }));
@@ -498,6 +562,50 @@ class LanguageSwitcher {
         // In a real app, this would reload translations or redirect
         // For now, we'll just reload the page
         // window.location.reload();
+    }
+}
+
+// ============================================
+// Theme Switcher
+// ============================================
+
+class ThemeSwitcher {
+    constructor() {
+        this.toggle = document.getElementById('themeToggle');
+        this.labels = document.querySelectorAll('[data-theme-toggle-label]');
+        this.key = 'nrg_theme_mode';
+        this.init();
+    }
+
+    init() {
+        this.apply(localStorage.getItem(this.key) || 'dark');
+
+        if (!this.toggle) return;
+
+        this.toggle.addEventListener('click', () => {
+            const next = document.body.classList.contains('theme-light') ? 'dark' : 'light';
+            this.apply(next);
+            localStorage.setItem(this.key, next);
+        });
+
+        window.addEventListener('storage', (event) => {
+            if (event.key === this.key && event.newValue) {
+                this.apply(event.newValue);
+            }
+        });
+    }
+
+    apply(mode) {
+        document.body.classList.toggle('theme-light', mode !== 'dark');
+        document.documentElement.style.colorScheme = mode === 'dark' ? 'dark' : 'light';
+        this.updateLabels();
+    }
+
+    updateLabels() {
+        const isLight = document.body.classList.contains('theme-light');
+        this.labels.forEach((label) => {
+            label.textContent = isLight ? 'Темна тема' : 'Світла тема';
+        });
     }
 }
 
@@ -884,20 +992,23 @@ class CategoriesDropdown {
 
 class AuthManager {
     constructor() {
-        this.loginBtn = document.getElementById('loginBtn');
         this.b2bPortalBtn = document.getElementById('b2bPortalBtn');
         this.init();
     }
 
     init() {
-        if (!this.loginBtn || !this.b2bPortalBtn) return;
+        if (!this.b2bPortalBtn) return;
 
-        // Check if user is authenticated
-        this.checkAuthStatus();
+        this.b2bPortalBtn.href = 'https://nrgportal.com.ua/uk/login';
+        this.b2bPortalBtn.target = '_blank';
+        this.b2bPortalBtn.rel = 'noopener noreferrer';
+
+        // Always show B2B portal button by project requirement
+        this.showB2BPortal();
 
         // Listen for auth changes (from localStorage or session)
         window.addEventListener('storage', () => {
-            this.checkAuthStatus();
+            this.showB2BPortal();
         });
 
         // Listen for custom auth events
@@ -906,37 +1017,207 @@ class AuthManager {
         });
 
         window.addEventListener('userLoggedOut', () => {
-            this.showLogin();
+            this.showB2BPortal();
         });
     }
 
     checkAuthStatus() {
-        // Check localStorage for auth token or user session
-        const isAuthenticated = localStorage.getItem('userToken') || 
-                               localStorage.getItem('isAuthenticated') === 'true' ||
-                               sessionStorage.getItem('userToken');
-
-        if (isAuthenticated) {
-            this.showB2BPortal();
-        } else {
-            this.showLogin();
-        }
+        this.showB2BPortal();
     }
 
     showB2BPortal() {
-        if (this.loginBtn) this.loginBtn.style.display = 'none';
         if (this.b2bPortalBtn) {
             this.b2bPortalBtn.style.display = 'flex';
             // Update tooltip with translated text
-            const lang = localStorage.getItem('selectedLanguage') || 'uk';
+            const lang = localStorage.getItem('nrg-lang') || 'uk';
             const noteText = lang === 'en' ? 'For registered clients only' : 'Тільки для зареєстрованих клієнтів';
             this.b2bPortalBtn.setAttribute('title', noteText);
         }
     }
 
     showLogin() {
-        if (this.loginBtn) this.loginBtn.style.display = 'flex';
-        if (this.b2bPortalBtn) this.b2bPortalBtn.style.display = 'none';
+        if (this.b2bPortalBtn) this.b2bPortalBtn.style.display = 'flex';
+    }
+}
+
+// ============================================
+// Admin Content Bridge
+// ============================================
+
+class AdminContentBridge {
+    constructor() {
+        this.key = 'nrg_admin_compact_data_v1';
+        this.init();
+    }
+
+    init() {
+        let data = null;
+        try {
+            data = JSON.parse(localStorage.getItem(this.key) || 'null');
+        } catch {
+            data = null;
+        }
+
+        if (!data || typeof data !== 'object') return;
+
+        if (data.branding && typeof data.branding === 'object') {
+            this.applyBranding(data.branding);
+        }
+
+        if (Array.isArray(data.blocks)) {
+            this.applyBlocks(data.blocks);
+        }
+
+        if (Array.isArray(data.articles)) {
+            this.applyNewsArticles(data.articles);
+        }
+    }
+
+    applyBranding(branding) {
+        const logo = this.resolveAssetUrl(branding.logoUrl || '');
+        const favicon = this.resolveAssetUrl(branding.faviconUrl || '');
+
+        if (logo) {
+            document.querySelectorAll('.logo-image, .home-logo img, .hero-brandmark, .footer-logo .logo-image').forEach((img) => {
+                if (img && img.tagName === 'IMG') img.src = logo;
+            });
+        }
+
+        if (favicon) {
+            let link = document.querySelector('link[rel="icon"]');
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = favicon;
+        }
+    }
+
+    resolveAssetUrl(rawUrl) {
+        const value = String(rawUrl || '').trim();
+        if (!value) return '';
+
+        // Keep absolute/protocol links untouched.
+        if (/^(https?:|data:|blob:|\/\/)/i.test(value)) return value;
+
+        // Keep explicit relative paths untouched.
+        if (value.startsWith('./') || value.startsWith('../')) return value;
+
+        // Root-relative paths are valid as is.
+        if (value.startsWith('/')) return value;
+
+        // Treat bare paths like "images/logo.svg" as web-root assets.
+        return `/${value.replace(/^\/+/, '')}`;
+    }
+
+    applyBlocks(blocks) {
+        const body = document.body;
+        if (!body) return;
+
+        const pageId = this.resolvePageId();
+        const enabled = blocks.filter((b) => b && b.enabled !== false && (b.page === 'all' || b.page === pageId));
+        if (!enabled.length) return;
+
+        const hostSection = document.querySelector('main') || document.body;
+        const wrapper = document.createElement('section');
+        wrapper.className = 'section admin-dynamic-blocks';
+
+        const container = document.createElement('div');
+        container.className = 'container';
+        wrapper.appendChild(container);
+
+        enabled.forEach((b) => {
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.style.marginBottom = '12px';
+
+            const html = [];
+            html.push(`<h3 style="margin-bottom:8px;">${this.esc(b.title || '')}</h3>`);
+            if (b.imageUrl) html.push(`<img src="${this.escAttr(b.imageUrl)}" alt="" style="max-width:100%;height:auto;border-radius:10px;margin-bottom:10px;">`);
+            if (b.text) html.push(`<p style="margin-bottom:10px;">${this.esc(b.text)}</p>`);
+            if (b.ctaText && b.ctaUrl) html.push(`<a class="btn btn-primary btn-sm" href="${this.escAttr(b.ctaUrl)}">${this.esc(b.ctaText)}</a>`);
+            card.innerHTML = html.join('');
+            container.appendChild(card);
+        });
+
+        hostSection.appendChild(wrapper);
+    }
+
+    applyNewsArticles(articles) {
+        const newsGrid = document.querySelector('.news-grid');
+        if (!newsGrid) return;
+
+        const storedLang = (localStorage.getItem('nrg-lang') || 'uk').toLowerCase();
+        const lang = storedLang === 'en' ? 'en' : 'uk';
+        const getText = (value) => {
+            if (value && typeof value === 'object') {
+                if (lang === 'en' && value.en) return value.en;
+                return value.uk || value.en || '';
+            }
+            return String(value || '');
+        };
+
+        const categoryLabel = (value) => {
+            const labels = {
+                company: 'Компанія',
+                products: 'Продукція',
+                partners: 'Партнерам',
+                events: 'Події'
+            };
+            return labels[value] || 'Компанія';
+        };
+
+        const filtered = articles.filter((a) => a && getText(a.title).trim());
+        if (!filtered.length) return;
+
+        const markup = filtered.slice().reverse().map((a) => {
+            const title = this.esc(getText(a.title));
+            const summary = this.esc(getText(a.summary));
+            const category = this.esc(categoryLabel(a.category));
+            const categoryKey = this.escAttr(a.category || 'company');
+            const date = this.esc(a.date || new Date().toLocaleDateString('uk-UA'));
+            const imageUrl = (a.imageUrl || '').trim();
+            const image = imageUrl
+                ? `<img src="${this.escAttr(imageUrl)}" alt="${title}">`
+                : '<div class="image-placeholder"><i class="fas fa-newspaper"></i></div>';
+
+            return `
+                <article class="news-card" data-category="${categoryKey}">
+                    <div class="news-image">${image}</div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">${category}</span>
+                            <span><i class="far fa-calendar"></i> ${date}</span>
+                        </div>
+                        <h3 class="news-title"><a href="#">${title}</a></h3>
+                        <p class="news-excerpt">${summary}</p>
+                    </div>
+                </article>
+            `;
+        }).join('');
+
+        newsGrid.innerHTML = markup;
+    }
+
+    resolvePageId() {
+        const path = (location.pathname || '').toLowerCase();
+        if (path.endsWith('/nrg-index.html') || path.endsWith('/index.html') || path === '/') return 'home';
+        if (path.includes('nrg-about')) return 'about';
+        if (path.includes('nrg-catalog')) return 'catalog';
+        if (path.includes('nrg-brands')) return 'brands';
+        if (path.includes('nrg-news')) return 'news';
+        if (path.includes('nrg-contacts')) return 'contacts';
+        if (path.includes('/partners')) return 'partners';
+        return 'all';
+    }
+
+    esc(v) {
+        return String(v ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+    }
+
+    escAttr(v) {
+        return this.esc(v).replaceAll('"', '&quot;');
     }
 }
 
@@ -946,6 +1227,10 @@ class AuthManager {
 
 document.addEventListener('DOMContentLoaded', () => {
     new PageTransitions();
+
+    // Always initialize global switches first
+    new LanguageSwitcher();
+    new ThemeSwitcher();
 
     // Core components
     new Preloader();
@@ -962,11 +1247,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Brands
     new BrandsMarquee();
 
-    // Language
-    new LanguageSwitcher();
-
     // Auth Manager
     new AuthManager();
+
+    // Apply optional admin-configured branding/blocks
+    new AdminContentBridge();
 
     // Forms (if present)
     new FormValidator('#partnerForm');
@@ -988,9 +1273,11 @@ window.NRG = {
     UkraineMap,
     BrandsMarquee,
     LanguageSwitcher,
+    ThemeSwitcher,
     BackToTop,
     FormValidator,
     CategoriesDropdown,
     AuthManager,
+    AdminContentBridge,
     PageTransitions
 };

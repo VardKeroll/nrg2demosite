@@ -64,7 +64,7 @@ nrg-ua/
 │   │   ├── nrg-brands.html   # Бренди
 │   │   ├── nrg-news.html     # Новини
 │   │   ├── nrg-contacts.html # Контакти
-│   │   └── nrg-cabinet.html  # Кабінет партнера
+│   │   └── nrg-cabinet.html  # Редирект у B2B Portal
 │   └── images/               # Зображення
 │
 ├── 🔧 Backend (FastAPI):
@@ -78,7 +78,7 @@ nrg-ua/
 │
 ├── 👨‍💼 Адміністрування:
 │   └── admin/
-│       └── nrg-admin.html    # Адмін-панель
+│       └── index.html        # Адмін-панель
 │
 └── 📦 Віртуальне середовище (авто):
     └── venv/                 # або .venv/
@@ -97,7 +97,7 @@ nrg-ua/
 | Бренди | `/pages/nrg-brands.html` |
 | Контакти | `/pages/nrg-contacts.html` |
 | Новини | `/pages/nrg-news.html` |
-| Кабінет | `/pages/nrg-cabinet.html` |
+| B2B Portal | `https://nrgportal.com.ua/uk/login` |
 
 ---
 

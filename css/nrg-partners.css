@@ -4,22 +4,22 @@
 
 /* CSS Variables for Partners Page */
 :root {
-    --bg-primary: #0A0F14;
-    --bg-secondary: #0F1419;
-    --bg-tertiary: #151C24;
-    --accent-primary: #00D4FF;
-    --accent-secondary: #6366F1;
-    --text-primary: #FFFFFF;
-    --text-secondary: #94A3B8;
-    --gray-300: #94A3B8;
-    --gray-400: #64748B;
-    --border-color: rgba(255, 255, 255, 0.08);
+    --bg-primary: var(--color-bg-primary);
+    --bg-secondary: var(--color-bg-secondary);
+    --bg-tertiary: var(--color-bg-tertiary);
+    --accent-primary: var(--color-accent);
+    --accent-secondary: var(--color-secondary);
+    --text-primary: var(--color-text-primary);
+    --text-secondary: var(--color-text-secondary);
+    --gray-300: var(--color-text-secondary);
+    --gray-400: var(--color-text-tertiary);
+    --border-color: var(--color-border);
     --section-spacing: 100px;
     --radius-md: 8px;
     --radius-lg: 12px;
     --radius-xl: 16px;
     --radius-full: 9999px;
-    --gradient-primary: linear-gradient(135deg, #00D4FF 0%, #6366F1 100%);
+    --gradient-primary: var(--gradient-primary);
 }
 
 /* Page Hero */
@@ -314,6 +314,48 @@
     padding-left: 80px;
 }
 
+.application-submit-effect {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+    border: 1px dashed rgba(0, 212, 255, 0.42);
+    border-radius: var(--radius-md);
+    padding: 0.65rem 0.8rem;
+    background: rgba(0, 212, 255, 0.08);
+}
+
+.application-submit-effect i {
+    color: var(--accent-primary);
+    animation: submitPulse 1.4s ease-in-out infinite;
+}
+
+.submit-track {
+    position: relative;
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+}
+
+.submit-track::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -35%;
+    width: 32%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0), rgba(0, 212, 255, 0.95), rgba(0, 212, 255, 0));
+    animation: submitRun 1.5s ease-in-out infinite;
+}
+
+.application-submit-effect span {
+    color: var(--gray-300);
+    font-size: 0.82rem;
+}
+
 .steps-timeline::before {
     content: '';
     position: absolute;
@@ -329,6 +371,17 @@
     display: flex;
     align-items: flex-start;
     padding: 2rem 0;
+}
+
+.seq-step {
+    opacity: 0.38;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.seq-step.is-active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .step-number {
@@ -361,6 +414,34 @@
 .step-description {
     color: var(--gray-300);
     line-height: 1.7;
+}
+
+.sfar-inline {
+    margin-top: 1rem;
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    background: rgba(0, 212, 255, 0.06);
+}
+
+.sfar-inline h4 {
+    margin-bottom: 0.45rem;
+}
+
+.sfar-inline p {
+    color: var(--gray-300);
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+}
+
+@keyframes submitRun {
+    from { left: -35%; }
+    to { left: 120%; }
+}
+
+@keyframes submitPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
 }
 
 /* Partner Benefits */
@@ -777,6 +858,56 @@
     line-height: 1.7;
 }
 
+/* Light theme adjustments for partners page */
+body.theme-light .page-hero-bg .hero-gradient {
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(74, 144, 226, 0.17) 0%, transparent 62%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(46, 92, 138, 0.11) 0%, transparent 54%);
+}
+
+body.theme-light .page-hero-bg .hero-pattern {
+    background-image:
+        linear-gradient(rgba(46, 92, 138, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46, 92, 138, 0.055) 1px, transparent 1px);
+}
+
+body.theme-light .orbit-core {
+    border-color: rgba(46, 92, 138, 0.4);
+    background: radial-gradient(circle at 30% 30%, rgba(74, 144, 226, 0.34), rgba(239, 245, 252, 0.94));
+    box-shadow: 0 16px 34px rgba(21, 42, 68, 0.16);
+}
+
+body.theme-light .orbit-ring {
+    border-color: rgba(46, 92, 138, 0.32);
+}
+
+body.theme-light .orbit-tag {
+    border-color: rgba(46, 92, 138, 0.26);
+    background: rgba(255, 255, 255, 0.84);
+    color: #34516d;
+}
+
+body.theme-light .application-submit-effect,
+body.theme-light .sfar-inline,
+body.theme-light .type-card.featured {
+    background: linear-gradient(145deg, rgba(74, 144, 226, 0.12), rgba(46, 92, 138, 0.06));
+}
+
+body.theme-light .submit-track {
+    background: rgba(46, 92, 138, 0.16);
+}
+
+body.theme-light .submit-track::after {
+    background: linear-gradient(90deg, rgba(74, 144, 226, 0), rgba(46, 92, 138, 0.95), rgba(74, 144, 226, 0));
+}
+
+body.theme-light .type-card,
+body.theme-light .benefit-item,
+body.theme-light .application-form,
+body.theme-light .step-item {
+    box-shadow: 0 14px 30px rgba(21, 42, 68, 0.08);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .page-hero .container {
@@ -828,6 +959,16 @@
     .steps-timeline {
         padding-left: 60px;
     }
+
+    .application-submit-effect {
+        flex-wrap: wrap;
+        gap: 0.45rem;
+    }
+
+    .application-submit-effect span {
+        width: 100%;
+        font-size: 0.76rem;
+    }
     
     .steps-timeline::before {
         left: 25px;
@@ -858,6 +999,33 @@
     
     .application-form {
         padding: 1.5rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .steps-timeline {
+        padding-left: 0;
+    }
+
+    .steps-timeline::before {
+        display: none;
+    }
+
+    .step-item {
+        padding: 0.9rem 0;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        margin-bottom: 0.7rem;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .step-number {
+        position: static;
+        margin: 0.6rem 0 0.25rem 0.6rem;
+    }
+
+    .step-content {
+        padding: 0 0.8rem 0.8rem;
     }
 }
 
@@ -959,4 +1127,59 @@
     .benefit-item {
         transition: none !important;
     }
+}
+
+/* ========================================
+   Premium Minimal Refresh (Partners)
+   ======================================== */
+.type-card,
+.benefit-item,
+.application-form,
+.step-item,
+.faq-item,
+.category-checkbox {
+    border-radius: 18px;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 18px 36px rgba(3, 9, 18, 0.28);
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease, background-color 260ms ease;
+}
+
+.type-card:hover,
+.benefit-item:hover,
+.category-checkbox:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.14);
+}
+
+.application-form {
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(6px);
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.015);
+    padding: 0 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.faq-question {
+    padding: 1.1rem 0;
+}
+
+body.theme-light .type-card,
+body.theme-light .benefit-item,
+body.theme-light .application-form,
+body.theme-light .step-item,
+body.theme-light .faq-item,
+body.theme-light .category-checkbox {
+    border-color: rgba(30, 58, 95, 0.14);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(246, 250, 255, 0.82));
+    box-shadow: 0 16px 30px rgba(21, 42, 68, 0.1);
+}
+
+body.theme-light .type-card:hover,
+body.theme-light .benefit-item:hover,
+body.theme-light .category-checkbox:hover {
+    box-shadow: 0 18px 36px rgba(21, 42, 68, 0.14);
 }
