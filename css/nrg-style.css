@@ -466,7 +466,7 @@ body.theme-light .home-header {
 }
 
 .home-logo img {
-    height: 47px;
+    height: 56px;
     width: auto;
     display: block;
     filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
@@ -2226,7 +2226,7 @@ body.page-leaving {
     }
 
     .home-logo img {
-        height: 46px;
+        height: 55px;
     }
 }
 
